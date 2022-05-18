@@ -8,7 +8,6 @@ export interface GoodsData {
 }
 
 export interface Option {
-  id: number;
   name: string;
   size: string | number;
   price: number;

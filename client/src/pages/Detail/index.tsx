@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState, useReducer, useRef } from 'react';
+import { useCallback, useEffect, useState, useReducer } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import { Option, GoodsData } from '@typings/db';
@@ -37,25 +37,36 @@ export default function Detail(): React.ReactElement {
     options: [],
     totalPrice: 0,
   });
-  const indexRef = useRef<number>(1);
+  const checkPrevSelectedSize = useCallback(
+    (size: string | number): boolean => {
+      return options.some(option => option.size === size);
+    },
+    [options]
+  );
 
   useEffect(() => {
     if (!size) return;
     if (size && goods) {
+      if (checkPrevSelectedSize(size)) {
+        alert('이미 추가된 옵션입니다.');
+        return;
+      }
       const newOption: Option = {
-        id: indexRef.current,
         name: goods.name,
         size,
         price: goods.price,
         quantity: 1,
       };
       dispatch({ type: 'ADD_OPTION', option: newOption });
-      indexRef.current += 1;
     }
   }, [size, goods]);
 
   const renderSelectedOptionList: React.ReactElement[] = options.map(option => (
-    <SelectedOption key={option.id} option={option} dispatch={dispatch} />
+    <SelectedOption
+      key={option.name + option.size}
+      option={option}
+      dispatch={dispatch}
+    />
   ));
 
   return (

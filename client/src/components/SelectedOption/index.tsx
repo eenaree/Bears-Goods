@@ -21,7 +21,7 @@ export default function SelectedOption({
   const handleQuantityIncrement = () => {
     dispatch({
       type: 'INCREMENT_OPTION_QUANTITY',
-      id: option.id,
+      size: option.size,
       price: option.price,
     });
   };
@@ -30,13 +30,13 @@ export default function SelectedOption({
     if (option.quantity === 1) return;
     dispatch({
       type: 'DECREMENT_OPTION_QUANTITY',
-      id: option.id,
+      size: option.size,
       price: option.price,
     });
   };
 
   const handleOptionRemove = () => {
-    dispatch({ type: 'REMOVE_OPTION', id: option.id });
+    dispatch({ type: 'REMOVE_OPTION', size: option.size });
   };
 
   return (
