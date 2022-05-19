@@ -37,3 +37,19 @@ export const CartButton = styled.button`
     right: 25px;
   }
 `;
+
+export const CartItemCount = styled.span({
+  position: 'absolute',
+  top: '-5px',
+  right: '-5px',
+  display: 'block',
+  minWidth: 15,
+  height: 15,
+  padding: 1,
+  lineHeight: '17px',
+  backgroundColor: '#ff0000',
+  borderRadius: 10,
+  color: '#fff',
+  fontSize: '0.75rem',
+  textAlign: 'center',
+});

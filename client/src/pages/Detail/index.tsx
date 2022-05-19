@@ -3,16 +3,12 @@ import { useCallback, useEffect, useState, useReducer } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import { Option, GoodsData } from '@typings/db';
-import {
-  AddToCartButton,
-  Container,
-  SelectedOptionList,
-  TotalPrice,
-} from './styles';
+import { Container, SelectedOptionList, TotalPrice } from './styles';
 import { addThousandSeperatorToNumber } from '@utils';
 import { optionReducer } from '@reducers/option';
 import SelectedOption from '@components/SelectedOption';
 import GoodsInfo from '@components/GoodsInfo';
+import AddToCartButton from '@components/AddToCartButton';
 
 export default function Detail(): React.ReactElement {
   const params = useParams<'id'>();
@@ -79,7 +75,7 @@ export default function Detail(): React.ReactElement {
             총 주문금액
             <strong> {addThousandSeperatorToNumber(totalPrice)}</strong> 원
           </TotalPrice>
-          <AddToCartButton>장바구니 추가</AddToCartButton>
+          <AddToCartButton options={options} />
           {options.length > 0 && (
             <SelectedOptionList>{renderSelectedOptionList}</SelectedOptionList>
           )}
