@@ -9,7 +9,12 @@ export type OptionAction =
   | { type: 'ADD_OPTION'; option: Option }
   | { type: 'REMOVE_OPTION'; size: string | number }
   | { type: 'INCREMENT_OPTION_QUANTITY'; size: string | number; price: number }
-  | { type: 'DECREMENT_OPTION_QUANTITY'; size: string | number; price: number };
+  | { type: 'DECREMENT_OPTION_QUANTITY'; size: string | number; price: number }
+  | { type: 'RESET_OPTIONS' };
+
+export function initializeOptions() {
+  return { options: [], totalPrice: 0 };
+}
 
 export function optionReducer(
   state: OptionState,
@@ -51,5 +56,7 @@ export function optionReducer(
         ),
         totalPrice: state.totalPrice - action.price,
       };
+    case 'RESET_OPTIONS':
+      return initializeOptions();
   }
 }

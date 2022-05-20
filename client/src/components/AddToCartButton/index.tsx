@@ -6,10 +6,12 @@ import { Button } from './styles';
 
 interface Props {
   options: Option[];
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AddToCartButton({
   options,
+  setModal,
 }: Props): React.ReactElement {
   const { cart } = useCartState();
   const dispatch = useCartDispatch();
@@ -20,6 +22,7 @@ export default function AddToCartButton({
       return;
     }
     dispatch({ type: 'ADD_CART_ITEM', options });
+    setModal(true);
   };
 
   useEffect(() => {

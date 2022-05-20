@@ -5,10 +5,11 @@ import goodsAPI from '@api/goods';
 import { Option, GoodsData } from '@typings/db';
 import { Container, SelectedOptionList, TotalPrice } from './styles';
 import { addThousandSeperatorToNumber } from '@utils';
-import { optionReducer } from '@reducers/option';
+import { optionReducer, initializeOptions } from '@reducers/option';
 import SelectedOption from '@components/SelectedOption';
 import GoodsInfo from '@components/GoodsInfo';
 import AddToCartButton from '@components/AddToCartButton';
+import CartCheckModal from '@components/CartCheckModal';
 
 export default function Detail(): React.ReactElement {
   const params = useParams<'id'>();
@@ -29,10 +30,11 @@ export default function Detail(): React.ReactElement {
   const onChangeSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSize(e.target.value);
   };
-  const [{ options, totalPrice }, dispatch] = useReducer(optionReducer, {
-    options: [],
-    totalPrice: 0,
-  });
+  const [{ options, totalPrice }, dispatch] = useReducer(
+    optionReducer,
+    null,
+    initializeOptions
+  );
   const checkPrevSelectedSize = useCallback(
     (size: string | number): boolean => {
       return options.some(option => option.size === size);
@@ -65,22 +67,36 @@ export default function Detail(): React.ReactElement {
     />
   ));
 
+  const [modal, setModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!modal) {
+      setSize('');
+      dispatch({ type: 'RESET_OPTIONS' });
+    }
+  }, [modal]);
+
   return (
-    <Container>
-      <Link to="/">목록보기</Link>
-      {goods && (
-        <>
-          <GoodsInfo goods={goods} size={size} onChangeSize={onChangeSize} />
-          <TotalPrice>
-            총 주문금액
-            <strong> {addThousandSeperatorToNumber(totalPrice)}</strong> 원
-          </TotalPrice>
-          <AddToCartButton options={options} />
-          {options.length > 0 && (
-            <SelectedOptionList>{renderSelectedOptionList}</SelectedOptionList>
-          )}
-        </>
-      )}
-    </Container>
+    <>
+      <Container>
+        <Link to="/">목록보기</Link>
+        {goods && (
+          <>
+            <GoodsInfo goods={goods} size={size} onChangeSize={onChangeSize} />
+            <TotalPrice>
+              총 주문금액
+              <strong> {addThousandSeperatorToNumber(totalPrice)}</strong> 원
+            </TotalPrice>
+            <AddToCartButton options={options} setModal={setModal} />
+            {options.length > 0 && (
+              <SelectedOptionList>
+                {renderSelectedOptionList}
+              </SelectedOptionList>
+            )}
+          </>
+        )}
+      </Container>
+      {modal && <CartCheckModal modal={modal} setModal={setModal} />}
+    </>
   );
 }
