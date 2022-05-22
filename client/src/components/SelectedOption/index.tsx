@@ -8,6 +8,7 @@ import {
 import { addThousandSeperatorToNumber } from '@utils';
 import { Option } from '@typings/db';
 import { OptionAction } from '@reducers/option';
+import useDelayUnmount from '@hooks/useDelayUnmount';
 
 interface Prop {
   option: Option;
@@ -35,12 +36,16 @@ export default function SelectedOption({
     });
   };
 
-  const handleOptionRemove = () => {
+  const [isMounted, setIsMounted] = useDelayUnmount(handleOptionRemove, 500);
+  function handleOptionRemove() {
     dispatch({ type: 'REMOVE_OPTION', size: option.size });
-  };
+  }
+  function handleDelayUnmount() {
+    setIsMounted(false);
+  }
 
   return (
-    <SelectedOptionWrapper>
+    <SelectedOptionWrapper isMounted={isMounted}>
       <div>Size: {option.size}</div>
       <div>
         <button onClick={handleQuantityDecrement}>
@@ -54,7 +59,7 @@ export default function SelectedOption({
       <Price>
         {addThousandSeperatorToNumber(option.price * option.quantity)}원
       </Price>
-      <button onClick={handleOptionRemove}>
+      <button onClick={handleDelayUnmount}>
         <AiOutlineCloseSquare size="1.2rem" color="#666" />
       </button>
     </SelectedOptionWrapper>

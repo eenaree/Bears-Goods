@@ -96,7 +96,7 @@ export default function Detail(): React.ReactElement {
           </>
         )}
       </Container>
-      {modal && <CartCheckModal modal={modal} setModal={setModal} />}
+      {modal && <CartCheckModal setModal={setModal} />}
     </>
   );
 }

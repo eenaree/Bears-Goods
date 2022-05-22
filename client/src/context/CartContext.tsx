@@ -3,6 +3,7 @@ import { createContext, useContext, useReducer } from 'react';
 import { CartAction, CartState, cartReducer } from '@reducers/cart';
 import { Option } from '@typings/db';
 import { checkObject } from '@utils';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 interface Props {
   children: React.ReactElement;
@@ -50,23 +51,6 @@ const checkCart = (cart: any): cart is Option[] => {
   return false;
 };
 
-const getStorageCart = (): Option[] => {
-  const storagedCart = localStorage.getItem('cart');
-  if (storagedCart) {
-    const parsedCart = JSON.parse(storagedCart);
-    if (checkCart(parsedCart)) {
-      return parsedCart;
-    } else {
-      localStorage.removeItem('cart');
-      localStorage.setItem('cart', JSON.stringify([]));
-      return [];
-    }
-  } else {
-    localStorage.setItem('cart', JSON.stringify([]));
-    return [];
-  }
-};
-
 const initializeCart = (initialCart: Option[]): CartState => {
   if (initialCart.length > 0) {
     let cartTotalPrice = 0;
@@ -80,9 +64,10 @@ const initializeCart = (initialCart: Option[]): CartState => {
 };
 
 export const CartProvider = ({ children }: Props): React.ReactElement => {
+  const storagedCart = useLocalStorage<Option[]>('cart', checkCart, []);
   const [{ cart, cartTotalPrice }, dispatch] = useReducer(
     cartReducer,
-    getStorageCart(),
+    storagedCart,
     initializeCart
   );
 
