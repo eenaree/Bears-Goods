@@ -36,6 +36,8 @@ const checkCart = (cart: any): cart is Option[] => {
     if (cart.length > 0) {
       if (checkObject(cart[0])) {
         return (
+          'id' in cart[0] &&
+          'img' in cart[0] &&
           'name' in cart[0] &&
           'size' in cart[0] &&
           'price' in cart[0] &&

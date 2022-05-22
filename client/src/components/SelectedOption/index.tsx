@@ -38,7 +38,7 @@ export default function SelectedOption({
 
   const [isMounted, setIsMounted] = useDelayUnmount(handleOptionRemove, 500);
   function handleOptionRemove() {
-    dispatch({ type: 'REMOVE_OPTION', size: option.size });
+    dispatch({ type: 'REMOVE_OPTION', option });
   }
   function handleDelayUnmount() {
     setIsMounted(false);

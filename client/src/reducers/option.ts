@@ -7,7 +7,7 @@ interface OptionState {
 
 export type OptionAction =
   | { type: 'ADD_OPTION'; option: Option }
-  | { type: 'REMOVE_OPTION'; size: string | number }
+  | { type: 'REMOVE_OPTION'; option: Option }
   | { type: 'INCREMENT_OPTION_QUANTITY'; size: string | number; price: number }
   | { type: 'DECREMENT_OPTION_QUANTITY'; size: string | number; price: number }
   | { type: 'RESET_OPTIONS' };
@@ -30,11 +30,11 @@ export function optionReducer(
     case 'REMOVE_OPTION':
       return {
         ...state,
-        options: state.options.filter(option => option.size !== action.size),
+        options: state.options.filter(
+          option => option.size !== action.option.size
+        ),
         totalPrice:
-          state.totalPrice -
-          state.options.find(option => option.size === action.size)!.price *
-            state.options.find(option => option.size === action.size)!.quantity,
+          state.totalPrice - action.option.price * action.option.quantity,
       };
     case 'INCREMENT_OPTION_QUANTITY':
       return {

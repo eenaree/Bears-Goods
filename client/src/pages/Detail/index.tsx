@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useCallback, useEffect, useState, useReducer } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
-import { Option, GoodsData } from '@typings/db';
+import { GoodsData } from '@typings/db';
 import { Container, SelectedOptionList, TotalPrice } from './styles';
 import { addThousandSeperatorToNumber } from '@utils';
 import { optionReducer, initializeOptions } from '@reducers/option';
@@ -10,6 +10,7 @@ import SelectedOption from '@components/SelectedOption';
 import GoodsInfo from '@components/GoodsInfo';
 import AddToCartButton from '@components/AddToCartButton';
 import CartCheckModal from '@components/CartCheckModal';
+import useSize from '@hooks/useSize';
 
 export default function Detail(): React.ReactElement {
   const params = useParams<'id'>();
@@ -26,38 +27,12 @@ export default function Detail(): React.ReactElement {
     }
   }, [params.id]);
 
-  const [size, setSize] = useState<string | number>('');
-  const onChangeSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSize(e.target.value);
-  };
   const [{ options, totalPrice }, dispatch] = useReducer(
     optionReducer,
     null,
     initializeOptions
   );
-  const checkPrevSelectedSize = useCallback(
-    (size: string | number): boolean => {
-      return options.some(option => option.size === size);
-    },
-    [options]
-  );
-
-  useEffect(() => {
-    if (!size) return;
-    if (size && goods) {
-      if (checkPrevSelectedSize(size)) {
-        alert('이미 추가된 옵션입니다.');
-        return;
-      }
-      const newOption: Option = {
-        name: goods.name,
-        size,
-        price: goods.price,
-        quantity: 1,
-      };
-      dispatch({ type: 'ADD_OPTION', option: newOption });
-    }
-  }, [size, goods]);
+  const [size, setSize, onChangeSize] = useSize(goods, options, dispatch);
 
   const renderSelectedOptionList: React.ReactElement[] = options.map(option => (
     <SelectedOption

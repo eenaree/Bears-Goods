@@ -8,7 +8,9 @@ export interface GoodsData {
 }
 
 export interface Option {
+  id: number;
   name: string;
+  img: string;
   size: string | number;
   price: number;
   quantity: number;
