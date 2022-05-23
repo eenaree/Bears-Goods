@@ -5,10 +5,11 @@ export interface CartState {
   cartTotalPrice: number;
 }
 
-export type CartAction = {
-  type: 'ADD_CART_ITEM';
-  options: Option[];
-};
+export type CartAction =
+  | { type: 'ADD_CART_ITEM'; options: Option[] }
+  | { type: 'REMOVE_CART_ITEM'; item: Option }
+  | { type: 'CHANGE_CART_ITEM_QUANTITY'; item: Option; quantity: number }
+  | { type: 'RESET_CART' };
 
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
@@ -36,6 +37,38 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
           action.options
             .map(option => option.price * option.quantity)
             .reduce((prev, curr) => prev + curr, 0),
+      };
+    case 'REMOVE_CART_ITEM':
+      return {
+        ...state,
+        cart: state.cart.filter(
+          item =>
+            item.name !== action.item.name || item.size !== action.item.size
+        ),
+        cartTotalPrice:
+          state.cartTotalPrice - action.item.price * action.item.quantity,
+      };
+    case 'CHANGE_CART_ITEM_QUANTITY':
+      return {
+        ...state,
+        cart: state.cart.map(item =>
+          item.name === action.item.name && item.size === action.item.size
+            ? { ...action.item, quantity: action.quantity }
+            : item
+        ),
+        cartTotalPrice: state.cart.reduce(
+          (prev, curr) =>
+            curr.name === action.item.name && curr.size === action.item.size
+              ? prev + curr.price * action.quantity
+              : prev + curr.price * curr.quantity,
+          0
+        ),
+      };
+    case 'RESET_CART':
+      return {
+        ...state,
+        cart: [],
+        cartTotalPrice: 0,
       };
   }
 }
