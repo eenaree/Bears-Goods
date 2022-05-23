@@ -19,7 +19,7 @@ const modalContainerFadeOut = keyframes({
   },
 });
 
-export const ModalContainer = styled.div<{ isMounted: boolean }>(
+export const ModalContainer = styled.div<{ isMounted: boolean | undefined }>(
   {
     position: 'fixed',
     top: 0,

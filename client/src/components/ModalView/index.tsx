@@ -4,7 +4,7 @@ import { ModalContainer } from './styles';
 
 interface Props {
   children: React.ReactElement;
-  isMounted: boolean;
+  isMounted?: boolean;
 }
 
 export default function ModalView({
