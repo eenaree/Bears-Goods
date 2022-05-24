@@ -6,7 +6,7 @@ export interface CartState {
 }
 
 export type CartAction =
-  | { type: 'ADD_CART_ITEM'; options: Option[] }
+  | { type: 'ADD_CART_ITEM'; items: Option[] }
   | { type: 'REMOVE_CART_ITEM'; item: Option }
   | { type: 'CHANGE_CART_ITEM_QUANTITY'; item: Option; quantity: number }
   | { type: 'RESET_CART' };
@@ -16,26 +16,24 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
     case 'ADD_CART_ITEM':
       return {
         ...state,
-        cart: state.cart
-          .concat(action.options)
-          .reduce<Option[]>((prev, curr) => {
-            const sameOptionIndex = prev.findIndex(
-              prev => prev.name === curr.name && prev.size === curr.size
-            );
+        cart: state.cart.concat(action.items).reduce<Option[]>((prev, curr) => {
+          const sameOptionIndex = prev.findIndex(
+            prev => prev.name === curr.name && prev.size === curr.size
+          );
 
-            if (sameOptionIndex !== -1) {
-              prev[sameOptionIndex] = {
-                ...prev[sameOptionIndex],
-                quantity: prev[sameOptionIndex].quantity + curr.quantity,
-              };
-            }
+          if (sameOptionIndex !== -1) {
+            prev[sameOptionIndex] = {
+              ...prev[sameOptionIndex],
+              quantity: prev[sameOptionIndex].quantity + curr.quantity,
+            };
+          }
 
-            return sameOptionIndex !== -1 ? prev : prev.concat(curr);
-          }, []),
+          return sameOptionIndex !== -1 ? prev : prev.concat(curr);
+        }, []),
         cartTotalPrice:
           state.cartTotalPrice +
-          action.options
-            .map(option => option.price * option.quantity)
+          action.items
+            .map(item => item.price * item.quantity)
             .reduce((prev, curr) => prev + curr, 0),
       };
     case 'REMOVE_CART_ITEM':

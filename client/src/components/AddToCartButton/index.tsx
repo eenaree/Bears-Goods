@@ -21,7 +21,7 @@ export default function AddToCartButton({
       alert('선택한 옵션이 없습니다.');
       return;
     }
-    dispatch({ type: 'ADD_CART_ITEM', options });
+    dispatch({ type: 'ADD_CART_ITEM', items: options });
     setModal(true);
   };
 
