@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useCartDispatch, useCartState } from '@context/CartContext';
-import { Option } from '@typings/db';
+import { CartItemOption, Option } from '@typings/db';
 import { Button } from './styles';
 
 interface Props {
@@ -21,7 +21,11 @@ export default function AddToCartButton({
       alert('선택한 옵션이 없습니다.');
       return;
     }
-    dispatch({ type: 'ADD_CART_ITEM', items: options });
+    const items: CartItemOption[] = options.map(option => ({
+      ...option,
+      selected: true,
+    }));
+    dispatch({ type: 'ADD_CART_ITEM', items });
     setModal(true);
   };
 

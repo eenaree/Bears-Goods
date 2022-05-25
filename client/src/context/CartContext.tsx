@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createContext, useContext, useReducer } from 'react';
 import { CartAction, CartState, cartReducer } from '@reducers/cart';
-import { Option } from '@typings/db';
+import { CartItemOption } from '@typings/db';
 import { checkObject } from '@utils';
 import useLocalStorage from '@hooks/useLocalStorage';
 
@@ -31,21 +31,24 @@ export const useCartDispatch = () => {
   return dispatch;
 };
 
-const checkCart = (cart: any): cart is Option[] => {
+const checkCart = (cart: any): cart is CartItemOption[] => {
   if (Array.isArray(cart)) {
     if (cart.length > 0) {
-      if (checkObject(cart[0])) {
-        return (
-          'id' in cart[0] &&
-          'img' in cart[0] &&
-          'name' in cart[0] &&
-          'size' in cart[0] &&
-          'price' in cart[0] &&
-          'quantity' in cart[0]
-        );
-      } else {
-        return false;
-      }
+      cart.map(item => {
+        if (checkObject(item)) {
+          return (
+            'id' in item &&
+            'img' in item &&
+            'name' in item &&
+            'size' in item &&
+            'price' in item &&
+            'quantity' in item &&
+            'selected' in item
+          );
+        } else {
+          return false;
+        }
+      });
     }
     return true;
   }
@@ -53,21 +56,23 @@ const checkCart = (cart: any): cart is Option[] => {
   return false;
 };
 
-const initializeCart = (initialCart: Option[]): CartState => {
+const initializeCart = (initialCart: CartItemOption[]): CartState => {
   if (initialCart.length > 0) {
-    let cartTotalPrice = 0;
-    initialCart.forEach(cart => {
-      cartTotalPrice += cart.quantity * cart.price;
-    });
-    return { cart: initialCart, cartTotalPrice };
+    const cartTotalPrice: number = initialCart.reduce(
+      (prev, curr) =>
+        curr.selected ? prev + curr.price * curr.quantity : prev,
+      0
+    );
+    const allSelected: boolean = initialCart.every(item => item.selected);
+    return { cart: initialCart, cartTotalPrice, allSelected };
   } else {
-    return { cart: [], cartTotalPrice: 0 };
+    return { cart: [], cartTotalPrice: 0, allSelected: false };
   }
 };
 
 export const CartProvider = ({ children }: Props): React.ReactElement => {
-  const storagedCart = useLocalStorage<Option[]>('cart', checkCart, []);
-  const [{ cart, cartTotalPrice }, dispatch] = useReducer(
+  const storagedCart = useLocalStorage<CartItemOption[]>('cart', checkCart, []);
+  const [{ cart, cartTotalPrice, allSelected }, dispatch] = useReducer(
     cartReducer,
     storagedCart,
     initializeCart
@@ -75,7 +80,7 @@ export const CartProvider = ({ children }: Props): React.ReactElement => {
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
-      <CartStateContext.Provider value={{ cart, cartTotalPrice }}>
+      <CartStateContext.Provider value={{ cart, cartTotalPrice, allSelected }}>
         {children}
       </CartStateContext.Provider>
     </CartDispatchContext.Provider>

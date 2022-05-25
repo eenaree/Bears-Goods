@@ -35,6 +35,19 @@ export const CartItemWrapper = styled.div<{ isMounted: boolean }>(
   })
 );
 
+export const ItemCheckbox = styled.div({
+  width: 20,
+  marginRight: 10,
+  input: {
+    position: 'relative',
+    top: '50%',
+    transform: 'translate(0, -50%)',
+  },
+  label: {
+    display: 'none',
+  },
+});
+
 export const ItemImageWrapper = styled.div({
   width: 120,
   height: 120,

@@ -14,6 +14,14 @@ export const CartItemList = styled.div({
   backgroundColor: '#fff',
 });
 
+export const CartItemAllCheckbox = styled.div({
+  marginTop: 20,
+  paddingLeft: 5,
+  label: {
+    marginLeft: 5,
+  },
+});
+
 export const TotalPrice = styled.div({
   display: 'flex',
   justifyContent: 'space-between',

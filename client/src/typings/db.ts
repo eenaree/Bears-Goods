@@ -15,3 +15,7 @@ export interface Option {
   price: number;
   quantity: number;
 }
+
+export interface CartItemOption extends Option {
+  selected: boolean;
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Option } from '@typings/db';
+import { CartItemOption } from '@typings/db';
 import {
   CartItemWrapper,
   DeleteButton,
@@ -10,6 +10,7 @@ import {
   Product,
   Price,
   Quantity,
+  ItemCheckbox,
 } from './styles';
 import { CgTrash } from 'react-icons/cg';
 import { addThousandSeperatorToNumber } from '@utils';
@@ -17,7 +18,7 @@ import { useCartDispatch } from '@context/CartContext';
 import useDelayUnmount from '@hooks/useDelayUnmount';
 
 interface Props {
-  item: Option;
+  item: CartItemOption;
 }
 
 export default function CartItem({ item }: Props): React.ReactElement {
@@ -45,8 +46,21 @@ export default function CartItem({ item }: Props): React.ReactElement {
     dispatch({ type: 'REMOVE_CART_ITEM', item });
   }
 
+  const handleCheckedChange = () => {
+    dispatch({ type: 'TOGGLE_ITEM_SELECT', item });
+  };
+
   return (
     <CartItemWrapper isMounted={isMounted}>
+      <ItemCheckbox>
+        <input
+          type="checkbox"
+          id="check"
+          checked={item.selected}
+          onChange={handleCheckedChange}
+        />
+        <label htmlFor="check">선택</label>
+      </ItemCheckbox>
       <ItemImageWrapper>
         <Link to={`/goods/${item.id}`} title={item.name}>
           <img src={item.img} alt={item.name} />
