@@ -14,9 +14,9 @@ export type CartAction =
       item: CartItemOption;
       quantity: number;
     }
-  | { type: 'RESET_CART' }
   | { type: 'TOGGLE_ALL_SELECT' }
-  | { type: 'TOGGLE_ITEM_SELECT'; item: CartItemOption };
+  | { type: 'TOGGLE_ITEM_SELECT'; item: CartItemOption }
+  | { type: 'REMOVE_SELECTED_CART_ITEM' };
 
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
@@ -74,13 +74,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
                 .every(item => item.selected)
             : false,
       };
-    case 'RESET_CART':
-      return {
-        ...state,
-        cart: [],
-        cartTotalPrice: 0,
-        allSelected: false,
-      };
     case 'CHANGE_CART_ITEM_QUANTITY':
       return {
         ...state,
@@ -136,6 +129,24 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
             ? !item.selected
             : item.selected
         ),
+      };
+    case 'REMOVE_SELECTED_CART_ITEM':
+      return {
+        ...state,
+        cart: state.cart.filter(item => !item.selected),
+        cartTotalPrice: state.cart
+          .filter(item => !item.selected)
+          .reduce(
+            (prev, curr) =>
+              curr.selected ? prev + curr.price * curr.quantity : prev,
+            0
+          ),
+        allSelected:
+          state.cart.filter(item => item.selected).length === state.cart.length
+            ? false
+            : state.cart
+                .filter(item => !item.selected)
+                .every(item => item.selected),
       };
   }
 }

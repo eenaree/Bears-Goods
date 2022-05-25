@@ -12,13 +12,16 @@ export default function DeleteConfirmModal({
   setModal,
 }: Props): React.ReactElement {
   const dispatch = useCartDispatch();
-  const [isMounted, setIsMounted] = useDelayUnmount(handleCartReset, 500);
+  const [isMounted, setIsMounted] = useDelayUnmount(
+    handleSelectedItemRemove,
+    500
+  );
   function handleDelayUnmount() {
     setIsMounted(false);
   }
 
-  function handleCartReset() {
-    dispatch({ type: 'RESET_CART' });
+  function handleSelectedItemRemove() {
+    dispatch({ type: 'REMOVE_SELECTED_CART_ITEM' });
     setModal(false);
   }
 
@@ -29,7 +32,7 @@ export default function DeleteConfirmModal({
   return (
     <ModalView isMounted={isMounted}>
       <ModalBody>
-        <p>상품을 전체 삭제하시겠습니까?</p>
+        <p>선택한 상품을 삭제하시겠습니까?</p>
         <button onClick={handleDelayUnmount}>예</button>
         <button onClick={handleModalClose}>아니오</button>
       </ModalBody>

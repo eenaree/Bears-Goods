@@ -57,3 +57,21 @@ export const ButtonWrapper = styled.div({
     },
   },
 });
+
+export const NoneCartList = styled.div({
+  margin: '20px 0',
+  padding: '200px 0',
+  textAlign: 'center',
+  backgroundColor: '#f8f8f8',
+  borderRadius: 15,
+  fontSize: '0.875rem',
+  a: {
+    border: '1px solid #eee',
+    padding: 15,
+    margin: '20px 0',
+    display: 'inline-block',
+    backgroundColor: '#fff',
+    color: '#333',
+    fontWeight: 700,
+  },
+});
