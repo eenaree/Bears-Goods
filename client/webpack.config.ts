@@ -5,6 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { createEmotionPlugin } from 'emotion-ts-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import * as webpack from 'webpack';
 import 'webpack-dev-server';
@@ -37,6 +38,17 @@ const commonConfig: webpack.Configuration = {
           loader: 'ts-loader',
           options: {
             transpileOnly: isDevelopment,
+            getCustomTransformers: () => ({
+              before: [
+                isDevelopment &&
+                  createEmotionPlugin({
+                    sourcemap: true,
+                    autoLabel: true,
+                    labelFormat: '[local]',
+                    autoInject: true,
+                  }),
+              ],
+            }),
           },
         },
       },
