@@ -19,26 +19,30 @@ const selectOptionFadeOut = keyframes({
   },
 });
 
-export const SelectedOptionWrapper = styled.div<{ isMounted: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  background-color: #f8f8f8;
-  margin: 10px 0;
-  padding: 10px 30px;
-  font-size: 0.875rem;
-  input {
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    margin: 0 5px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-  }
-  animation: ${props =>
-      props.isMounted ? selectOptionSlideIn : selectOptionFadeOut}
-    0.5s forwards;
-`;
+export const SelectedOptionWrapper = styled.div<{ isMounted: boolean }>(
+  {
+    display: 'flex',
+    justifyContent: 'space-between',
+    backgroundColor: '#f8f8f8',
+    margin: '10px 0',
+    padding: '10px 30px',
+    fontSize: '0.875rem',
+    input: {
+      width: 20,
+      height: 20,
+      textAlign: 'center',
+      margin: '0 5px',
+      border: '1px solid #eee',
+      borderRadius: 5,
+    },
+  },
+  props => ({
+    animation: `${
+      props.isMounted ? selectOptionSlideIn : selectOptionFadeOut
+    } 0.5s forwards`,
+  })
+);
 
-export const Price = styled.div`
-  font-weight: 700;
-`;
+export const Price = styled.div({
+  fontWeight: 700,
+});
