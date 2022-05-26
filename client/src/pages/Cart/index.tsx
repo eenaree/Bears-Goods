@@ -7,13 +7,15 @@ import { addThousandSeperatorToNumber } from '@utils';
 import {
   CartItemList,
   Container,
-  TotalPrice,
+  PriceBox,
   ButtonWrapper,
   CartItemAllCheckbox,
   NoneCartList,
+  ToolTipText,
 } from './styles';
 import DeleteConfirmModal from '@components/DeleteConfirmModal';
 import { CartItemOption } from '@typings/db';
+import { FcAbout } from 'react-icons/fc';
 
 export default function Cart(): React.ReactElement {
   const { cart, cartTotalPrice, allSelected } = useCartState();
@@ -59,13 +61,40 @@ export default function Cart(): React.ReactElement {
               <label htmlFor="allCheck">전체 선택</label>
             </CartItemAllCheckbox>
             <CartItemList>{renderCartItemList}</CartItemList>
-            <TotalPrice>
-              <span>총 주문금액</span>
-              <span>
-                <strong>{addThousandSeperatorToNumber(cartTotalPrice)}</strong>
-                &nbsp;원
-              </span>
-            </TotalPrice>
+            <PriceBox>
+              <p>
+                <span>주문금액</span>
+                <span>
+                  {addThousandSeperatorToNumber(cartTotalPrice)}
+                  &nbsp;원
+                </span>
+              </p>
+              <p>
+                <span>
+                  배송비
+                  <FcAbout />
+                  <ToolTipText>5만원 이상 구매시 무료배송</ToolTipText>
+                </span>
+                <span>
+                  {selectedCartItem.length > 0 && cartTotalPrice < 50000
+                    ? addThousandSeperatorToNumber(3000)
+                    : 0}
+                  &nbsp;원
+                </span>
+              </p>
+              <hr />
+              <p>
+                <span>총 주문금액</span>
+                <span>
+                  <strong>
+                    {selectedCartItem.length > 0 && cartTotalPrice < 50000
+                      ? addThousandSeperatorToNumber(cartTotalPrice + 3000)
+                      : addThousandSeperatorToNumber(cartTotalPrice)}
+                  </strong>
+                  &nbsp;원
+                </span>
+              </p>
+            </PriceBox>
             <ButtonWrapper>
               <button onClick={handleDeleteClick}>선택 삭제</button>
               <button>주문하기</button>

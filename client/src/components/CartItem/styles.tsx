@@ -17,14 +17,9 @@ export const CartItemWrapper = styled.div<{ isMounted: boolean }>(
     position: 'relative',
     height: 120,
     padding: '0 10px',
-    border: '1px solid #eee',
-    borderBottom: 'none',
-    '&:first-of-type': {
-      borderRadius: '15px 15px 0 0',
-    },
+    borderBottom: '1px solid #eee',
     '&:last-of-type': {
-      borderBottom: '1px solid #eee',
-      borderRadius: '0 0 15px 15px',
+      borderBottom: 'none',
     },
     [mq('sm')]: {
       height: 150,
@@ -74,6 +69,13 @@ export const ItemInfo = styled.div({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  [mq('md')]: {
+    width: 'auto',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'start',
+    marginLeft: 20,
+  },
 });
 
 export const Product = styled.div({
@@ -86,8 +88,12 @@ export const Product = styled.div({
     margin: '5px 0',
   },
   [mq('sm')]: {
-    marginLeft: 40,
+    margin: '0 10px',
     flex: '1.5 1 0',
+  },
+  [mq('md')]: {
+    marginLeft: 0,
+    flex: 0,
   },
 });
 
@@ -116,6 +122,9 @@ export const Quantity = styled.div({
   [mq('sm')]: {
     flex: '1.2 1 0',
   },
+  [mq('md')]: {
+    flex: 0,
+  },
 });
 
 export const Price = styled.div({
@@ -127,6 +136,9 @@ export const Price = styled.div({
   fontWeight: 400,
   [mq('sm')]: {
     flex: '1 1 0',
+  },
+  [mq('md')]: {
+    flex: 0,
   },
 });
 
