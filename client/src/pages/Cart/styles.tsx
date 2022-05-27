@@ -2,10 +2,13 @@ import styled from '@emotion/styled';
 import { mq } from '@styles/mediaQueries';
 
 export const Container = styled.div({
-  padding: 20,
+  padding: '20px 10px',
   h2: {
-    fontSize: '1.4rem',
+    fontSize: '2.4rem',
     fontWeight: 700,
+  },
+  [mq('xs')]: {
+    padding: '20px',
   },
   [mq('md')]: {
     '&:after': {
@@ -13,6 +16,9 @@ export const Container = styled.div({
       display: 'block',
       content: '""',
     },
+  },
+  [mq('lg')]: {
+    padding: '20px 0',
   },
 });
 
@@ -33,6 +39,7 @@ export const CartItemAllCheckbox = styled.div({
   paddingLeft: 5,
   label: {
     marginLeft: 5,
+    fontSize: '1.5rem',
   },
 });
 
@@ -49,6 +56,7 @@ export const PriceBox = styled.div({
   span: {
     flex: '0 0 150px',
     position: 'relative',
+    fontSize: '1.5rem',
   },
   'span:first-of-type': {
     fontWeight: 700,
@@ -61,7 +69,7 @@ export const PriceBox = styled.div({
   },
   strong: {
     fontWeight: 700,
-    fontSize: '1.5rem',
+    fontSize: '2.2rem',
     color: '#ff0000',
   },
   hr: {
@@ -88,7 +96,7 @@ export const ToolTipText = styled.em({
   padding: 10,
   width: 180,
   textAlign: 'center',
-  fontSize: '0.875rem',
+  fontSize: '1.3rem',
   fontWeight: 400,
   backgroundColor: '#fff',
   borderRadius: 10,
@@ -133,7 +141,7 @@ export const NoneCartList = styled.div({
   textAlign: 'center',
   backgroundColor: '#f8f8f8',
   borderRadius: 15,
-  fontSize: '0.875rem',
+  fontSize: '1.4rem',
   a: {
     border: '1px solid #eee',
     padding: 15,

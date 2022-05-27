@@ -11,15 +11,18 @@ const cartItemFadeOut = keyframes({
   },
 });
 
-export const CartItemWrapper = styled.div<{ isMounted: boolean }>(
+export const Wrapper = styled.div<{ isMounted: boolean }>(
   {
     display: 'flex',
     position: 'relative',
     height: 120,
-    padding: '0 10px',
+    padding: '0 5px',
     borderBottom: '1px solid #eee',
     '&:last-of-type': {
       borderBottom: 'none',
+    },
+    [mq('xs')]: {
+      padding: '0 10px',
     },
     [mq('sm')]: {
       height: 150,
@@ -30,27 +33,35 @@ export const CartItemWrapper = styled.div<{ isMounted: boolean }>(
   })
 );
 
-export const ItemCheckbox = styled.div({
+export const Checkbox = styled.div({
   width: 20,
-  marginRight: 10,
   input: {
     position: 'relative',
     top: '50%',
     transform: 'translate(0, -50%)',
   },
   label: {
-    display: 'none',
+    visibility: 'hidden',
   },
 });
 
-export const ItemImageWrapper = styled.div({
-  width: 120,
-  height: 120,
+export const ImageWrapper = styled.div({
+  minWidth: 100,
+  width: 100,
+  height: 100,
   textAlign: 'center',
+  margin: '0 10px',
   img: {
     width: '90%',
     height: '90%',
-    transform: 'translate(0, 10px)',
+    transform: 'translate(0, 20px)',
+  },
+  [mq('xs')]: {
+    width: 120,
+    height: 120,
+    img: {
+      transform: 'translate(0, 10px)',
+    },
   },
   [mq('sm')]: {
     width: 150,
@@ -60,12 +71,11 @@ export const ItemImageWrapper = styled.div({
 
 export const ItemInfo = styled.div({
   display: 'flex',
+  minWidth: 150,
   flexDirection: 'column',
   justifyContent: 'space-evenly',
-  marginLeft: 20,
   [mq('sm')]: {
     width: 'calc(100% - 150px)',
-    marginLeft: 0,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -74,7 +84,6 @@ export const ItemInfo = styled.div({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'start',
-    marginLeft: 20,
   },
 });
 
@@ -82,17 +91,18 @@ export const Product = styled.div({
   display: 'flex',
   flexDirection: 'column',
   color: '#666',
-  fontSize: '0.875rem',
+  fontSize: '1.3rem',
   fontWeight: 700,
   p: {
     margin: '5px 0',
   },
+  [mq('xs')]: {
+    fontSize: '1.4rem',
+  },
   [mq('sm')]: {
-    margin: '0 10px',
     flex: '1.5 1 0',
   },
   [mq('md')]: {
-    marginLeft: 0,
     flex: 0,
   },
 });
@@ -128,12 +138,11 @@ export const Quantity = styled.div({
 });
 
 export const Price = styled.div({
+  fontSize: '1.4rem',
+  fontWeight: 400,
   strong: {
     fontWeight: 700,
-    fontSize: '1rem',
   },
-  fontSize: '0.875rem',
-  fontWeight: 400,
   [mq('sm')]: {
     flex: '1 1 0',
   },
@@ -144,11 +153,7 @@ export const Price = styled.div({
 
 export const DeleteButton = styled.button({
   position: 'absolute',
-  top: 10,
-  right: 10,
-  [mq('sm')]: {
-    top: '50%',
-    right: '5%',
-    transform: 'translate(0, -50%)',
-  },
+  top: '50%',
+  right: '4%',
+  transform: 'translate(0, -50%)',
 });

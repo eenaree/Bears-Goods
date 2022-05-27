@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartItemOption } from '@typings/db';
 import {
-  CartItemWrapper,
+  Wrapper,
   DeleteButton,
-  ItemImageWrapper,
+  ImageWrapper,
   ItemInfo,
   Product,
   Price,
   Quantity,
-  ItemCheckbox,
+  Checkbox,
 } from './styles';
 import { CgTrash } from 'react-icons/cg';
 import { addThousandSeperatorToNumber } from '@utils';
@@ -51,8 +51,8 @@ export default function CartItem({ item }: Props): React.ReactElement {
   };
 
   return (
-    <CartItemWrapper isMounted={isMounted}>
-      <ItemCheckbox>
+    <Wrapper isMounted={isMounted}>
+      <Checkbox>
         <input
           type="checkbox"
           id="check"
@@ -60,12 +60,12 @@ export default function CartItem({ item }: Props): React.ReactElement {
           onChange={handleCheckedChange}
         />
         <label htmlFor="check">선택</label>
-      </ItemCheckbox>
-      <ItemImageWrapper>
+      </Checkbox>
+      <ImageWrapper>
         <Link to={`/goods/${item.id}`} title={item.name}>
           <img src={item.img} alt={item.name} />
         </Link>
-      </ItemImageWrapper>
+      </ImageWrapper>
       <ItemInfo>
         <Product>
           <p>{item.name}</p>
@@ -82,8 +82,8 @@ export default function CartItem({ item }: Props): React.ReactElement {
         </Price>
       </ItemInfo>
       <DeleteButton onClick={handleDelayUnmount}>
-        <CgTrash size="1.2rem" />
+        <CgTrash size="2rem" />
       </DeleteButton>
-    </CartItemWrapper>
+    </Wrapper>
   );
 }

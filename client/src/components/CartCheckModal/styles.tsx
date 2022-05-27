@@ -6,21 +6,22 @@ export const ModalBody = styled.div({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   maxHeight: '100vh',
-  minWidth: 280,
   backgroundColor: '#f8f8f8',
-  padding: '40px 20px',
   borderRadius: 10,
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+  minWidth: 220,
+  padding: '40px 20px',
   textAlign: 'center',
   p: {
-    margin: 20,
+    marginBottom: 20,
+    fontSize: '1.4rem',
   },
   div: {
     button: {
       fontWeight: 700,
       backgroundColor: '#fff',
       padding: 10,
-      marginRight: 10,
+      margin: '0 5px',
       borderRadius: 10,
       borderBottom: '2px solid #00cc33',
       transition: '0.5s',
@@ -36,9 +37,9 @@ export const ModalBody = styled.div({
 
 export const CloseButton = styled.button({
   position: 'absolute',
-  top: 10,
-  right: 15,
-  fontSize: 28,
+  top: 5,
+  right: 10,
+  fontSize: '2.5rem',
   fontWeight: 700,
   color: '#333',
   '&:hover': {

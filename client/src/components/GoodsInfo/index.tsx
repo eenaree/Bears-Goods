@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import { GoodsData } from '@typings/db';
 import { addThousandSeperatorToNumber } from '@utils';
 import { GoodsImageWrapper, GoodsInfoContainer, GoodsTable } from './styles';
@@ -14,11 +15,15 @@ export default function GoodsInfo({
   size,
   onChangeSize,
 }: Props): React.ReactElement {
-  const options: React.ReactElement[] = goods.size.map(size => (
-    <option key={size} value={size}>
-      {size}
-    </option>
-  ));
+  const renderOptions: React.ReactElement[] = useMemo(
+    () =>
+      goods.size.map(size => (
+        <option key={size} value={size}>
+          {size}
+        </option>
+      )),
+    [goods]
+  );
 
   return (
     <GoodsInfoContainer>
@@ -40,7 +45,7 @@ export default function GoodsInfo({
             <td>
               <select name="size" value={size} onChange={onChangeSize}>
                 <option value="">옵션 선택</option>
-                {options}
+                {renderOptions}
               </select>
             </td>
           </tr>

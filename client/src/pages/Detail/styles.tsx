@@ -3,6 +3,9 @@ import { mq } from '@styles/mediaQueries';
 
 export const Container = styled.div({
   padding: 20,
+  a: {
+    fontSize: '1.6rem',
+  },
   [mq('md')]: {
     '&:after': {
       clear: 'both',
@@ -13,7 +16,7 @@ export const Container = styled.div({
 });
 
 export const SelectedOptionList = styled.div({
-  [mq('md')]: {
+  [mq('sm')]: {
     float: 'right',
     width: '48%',
   },
@@ -22,12 +25,13 @@ export const SelectedOptionList = styled.div({
 export const TotalPrice = styled.div({
   textAlign: 'center',
   margin: '20px 0',
+  fontSize: '1.5rem',
   strong: {
     fontWeight: 700,
-    fontSize: '1.5rem',
+    fontSize: '2.2rem',
     color: '#ff0000',
   },
-  [mq('md')]: {
+  [mq('sm')]: {
     float: 'right',
     width: '48%',
   },

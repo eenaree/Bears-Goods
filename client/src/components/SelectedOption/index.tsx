@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectedOptionWrapper, Price } from './styles';
+import { Wrapper, Price } from './styles';
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -45,7 +45,7 @@ export default function SelectedOption({
   }
 
   return (
-    <SelectedOptionWrapper isMounted={isMounted}>
+    <Wrapper isMounted={isMounted}>
       <div>Size: {option.size}</div>
       <div>
         <button onClick={handleQuantityDecrement}>
@@ -60,8 +60,8 @@ export default function SelectedOption({
         {addThousandSeperatorToNumber(option.price * option.quantity)}원
       </Price>
       <button onClick={handleDelayUnmount}>
-        <AiOutlineCloseSquare size="1.2rem" color="#666" />
+        <AiOutlineCloseSquare size="1.8rem" color="#666" />
       </button>
-    </SelectedOptionWrapper>
+    </Wrapper>
   );
 }

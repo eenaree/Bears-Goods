@@ -19,14 +19,14 @@ const selectOptionFadeOut = keyframes({
   },
 });
 
-export const SelectedOptionWrapper = styled.div<{ isMounted: boolean }>(
+export const Wrapper = styled.div<{ isMounted: boolean }>(
   {
     display: 'flex',
     justifyContent: 'space-between',
     backgroundColor: '#f8f8f8',
     margin: '10px 0',
     padding: '10px 30px',
-    fontSize: '0.875rem',
+    fontSize: '1.4rem',
     input: {
       width: 20,
       height: 20,

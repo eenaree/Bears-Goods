@@ -10,9 +10,8 @@ export const GoodsImageWrapper = styled.div({
   textAlign: 'center',
   img: {
     width: '100%',
-    textAlign: 'center',
   },
-  [mq('md')]: {
+  [mq('sm')]: {
     float: 'left',
     width: '49%',
   },
@@ -21,6 +20,7 @@ export const GoodsImageWrapper = styled.div({
 export const GoodsTable = styled.table({
   width: '100%',
   margin: '20px 0',
+  fontSize: '1.5rem',
   tr: {
     display: 'block',
     padding: '10px 0',
@@ -39,8 +39,8 @@ export const GoodsTable = styled.table({
     height: 30,
     borderColor: '#eee',
   },
-  [mq('md')]: {
+  [mq('sm')]: {
     float: 'right',
-    width: '40%',
+    width: '48%',
   },
 });
