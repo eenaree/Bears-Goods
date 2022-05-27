@@ -17,14 +17,14 @@ export const Inner = styled.div({
 export const Logo = styled.h1({
   padding: '20px 0',
   textAlign: 'center',
-  fontSize: '1.2rem',
+  fontSize: '2rem',
   fontWeight: 700,
   a: {
     color: '#666',
   },
-  [mq('lg')]: {
+  [mq('md')]: {
     padding: '30px 0',
-    fontSize: '1.5rem',
+    fontSize: '2.8rem',
   },
 });
 
@@ -32,7 +32,7 @@ export const CartButton = styled.button({
   position: 'absolute',
   top: 15,
   right: 15,
-  [mq('lg')]: {
+  [mq('md')]: {
     top: 25,
     right: 25,
   },
@@ -46,10 +46,10 @@ export const CartItemCount = styled.span({
   minWidth: 15,
   height: 15,
   padding: 1,
-  lineHeight: '17px',
+  lineHeight: '15px',
   backgroundColor: '#ff0000',
   borderRadius: 10,
   color: '#fff',
-  fontSize: '0.75rem',
+  fontSize: '1rem',
   textAlign: 'center',
 });

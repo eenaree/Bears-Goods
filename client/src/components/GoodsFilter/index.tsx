@@ -2,7 +2,7 @@ import * as React from 'react';
 import { GoodsFilterContainer } from './styles';
 
 interface Props {
-  filter: string | null;
+  filter: string;
   onChangeFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

@@ -8,13 +8,7 @@ import { GoodsCardList } from './styles';
 
 const renderGoodsCardList = (goodsList: GoodsData[]): React.ReactElement[] =>
   goodsList.map(goods => (
-    <GoodsCard
-      key={goods.id}
-      id={goods.id}
-      img={goods.img}
-      name={goods.name}
-      price={goods.price}
-    />
+    <GoodsCard key={goods.id} id={goods.id} img={goods.img} name={goods.name} />
   ));
 
 export default function Main(): React.ReactElement {

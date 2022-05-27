@@ -14,7 +14,7 @@ export default function GoodsInfo({
   size,
   onChangeSize,
 }: Props): React.ReactElement {
-  const options = goods.size.map(size => (
+  const options: React.ReactElement[] = goods.size.map(size => (
     <option key={size} value={size}>
       {size}
     </option>

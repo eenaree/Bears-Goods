@@ -19,6 +19,7 @@ export const GoodsFilterContainer = styled.div({
     backgroundColor: '#f8f8f8',
     textAlign: 'center',
     cursor: 'pointer',
+    fontSize: '1.4rem',
     transition: '0.3s',
     '&:hover': {
       backgroundColor: '#333',

@@ -18,7 +18,7 @@ export default function Header(): React.ReactElement {
           <Link to="/">Bears Goods</Link>
         </Logo>
         <CartButton onClick={handleCartCheck}>
-          <AiOutlineShoppingCart size="1.7rem" />
+          <AiOutlineShoppingCart size="2.8rem" />
           {cart.length > 0 && <CartItemCount>{cart.length}</CartItemCount>}
         </CartButton>
       </Inner>
