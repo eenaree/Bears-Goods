@@ -34,12 +34,23 @@ export const CartItemList = styled.div({
   },
 });
 
-export const CartItemAllCheckbox = styled.div({
+export const SelectZone = styled.div({
   marginTop: 20,
   paddingLeft: 5,
+  fontWeight: 700,
+  span: {
+    '&:after': {
+      content: '"|"',
+      display: 'inline-block',
+      margin: '0 10px 0 15px',
+    },
+  },
   label: {
     marginLeft: 5,
-    fontSize: '1.5rem',
+    fontSize: '1.4rem',
+  },
+  button: {
+    fontWeight: 700,
   },
 });
 
@@ -112,7 +123,7 @@ export const ToolTipText = styled.em({
   },
 });
 
-export const ButtonWrapper = styled.div({
+export const ButtonGroup = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   button: {

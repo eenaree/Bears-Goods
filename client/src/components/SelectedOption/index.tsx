@@ -20,6 +20,7 @@ export default function SelectedOption({
   dispatch,
 }: Prop): React.ReactElement {
   const handleQuantityIncrement = () => {
+    if (option.quantity === 10) return;
     dispatch({
       type: 'INCREMENT_OPTION_QUANTITY',
       size: option.size,

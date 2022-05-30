@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartDispatch, useCartState } from '@context/CartContext';
 import CartItem from '@components/CartItem';
 import { addThousandSeperatorToNumber } from '@utils';
@@ -8,8 +8,8 @@ import {
   CartItemList,
   Container,
   PriceBox,
-  ButtonWrapper,
-  CartItemAllCheckbox,
+  ButtonGroup,
+  SelectZone,
   NoneCartList,
   ToolTipText,
 } from './styles';
@@ -45,21 +45,31 @@ export default function Cart(): React.ReactElement {
     dispatch({ type: 'TOGGLE_ALL_SELECT' });
   };
 
+  const navigate = useNavigate();
+  const handleListNavigate = () => {
+    navigate('/');
+  };
+
   return (
     <>
       <Container>
         <h2>장바구니</h2>
         {cart.length > 0 ? (
           <>
-            <CartItemAllCheckbox>
-              <input
-                type="checkbox"
-                id="allCheck"
-                checked={allSelected}
-                onChange={handleAllCheckedChange}
-              />
-              <label htmlFor="allCheck">전체 선택</label>
-            </CartItemAllCheckbox>
+            <SelectZone>
+              <span>
+                <input
+                  type="checkbox"
+                  id="allCheck"
+                  checked={allSelected}
+                  onChange={handleAllCheckedChange}
+                />
+                <label htmlFor="allCheck">
+                  전체 선택 ({selectedCartItem.length}/{cart.length})
+                </label>
+              </span>
+              <button onClick={handleDeleteClick}>선택 삭제</button>
+            </SelectZone>
             <CartItemList>{renderCartItemList}</CartItemList>
             <PriceBox>
               <p>
@@ -95,10 +105,10 @@ export default function Cart(): React.ReactElement {
                 </span>
               </p>
             </PriceBox>
-            <ButtonWrapper>
-              <button onClick={handleDeleteClick}>선택 삭제</button>
+            <ButtonGroup>
+              <button onClick={handleListNavigate}>목록으로</button>
               <button>주문하기</button>
-            </ButtonWrapper>
+            </ButtonGroup>
           </>
         ) : (
           <NoneCartList>
