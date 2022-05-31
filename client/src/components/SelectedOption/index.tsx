@@ -26,6 +26,11 @@ export default function SelectedOption({
     if (parseInt(e.target.value) > 10) {
       alert('최대 구매 가능 수량은 10개입니다.');
       setQuantity('10');
+      dispatch({
+        type: 'CHANGE_OPTION_QUANTITY',
+        size: option.size,
+        quantity: 10,
+      });
       return;
     }
 
