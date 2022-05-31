@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Wrapper, Price } from './styles';
 import {
   AiOutlineMinus,
@@ -19,8 +20,46 @@ export default function SelectedOption({
   option,
   dispatch,
 }: Prop): React.ReactElement {
+  const [quantity, setQuantity] = useState<string>(String(option.quantity));
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isNaN(Number(e.target.value))) return;
+    if (parseInt(e.target.value) > 10) {
+      alert('최대 구매 가능 수량은 10개입니다.');
+      setQuantity('10');
+      return;
+    }
+
+    setQuantity(e.target.value);
+    const value: number = parseInt(e.target.value);
+    if (value) {
+      if (value === option.quantity) return;
+      dispatch({
+        type: 'CHANGE_OPTION_QUANTITY',
+        size: option.size,
+        quantity: value,
+      });
+    }
+  };
+
+  const handleQuantityBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (!e.target.value) {
+      setQuantity(String(option.quantity));
+      return;
+    }
+
+    if (e.target.value.startsWith(' ') || e.target.value.startsWith('0')) {
+      const value: number = parseInt(e.target.value);
+      if (!value) {
+        setQuantity(String(option.quantity));
+      } else {
+        setQuantity(String(value));
+      }
+    }
+  };
+
   const handleQuantityIncrement = () => {
     if (option.quantity === 10) return;
+    setQuantity(prev => String(parseInt(prev) + 1));
     dispatch({
       type: 'INCREMENT_OPTION_QUANTITY',
       size: option.size,
@@ -30,6 +69,7 @@ export default function SelectedOption({
 
   const handleQuantityDecrement = () => {
     if (option.quantity === 1) return;
+    setQuantity(prev => String(parseInt(prev) - 1));
     dispatch({
       type: 'DECREMENT_OPTION_QUANTITY',
       size: option.size,
@@ -52,7 +92,11 @@ export default function SelectedOption({
         <button onClick={handleQuantityDecrement}>
           <AiOutlineMinus />
         </button>
-        <input value={option.quantity} readOnly />
+        <input
+          value={quantity}
+          onChange={handleQuantityChange}
+          onBlur={handleQuantityBlur}
+        />
         <button onClick={handleQuantityIncrement}>
           <AiOutlinePlus />
         </button>

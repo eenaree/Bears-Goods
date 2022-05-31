@@ -10,7 +10,8 @@ export type OptionAction =
   | { type: 'REMOVE_OPTION'; option: Option }
   | { type: 'INCREMENT_OPTION_QUANTITY'; size: string | number; price: number }
   | { type: 'DECREMENT_OPTION_QUANTITY'; size: string | number; price: number }
-  | { type: 'RESET_OPTIONS' };
+  | { type: 'RESET_OPTIONS' }
+  | { type: 'CHANGE_OPTION_QUANTITY'; size: string | number; quantity: number };
 
 export function initializeOptions() {
   return { options: [], totalPrice: 0 };
@@ -58,5 +59,21 @@ export function optionReducer(
       };
     case 'RESET_OPTIONS':
       return initializeOptions();
+    case 'CHANGE_OPTION_QUANTITY':
+      return {
+        ...state,
+        options: state.options.map(option =>
+          option.size === action.size
+            ? { ...option, quantity: action.quantity }
+            : option
+        ),
+        totalPrice: state.options.reduce(
+          (prev, curr) =>
+            curr.size === action.size
+              ? prev + curr.price * action.quantity
+              : prev + curr.price * curr.quantity,
+          0
+        ),
+      };
   }
 }
