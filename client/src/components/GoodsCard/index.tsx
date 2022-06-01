@@ -7,17 +7,20 @@ import {
   ImageWrapper,
   OverlayText,
 } from './styles';
+import { addThousandSeperatorToNumber } from '@utils';
 
 interface Props {
   id: number;
   img: string;
   name: string;
+  price: number;
 }
 
 export default function GoodsCard({
   id,
   img,
   name,
+  price,
 }: Props): React.ReactElement {
   return (
     <Wrapper>
@@ -31,7 +34,12 @@ export default function GoodsCard({
           </Link>
         </OverlayText>
       </CardSquare>
-      <CardLabel>{name}</CardLabel>
+      <CardLabel>
+        <p>{name}</p>
+        <p>
+          <strong>{addThousandSeperatorToNumber(price)}</strong> 원
+        </p>
+      </CardLabel>
     </Wrapper>
   );
 }

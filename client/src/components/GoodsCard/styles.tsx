@@ -2,9 +2,7 @@ import styled from '@emotion/styled';
 import { mq } from '@styles/mediaQueries';
 
 export const CardLabel = styled.div({
-  height: 50,
   padding: '0 10px',
-  lineHeight: '50px',
   fontSize: '1.2rem',
   fontWeight: 700,
   color: '#333',
@@ -13,6 +11,14 @@ export const CardLabel = styled.div({
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  p: {
+    height: 25,
+    lineHeight: '25px',
+  },
+  strong: {
+    color: '#ff0000',
+    fontSize: '1.5rem',
+  },
 });
 
 export const OverlayText = styled.div({
