@@ -5,6 +5,7 @@ import axios from 'axios';
 import Category from '@components/Category';
 import GoodsCard from '@components/GoodsCard';
 import PriceSorting from '@components/PriceSorting';
+import ProgressBar from '@components/ProgressBar';
 import { GoodsData } from '@typings/db';
 import goodsAPI from '@api/goods';
 import { CreateError, GoodsCardList } from './styles';
@@ -71,17 +72,21 @@ export default function Main(): React.ReactElement {
         { signal: abortController.signal }
       )
       .then(({ data }) => {
-        if (abortController.signal.aborted) return;
-        setState({ status: 'resolved', goods: data, error: null });
+        setTimeout(() => {
+          if (abortController.signal.aborted) return;
+          setState({ status: 'resolved', goods: data, error: null });
+        }, 500);
       })
       .catch((error: unknown) => {
         if (axios.isAxiosError(error)) {
-          if (abortController.signal.aborted) return;
-          setState({
-            status: 'rejected',
-            goods: null,
-            error: error.response,
-          });
+          setTimeout(() => {
+            if (abortController.signal.aborted) return;
+            setState({
+              status: 'rejected',
+              goods: null,
+              error: error.response,
+            });
+          }, 500);
         }
       });
     return () => {
@@ -91,6 +96,7 @@ export default function Main(): React.ReactElement {
 
   return (
     <>
+      <ProgressBar isLoading={state.status === 'loading'} />
       <form onChange={handleChangeFormFilter}>
         <Category category={category} />
         <PriceSorting order={order} />
