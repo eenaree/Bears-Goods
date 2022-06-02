@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useEffect, useState, useReducer } from 'react';
+import { useEffect, useState, useReducer, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import { GoodsData } from '@typings/db';
 import { Container, SelectedOptionList, TotalPrice } from './styles';
 import { addThousandSeperatorToNumber } from '@utils';
-import { optionReducer, initializeOptions } from '@reducers/option';
+import { optionReducer } from '@reducers/option';
 import SelectedOption from '@components/SelectedOption';
 import GoodsInfo from '@components/GoodsInfo';
 import AddToCartButton from '@components/AddToCartButton';
@@ -27,11 +27,10 @@ export default function Detail(): React.ReactElement {
     }
   }, [params.id]);
 
-  const [{ options, totalPrice }, dispatch] = useReducer(
-    optionReducer,
-    null,
-    initializeOptions
-  );
+  const [{ options }, dispatch] = useReducer(optionReducer, { options: [] });
+  const totalPrice = useMemo(() => {
+    return options.reduce((prev, curr) => prev + curr.quantity * curr.price, 0);
+  }, [options]);
   const [size, setSize, onChangeSize] = useSize(goods, options, dispatch);
 
   const renderSelectedOptionList: React.ReactElement[] = options.map(option => (
