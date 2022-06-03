@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer, useMemo } from 'react';
 import { CartAction, CartState, cartReducer } from '@reducers/cart';
 import { CartItemOption } from '@typings/db';
 import { checkObject } from '@utils';
@@ -14,6 +14,16 @@ const CartStateContext = createContext<CartState | undefined>(undefined);
 const CartDispatchContext = createContext<
   React.Dispatch<CartAction> | undefined
 >(undefined);
+
+const CartListCountContext = createContext<number>(0);
+
+export const useCartListCount = () => {
+  const state = useContext(CartListCountContext);
+  if (!state) {
+    throw new Error('CountListCountPrivder can not found');
+  }
+  return state;
+};
 
 export const useCartState = () => {
   const state = useContext(CartStateContext);
@@ -77,12 +87,17 @@ export const CartProvider = ({ children }: Props): React.ReactElement => {
     storagedCart,
     initializeCart
   );
+  const cartListCount = useMemo(() => cart.length, [cart.length]);
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
-      <CartStateContext.Provider value={{ cart, cartTotalPrice, allSelected }}>
-        {children}
-      </CartStateContext.Provider>
+      <CartListCountContext.Provider value={cartListCount}>
+        <CartStateContext.Provider
+          value={{ cart, cartTotalPrice, allSelected }}
+        >
+          {children}
+        </CartStateContext.Provider>
+      </CartListCountContext.Provider>
     </CartDispatchContext.Provider>
   );
 };
