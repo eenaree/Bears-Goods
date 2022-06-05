@@ -18,7 +18,7 @@ import { CartItemOption } from '@typings/db';
 import { FcAbout } from 'react-icons/fc';
 
 export default function Cart(): React.ReactElement {
-  const { cart, cartTotalPrice, allSelected } = useCartState();
+  const { cart, allSelected } = useCartState();
   const dispatch = useCartDispatch();
   const renderCartItemList: React.ReactElement[] = cart.map(item => (
     <CartItem key={item.name + item.size} item={item} />
@@ -32,6 +32,14 @@ export default function Cart(): React.ReactElement {
   const selectedCartItem = useMemo<CartItemOption[]>(
     () => cart.filter(item => item.selected),
     [cart]
+  );
+  const selectedCartItemPrice = useMemo(
+    () =>
+      selectedCartItem.reduce(
+        (prev, curr) => prev + curr.quantity * curr.price,
+        0
+      ),
+    [selectedCartItem]
   );
   const handleDeleteClick = () => {
     if (!selectedCartItem.length) {
@@ -75,7 +83,7 @@ export default function Cart(): React.ReactElement {
               <p>
                 <span>주문금액</span>
                 <span>
-                  {addThousandSeperatorToNumber(cartTotalPrice)}
+                  {addThousandSeperatorToNumber(selectedCartItemPrice)}
                   &nbsp;원
                 </span>
               </p>
@@ -86,7 +94,7 @@ export default function Cart(): React.ReactElement {
                   <ToolTipText>5만원 이상 구매시 무료배송</ToolTipText>
                 </span>
                 <span>
-                  {selectedCartItem.length > 0 && cartTotalPrice < 50000
+                  {selectedCartItem.length > 0 && selectedCartItemPrice < 50000
                     ? addThousandSeperatorToNumber(3000)
                     : 0}
                   &nbsp;원
@@ -97,9 +105,12 @@ export default function Cart(): React.ReactElement {
                 <span>총 주문금액</span>
                 <span>
                   <strong>
-                    {selectedCartItem.length > 0 && cartTotalPrice < 50000
-                      ? addThousandSeperatorToNumber(cartTotalPrice + 3000)
-                      : addThousandSeperatorToNumber(cartTotalPrice)}
+                    {selectedCartItem.length > 0 &&
+                    selectedCartItemPrice < 50000
+                      ? addThousandSeperatorToNumber(
+                          selectedCartItemPrice + 3000
+                        )
+                      : addThousandSeperatorToNumber(selectedCartItemPrice)}
                   </strong>
                   &nbsp;원
                 </span>

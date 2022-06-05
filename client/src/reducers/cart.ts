@@ -2,7 +2,6 @@ import { CartItemOption } from '@typings/db';
 
 export interface CartState {
   cart: CartItemOption[];
-  cartTotalPrice: number;
   allSelected: boolean;
 }
 
@@ -39,11 +38,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
             return sameOptionIndex !== -1 ? prev : prev.concat(curr);
           }, []),
-        cartTotalPrice:
-          state.cartTotalPrice +
-          action.items
-            .map(item => item.price * item.quantity)
-            .reduce((prev, curr) => prev + curr, 0),
         allSelected: state.cart.every(item => item.selected),
       };
     case 'REMOVE_CART_ITEM':
@@ -53,16 +47,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
           item =>
             item.name !== action.item.name || item.size !== action.item.size
         ),
-        cartTotalPrice: state.cart
-          .filter(
-            item =>
-              item.name !== action.item.name || item.size !== action.item.size
-          )
-          .reduce(
-            (prev, curr) =>
-              curr.selected ? prev + curr.price * curr.quantity : prev,
-            0
-          ),
         allSelected:
           state.cart.length - 1 > 0
             ? state.cart
@@ -82,16 +66,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...action.item, quantity: action.quantity }
             : item
         ),
-        cartTotalPrice: state.cart.reduce((prev, curr) => {
-          if (
-            curr.name === action.item.name &&
-            curr.size === action.item.size
-          ) {
-            return curr.selected ? prev + curr.price * action.quantity : prev;
-          } else {
-            return curr.selected ? prev + curr.price * curr.quantity : prev;
-          }
-        }, 0),
       };
     case 'TOGGLE_ALL_SELECT':
       return {
@@ -99,11 +73,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
         cart: state.allSelected
           ? state.cart.map(item => ({ ...item, selected: false }))
           : state.cart.map(item => ({ ...item, selected: true })),
-        cartTotalPrice: state.allSelected
-          ? 0
-          : state.cart.reduce((prev, curr) => {
-              return prev + curr.price * curr.quantity;
-            }, 0),
         allSelected: !state.allSelected,
       };
     case 'TOGGLE_ITEM_SELECT':
@@ -114,16 +83,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...item, selected: !item.selected }
             : item
         ),
-        cartTotalPrice: state.cart.reduce((prev, curr) => {
-          if (
-            curr.name === action.item.name &&
-            curr.size === action.item.size
-          ) {
-            return curr.selected ? prev : prev + curr.price * curr.quantity;
-          } else {
-            return curr.selected ? prev + curr.price * curr.quantity : prev;
-          }
-        }, 0),
         allSelected: state.cart.every(item =>
           item.name === action.item.name && item.size === action.item.size
             ? !item.selected
@@ -134,13 +93,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         cart: state.cart.filter(item => !item.selected),
-        cartTotalPrice: state.cart
-          .filter(item => !item.selected)
-          .reduce(
-            (prev, curr) =>
-              curr.selected ? prev + curr.price * curr.quantity : prev,
-            0
-          ),
         allSelected:
           state.cart.filter(item => item.selected).length === state.cart.length
             ? false

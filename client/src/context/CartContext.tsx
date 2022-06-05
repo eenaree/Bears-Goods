@@ -68,21 +68,16 @@ const checkCart = (cart: any): cart is CartItemOption[] => {
 
 const initializeCart = (initialCart: CartItemOption[]): CartState => {
   if (initialCart.length > 0) {
-    const cartTotalPrice: number = initialCart.reduce(
-      (prev, curr) =>
-        curr.selected ? prev + curr.price * curr.quantity : prev,
-      0
-    );
     const allSelected: boolean = initialCart.every(item => item.selected);
-    return { cart: initialCart, cartTotalPrice, allSelected };
+    return { cart: initialCart, allSelected };
   } else {
-    return { cart: [], cartTotalPrice: 0, allSelected: false };
+    return { cart: [], allSelected: false };
   }
 };
 
 export const CartProvider = ({ children }: Props): React.ReactElement => {
   const storagedCart = useLocalStorage<CartItemOption[]>('cart', checkCart, []);
-  const [{ cart, cartTotalPrice, allSelected }, dispatch] = useReducer(
+  const [{ cart, allSelected }, dispatch] = useReducer(
     cartReducer,
     storagedCart,
     initializeCart
@@ -92,9 +87,7 @@ export const CartProvider = ({ children }: Props): React.ReactElement => {
   return (
     <CartDispatchContext.Provider value={dispatch}>
       <CartListCountContext.Provider value={cartListCount}>
-        <CartStateContext.Provider
-          value={{ cart, cartTotalPrice, allSelected }}
-        >
+        <CartStateContext.Provider value={{ cart, allSelected }}>
           {children}
         </CartStateContext.Provider>
       </CartListCountContext.Provider>
