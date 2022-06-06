@@ -18,11 +18,7 @@ const CartDispatchContext = createContext<
 const CartListCountContext = createContext<number>(0);
 
 export const useCartListCount = () => {
-  const state = useContext(CartListCountContext);
-  if (!state) {
-    throw new Error('CountListCountPrivder can not found');
-  }
-  return state;
+  return useContext(CartListCountContext);
 };
 
 export const useCartState = () => {
