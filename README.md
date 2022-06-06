@@ -51,5 +51,10 @@ npm run dev
 - 로딩 상태 진행 바
 - 장바구니 추가 완료, 상품 삭제 확인 팝업창
 
-### 발생했던 문제들
+### 오답 노트
 
+- [사용자가 선택한 옵션을 장바구니에 추가할 때, 중복성 처리하기](https://github.com/eenaree/dev_log/blob/main/BearsGoods/checkDuplicate.md)
+- [장바구니 아이템을 모두 삭제했는데, 전체 선택 박스가 체크되어 있어요!](https://github.com/eenaree/dev_log/blob/main/BearsGoods/AllSelectedBug.md)
+- [사용자 입력을 활성화한 수량 변경 방식, 어디까지 사용자에게 입력을 허용해야 할까?](https://github.com/eenaree/dev_log/blob/main/BearsGoods/UserInputQuantity.md)
+- [사용자가 A, B, C를 모두 클릭했더라도 마지막으로 클릭한 C만 보여주고 싶어요!](https://github.com/eenaree/dev_log/blob/main/BearsGoods/cancelPromise.md)
+- [로딩상태를 나타내는 진행바 만들기](https://github.com/eenaree/dev_log/blob/main/BearsGoods/LoadingBar.md)
