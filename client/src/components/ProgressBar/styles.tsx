@@ -24,7 +24,7 @@ export const Bar = styled.div<{ isLoading: boolean }>(
   })
 );
 
-export const CreateBar = styled.div<{ isMounted: boolean }>(
+export const CreateBar = styled.div<{ isLoading: boolean }>(
   {
     width: '100%',
     backgroundColor: '#f8f8f8',
@@ -32,6 +32,7 @@ export const CreateBar = styled.div<{ isMounted: boolean }>(
     transition: 'opacity 1s',
   },
   props => ({
-    opacity: props.isMounted ? 1 : 0,
+    opacity: props.isLoading ? 1 : 0,
+    transitionDelay: props.isLoading ? '0' : '.5s',
   })
 );
