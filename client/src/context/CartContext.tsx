@@ -2,8 +2,7 @@ import * as React from 'react';
 import { createContext, useContext, useReducer, useMemo } from 'react';
 import { CartAction, CartState, cartReducer } from '@reducers/cart';
 import { CartItemOption } from '@typings/db';
-import { checkObject } from '@utils';
-import useLocalStorage from '@hooks/useLocalStorage';
+import { checkObject, getLocalStorage } from '@utils';
 
 interface Props {
   children: React.ReactElement;
@@ -62,7 +61,8 @@ const checkCart = (cart: any): cart is CartItemOption[] => {
   return false;
 };
 
-const initializeCart = (initialCart: CartItemOption[]): CartState => {
+const initializeCart = (): CartState => {
+  const initialCart = getLocalStorage('cart', checkCart, []);
   if (initialCart.length > 0) {
     const allSelected: boolean = initialCart.every(item => item.selected);
     return { cart: initialCart, allSelected };
@@ -72,13 +72,12 @@ const initializeCart = (initialCart: CartItemOption[]): CartState => {
 };
 
 export const CartProvider = ({ children }: Props): React.ReactElement => {
-  const storagedCart = useLocalStorage<CartItemOption[]>('cart', checkCart, []);
   const [{ cart, allSelected }, dispatch] = useReducer(
     cartReducer,
-    storagedCart,
+    null,
     initializeCart
   );
-  const cartListCount = useMemo(() => cart.length, [cart.length]);
+  const cartListCount: number = useMemo(() => cart.length, [cart.length]);
 
   return (
     <CartDispatchContext.Provider value={dispatch}>
