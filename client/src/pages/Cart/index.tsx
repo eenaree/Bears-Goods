@@ -19,7 +19,7 @@ import { FcAbout } from 'react-icons/fc';
 import CheckBox from '@components/CheckBox';
 
 export default function Cart(): React.ReactElement {
-  const { cart, allSelected } = useCartState();
+  const { cart } = useCartState();
   const dispatch = useCartDispatch();
   const renderCartItemList: React.ReactElement[] = cart.map(item => (
     <CartItem key={item.name + item.size} item={item} />
@@ -29,8 +29,7 @@ export default function Cart(): React.ReactElement {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const [modal, setModal] = useState<boolean>(false);
-  const selectedCartItem = useMemo<CartItemOption[]>(
+  const selectedCart = useMemo<CartItemOption[]>(
     () => cart.filter(item => item.selected),
     [cart]
   );
@@ -43,7 +42,7 @@ export default function Cart(): React.ReactElement {
     [selectedCartItem]
   );
   const handleDeleteClick = () => {
-    if (!selectedCartItem.length) {
+    if (!selectedCart.length) {
       alert('선택된 상품이 없습니다. 삭제할 상품을 선택하세요.');
       return;
     }
@@ -51,12 +50,11 @@ export default function Cart(): React.ReactElement {
   };
 
   const handleAllCheckedChange = () => {
-    dispatch({ type: 'TOGGLE_ALL_SELECT' });
-  };
-
-  const navigate = useNavigate();
-  const handleListNavigate = () => {
-    navigate('/');
+    const allSelected = cart.length === selectedCart.length;
+    dispatch({
+      type: 'TOGGLE_ALL_SELECT',
+      selected: !allSelected,
+    });
   };
 
   return (
@@ -68,9 +66,9 @@ export default function Cart(): React.ReactElement {
             <SelectZone>
               <CheckBox
                 id="allCheckbox"
-                checked={allSelected}
+                checked={cart.length === selectedCart.length}
                 onChange={handleAllCheckedChange}
-                label={`전체 선택 (${selectedCartItem.length}/${cart.length})`}
+                label={`전체 선택 (${selectedCart.length}/${cart.length})`}
               />
               <button onClick={handleDeleteClick}>선택 삭제</button>
             </SelectZone>

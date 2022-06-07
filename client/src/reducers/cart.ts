@@ -2,7 +2,6 @@ import { CartItemOption } from '@typings/db';
 
 export interface CartState {
   cart: CartItemOption[];
-  allSelected: boolean;
 }
 
 export type CartAction =
@@ -13,7 +12,7 @@ export type CartAction =
       item: CartItemOption;
       quantity: number;
     }
-  | { type: 'TOGGLE_ALL_SELECT' }
+  | { type: 'TOGGLE_ALL_SELECT'; selected: boolean }
   | { type: 'TOGGLE_ITEM_SELECT'; item: CartItemOption }
   | { type: 'REMOVE_SELECTED_CART_ITEM' };
 
@@ -38,7 +37,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
             return sameOptionIndex !== -1 ? prev : prev.concat(curr);
           }, []),
-        allSelected: state.cart.every(item => item.selected),
       };
     case 'REMOVE_CART_ITEM':
       return {
@@ -47,16 +45,6 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
           item =>
             item.name !== action.item.name || item.size !== action.item.size
         ),
-        allSelected:
-          state.cart.length - 1 > 0
-            ? state.cart
-                .filter(
-                  item =>
-                    item.name !== action.item.name ||
-                    item.size !== action.item.size
-                )
-                .every(item => item.selected)
-            : false,
       };
     case 'CHANGE_CART_ITEM_QUANTITY':
       return {
@@ -70,10 +58,7 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
     case 'TOGGLE_ALL_SELECT':
       return {
         ...state,
-        cart: state.allSelected
-          ? state.cart.map(item => ({ ...item, selected: false }))
-          : state.cart.map(item => ({ ...item, selected: true })),
-        allSelected: !state.allSelected,
+        cart: state.cart.map(item => ({ ...item, selected: action.selected })),
       };
     case 'TOGGLE_ITEM_SELECT':
       return {
@@ -83,22 +68,11 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...item, selected: !item.selected }
             : item
         ),
-        allSelected: state.cart.every(item =>
-          item.name === action.item.name && item.size === action.item.size
-            ? !item.selected
-            : item.selected
-        ),
       };
     case 'REMOVE_SELECTED_CART_ITEM':
       return {
         ...state,
         cart: state.cart.filter(item => !item.selected),
-        allSelected:
-          state.cart.filter(item => item.selected).length === state.cart.length
-            ? false
-            : state.cart
-                .filter(item => !item.selected)
-                .every(item => item.selected),
       };
   }
 }
