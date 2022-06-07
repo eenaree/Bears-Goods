@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/react';
+import { keyframes, css } from '@emotion/react';
 import { mq } from '@styles/mediaQueries';
 
 const cartItemFadeOut = keyframes({
@@ -33,7 +33,7 @@ export const Wrapper = styled.div<{ isMounted: boolean }>(
   })
 );
 
-export const Checkbox = styled.div({
+export const checkboxStyle = css({
   width: 20,
   input: {
     position: 'relative',

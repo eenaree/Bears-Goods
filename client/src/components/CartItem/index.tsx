@@ -10,12 +10,13 @@ import {
   Product,
   Price,
   Quantity,
-  Checkbox,
+  checkboxStyle,
 } from './styles';
 import { CgTrash } from 'react-icons/cg';
 import { addThousandSeperatorToNumber } from '@utils';
 import { useCartDispatch } from '@context/CartContext';
 import useDelayUnmount from '@hooks/useDelayUnmount';
+import CheckBox from '@components/CheckBox';
 
 interface Props {
   item: CartItemOption;
@@ -82,15 +83,12 @@ export default function CartItem({ item }: Props): React.ReactElement {
 
   return (
     <Wrapper isMounted={isMounted}>
-      <Checkbox>
-        <input
-          type="checkbox"
-          id="check"
-          checked={item.selected}
-          onChange={handleItemSelectedToggle}
-        />
-        <label htmlFor="check">선택</label>
-      </Checkbox>
+      <CheckBox
+        id="check"
+        checked={item.selected}
+        onChange={handleItemSelectedToggle}
+        css={checkboxStyle}
+      />
       <ImageWrapper>
         <Link to={`/goods/${item.id}`} title={item.name}>
           <img src={item.img} alt={item.name} />

@@ -16,6 +16,7 @@ import {
 import DeleteConfirmModal from '@components/DeleteConfirmModal';
 import { CartItemOption } from '@typings/db';
 import { FcAbout } from 'react-icons/fc';
+import CheckBox from '@components/CheckBox';
 
 export default function Cart(): React.ReactElement {
   const { cart, allSelected } = useCartState();
@@ -65,17 +66,12 @@ export default function Cart(): React.ReactElement {
         {cart.length > 0 ? (
           <>
             <SelectZone>
-              <span>
-                <input
-                  type="checkbox"
-                  id="allCheck"
-                  checked={allSelected}
-                  onChange={handleAllCheckedChange}
-                />
-                <label htmlFor="allCheck">
-                  전체 선택 ({selectedCartItem.length}/{cart.length})
-                </label>
-              </span>
+              <CheckBox
+                id="allCheckbox"
+                checked={allSelected}
+                onChange={handleAllCheckedChange}
+                label={`전체 선택 (${selectedCartItem.length}/${cart.length})`}
+              />
               <button onClick={handleDeleteClick}>선택 삭제</button>
             </SelectZone>
             <CartItemList>{renderCartItemList}</CartItemList>
