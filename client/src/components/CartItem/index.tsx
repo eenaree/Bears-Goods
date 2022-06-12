@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { CartItemOption } from '@typings/db';
 import {
@@ -22,7 +22,7 @@ interface Props {
   item: CartItemOption;
 }
 
-export default function CartItem({ item }: Props): React.ReactElement {
+export default memo(function CartItem({ item }: Props): React.ReactElement {
   const dispatch = useCartDispatch();
   const [quantity, setQuantity] = useState<string>(String(item.quantity));
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,4 +122,4 @@ export default function CartItem({ item }: Props): React.ReactElement {
       </DeleteButton>
     </Wrapper>
   );
-}
+});
