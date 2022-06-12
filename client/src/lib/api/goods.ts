@@ -2,16 +2,12 @@ import { server } from '@api/default';
 import { GoodsData } from '@typings/db';
 import { AxiosRequestConfig } from 'axios';
 
-interface GoodsListParams {
-  category?: string | null;
-  sort?: string | null;
-  order?: string | null;
-}
-
 const goodsAPI = {
   getGoodsList: (
-    { category, sort, order }: GoodsListParams,
-    config?: AxiosRequestConfig
+    config: AxiosRequestConfig,
+    category?: string | null,
+    sort?: string | null,
+    order?: string | null
   ) =>
     server.get<GoodsData[]>(
       `/goods?${category ? `category=${category}` : ''}${
