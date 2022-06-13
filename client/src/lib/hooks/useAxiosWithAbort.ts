@@ -10,9 +10,9 @@ interface Async<T> {
 const useAxiosWithAbort = <T>(
   asyncFunction: (
     config: AxiosRequestConfig,
-    ...args: any
+    ...args: any[]
   ) => Promise<AxiosResponse<T, any>>,
-  ...args: any
+  ...args: any[]
 ): Async<T> => {
   const [state, setState] = useState<Async<T>>({
     status: 'idle',
