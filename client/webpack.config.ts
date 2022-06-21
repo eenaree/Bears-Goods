@@ -39,15 +39,16 @@ const commonConfig: webpack.Configuration = {
           options: {
             transpileOnly: isDevelopment,
             getCustomTransformers: () => ({
-              before: [
-                isDevelopment &&
-                  createEmotionPlugin({
-                    sourcemap: true,
-                    autoLabel: true,
-                    labelFormat: '[local]',
-                    autoInject: true,
-                  }),
-              ],
+              before: isDevelopment
+                ? [
+                    createEmotionPlugin({
+                      sourcemap: true,
+                      autoLabel: true,
+                      labelFormat: '[local]',
+                      autoInject: true,
+                    }),
+                  ]
+                : [],
             }),
           },
         },
