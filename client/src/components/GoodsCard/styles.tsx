@@ -92,7 +92,7 @@ export const Wrapper = styled.div({
   '&:hover': {
     transform: 'translate(0, -5px)',
     boxShadow: '10px 10px 10px rgba(255, 255, 255, 0.4)',
-    [`${OverlayText}`]: {
+    'div > div:nth-of-type(2)': {
       opacity: 1,
       '&:after': {
         opacity: 1,
