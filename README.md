@@ -55,11 +55,11 @@ npm run dev
 
 ### 오답 노트
 
-- [사용자가 선택한 옵션을 장바구니에 추가할 때, 중복성 처리하기](https://velog.io/@eenaree/%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%9C-%EC%98%B5%EC%85%98%EC%9D%84-%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%A0-%EB%95%8C-%EC%A4%91%EB%B3%B5%EC%84%B1-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-ffqijx8t)
-- [장바구니 아이템을 모두 삭제했는데, 전체 선택 박스가 체크 되어 있어요!](https://velog.io/@eenaree/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88-%EC%95%84%EC%9D%B4%ED%85%9C%EC%9D%84-%EB%AA%A8%EB%91%90-%EC%82%AD%EC%A0%9C%ED%96%88%EB%8A%94%EB%8D%B0-%EC%A0%84%EC%B2%B4-%EC%84%A0%ED%83%9D-%EB%B0%95%EC%8A%A4%EA%B0%80-%EC%B2%B4%ED%81%AC-%EB%90%98%EC%96%B4-%EC%9E%88%EC%96%B4%EC%9A%94)
-- [사용자에게 수량을 입력 받을 때, 어디까지 입력을 허용해야 할까요?](https://velog.io/@eenaree/%EC%82%AC%EC%9A%A9%EC%9E%90%EC%97%90%EA%B2%8C-%EC%88%98%EB%9F%89%EC%9D%84-%EC%9E%85%EB%A0%A5-%EB%B0%9B%EC%9D%84-%EB%95%8C-%EC%96%B4%EB%94%94%EA%B9%8C%EC%A7%80-%EC%9E%85%EB%A0%A5%EC%9D%84-%ED%97%88%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C%EC%9A%94)
-- [사용자가 A, B, C를 모두 클릭했더라도 마지막으로 클릭한 C만 보여주고 싶어요!](https://velog.io/@eenaree/%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-A-B-C%EB%A5%BC-%EB%AA%A8%EB%91%90-%ED%81%B4%EB%A6%AD%ED%96%88%EB%8D%94%EB%9D%BC%EB%8F%84-%EB%A7%88%EC%A7%80%EB%A7%89%EC%9C%BC%EB%A1%9C-%ED%81%B4%EB%A6%AD%ED%95%9C-C%EB%A7%8C-%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B3%A0-%EC%8B%B6%EC%96%B4%EC%9A%94)
-- [로딩상태를 나타내는 진행바 만들기](https://velog.io/@eenaree/%EB%A1%9C%EB%94%A9-%EC%83%81%ED%83%9C%EB%A5%BC-%EB%82%98%ED%83%80%EB%82%B4%EB%8A%94-%EC%A7%84%ED%96%89%EB%B0%94-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+- [사용자가 선택한 옵션을 장바구니에 추가할 때, 중복성 처리하기](https://velog.io/@eenaree/shopping-cart-item-duplicate-check)
+- [장바구니 아이템을 모두 삭제했는데, 전체 선택 박스가 체크 되어 있어요!](https://velog.io/@eenaree/checkbox-allselected-bug)
+- [사용자에게 수량을 입력 받을 때, 어디까지 입력을 허용해야 할까요?](https://velog.io/@eenaree/react-input-quantity-event)
+- [사용자가 A, B, C를 모두 클릭했더라도 마지막으로 클릭한 C만 보여주고 싶어요!](https://velog.io/@eenaree/javascript-cancel-promise)
+- [로딩상태를 나타내는 진행바 만들기](https://velog.io/@eenaree/loading-progress-bar)
 
 ### 부족했던 점
 
