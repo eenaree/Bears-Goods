@@ -12,6 +12,7 @@
       "@hooks/*": ["src/lib/hooks/*"],
       "@typings/*": ["src/typings/*"],
       "@lib/*": ["src/lib/*"],
+      "@store/*": ["src/store/*"],
     },
     "outDir": "build",
     "allowJs": true,
