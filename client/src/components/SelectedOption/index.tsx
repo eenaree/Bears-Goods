@@ -6,7 +6,7 @@ import {
   AiOutlinePlus,
   AiOutlineCloseSquare,
 } from 'react-icons/ai';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { Option } from '@typings/db';
 import { OptionAction } from '@reducers/option';
 import useDelayUnmount from '@hooks/useDelayUnmount';

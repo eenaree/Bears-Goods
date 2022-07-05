@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 import { GoodsData } from '@typings/db';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { GoodsImageWrapper, GoodsInfoContainer, GoodsTable } from './styles';
 
 interface Props {

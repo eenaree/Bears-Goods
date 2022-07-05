@@ -12,7 +12,7 @@ import {
   checkboxStyle,
 } from './styles';
 import { CgTrash } from 'react-icons/cg';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { useCartDispatch } from '@context/CartContext';
 import useDelayUnmount from '@hooks/useDelayUnmount';
 import CheckBox from '@components/CheckBox';

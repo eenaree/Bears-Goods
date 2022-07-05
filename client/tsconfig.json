@@ -12,7 +12,6 @@
       "@hooks/*": ["src/lib/hooks/*"],
       "@typings/*": ["src/typings/*"],
       "@lib/*": ["src/lib/*"],
-      "@utils": ["src/lib/utils.ts"]
     },
     "outDir": "build",
     "allowJs": true,

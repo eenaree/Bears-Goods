@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 import { FcAbout } from 'react-icons/fc';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { CartItemOption } from '@typings/db';
 import { PriceBox, ToolTipText } from './styles';
 

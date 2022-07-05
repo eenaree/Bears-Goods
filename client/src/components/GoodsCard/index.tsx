@@ -7,7 +7,7 @@ import {
   ImageWrapper,
   OverlayText,
 } from './styles';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 
 interface Props {
   id: number;

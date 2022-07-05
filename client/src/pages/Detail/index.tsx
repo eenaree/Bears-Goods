@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import { GoodsData } from '@typings/db';
 import { Container, SelectedOptionList, TotalPrice } from './styles';
-import { addThousandSeperatorToNumber } from '@utils';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { optionReducer } from '@reducers/option';
 import SelectedOption from '@components/SelectedOption';
 import GoodsInfo from '@components/GoodsInfo';
