@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { useEffect, useState, useReducer, useMemo } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
-import { GoodsData } from '@typings/db';
-import { Container, SelectedOptionList, TotalPrice } from './styles';
-import { addThousandSeperatorToNumber } from '@lib/utils';
-import { optionReducer } from '@reducers/option';
-import SelectedOption from '@components/SelectedOption';
-import GoodsInfo from '@components/GoodsInfo';
 import AddToCartButton from '@components/AddToCartButton';
 import CartCheckModal from '@components/CartCheckModal';
+import GoodsInfo from '@components/GoodsInfo';
+import SelectedOption from '@components/SelectedOption';
 import useSize from '@hooks/useSize';
+import { addThousandSeperatorToNumber } from '@lib/utils';
+import { optionReducer } from '@reducers/option';
+import { GoodsData } from '@typings/db';
+import { Container, SelectedOptionList, TotalPrice } from './styles';
 
 export default function Detail(): React.ReactElement {
   const params = useParams<'id'>();

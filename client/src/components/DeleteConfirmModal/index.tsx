@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ModalView from '@components/ModalView';
-import { ModalBody } from './styles';
-import useDelayUnmount from '@hooks/useDelayUnmount';
 import { useCartDispatch } from '@context/CartContext';
+import useDelayUnmount from '@hooks/useDelayUnmount';
+import { ModalBody } from './styles';
 
 interface Props {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;

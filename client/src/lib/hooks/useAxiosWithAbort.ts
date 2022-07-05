@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface Async<T> {
   status: 'idle' | 'loading' | 'resolved' | 'rejected';

@@ -1,6 +1,6 @@
+import { AxiosRequestConfig } from 'axios';
 import { server } from '@api/default';
 import { GoodsData } from '@typings/db';
-import { AxiosRequestConfig } from 'axios';
 
 const goodsAPI = {
   getGoodsList: (

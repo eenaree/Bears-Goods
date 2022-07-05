@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState, useCallback } from 'react';
-import { CartItemOption } from '@typings/db';
+import { useCallback, useState } from 'react';
 import { useCartDispatch } from '@context/CartContext';
+import { CartItemOption } from '@typings/db';
 import { Button, ChangeButton, Wrapper } from './styles';
 
 interface Props {

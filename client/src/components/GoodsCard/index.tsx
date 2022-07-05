@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import {
   CardLabel,
   CardSquare,
-  Wrapper,
   ImageWrapper,
   OverlayText,
+  Wrapper,
 } from './styles';
-import { addThousandSeperatorToNumber } from '@lib/utils';
 
 interface Props {
   id: number;

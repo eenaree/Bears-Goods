@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CloseButton, ModalBody } from './styles';
 import ModalView from '@components/ModalView';
 import useDelayUnmount from '@hooks/useDelayUnmount';
+import { CloseButton, ModalBody } from './styles';
 
 interface Props {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;

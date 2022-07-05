@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Wrapper, Price } from './styles';
 import {
+  AiOutlineCloseSquare,
   AiOutlineMinus,
   AiOutlinePlus,
-  AiOutlineCloseSquare,
 } from 'react-icons/ai';
-import { addThousandSeperatorToNumber } from '@lib/utils';
-import { Option } from '@typings/db';
-import { OptionAction } from '@reducers/option';
 import useDelayUnmount from '@hooks/useDelayUnmount';
+import { addThousandSeperatorToNumber } from '@lib/utils';
+import { OptionAction } from '@reducers/option';
+import { Option } from '@typings/db';
+import { Price, Wrapper } from './styles';
 
 interface Prop {
   option: Option;

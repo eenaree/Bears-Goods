@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { useState, useCallback, memo } from 'react';
+import { memo } from 'react';
+import { CgTrash } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
+import CartQuantityInput from '@components/CartQuantityInput';
+import CheckBox from '@components/CheckBox';
+import { useCartDispatch } from '@context/CartContext';
+import useDelayUnmount from '@hooks/useDelayUnmount';
+import { addThousandSeperatorToNumber } from '@lib/utils';
 import { CartItemOption } from '@typings/db';
 import {
-  Wrapper,
+  checkboxStyle,
   DeleteButton,
   ImageWrapper,
   ItemInfo,
-  Product,
   Price,
-  checkboxStyle,
+  Product,
+  Wrapper,
 } from './styles';
-import { CgTrash } from 'react-icons/cg';
-import { addThousandSeperatorToNumber } from '@lib/utils';
-import { useCartDispatch } from '@context/CartContext';
-import useDelayUnmount from '@hooks/useDelayUnmount';
-import CheckBox from '@components/CheckBox';
-import CartQuantityInput from '@components/CartQuantityInput';
 
 interface Props {
   item: CartItemOption;

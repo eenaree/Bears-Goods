@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { createContext, useContext, useReducer, useMemo } from 'react';
-import { CartAction, CartState, cartReducer } from '@reducers/cart';
-import { CartItemOption } from '@typings/db';
+import { createContext, useContext, useMemo, useReducer } from 'react';
 import { checkObject, getLocalStorage } from '@lib/utils';
+import { CartAction, cartReducer, CartState } from '@reducers/cart';
+import { CartItemOption } from '@typings/db';
 
 interface Props {
   children: React.ReactElement;

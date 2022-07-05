@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { CartButton, Logo, Container, Inner, CartItemCount } from './styles';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartListCount } from '@context/CartContext';
+import { CartButton, CartItemCount, Container, Inner, Logo } from './styles';
 
 export default function Header(): React.ReactElement {
   const cartListCount = useCartListCount();

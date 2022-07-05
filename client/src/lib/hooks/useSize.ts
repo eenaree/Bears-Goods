@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
-import { GoodsData, Option } from '@typings/db';
+import { useCallback, useEffect, useState } from 'react';
 import { OptionAction } from '@reducers/option';
+import { GoodsData, Option } from '@typings/db';
 
 const useSize = (
   goods: GoodsData | null,
