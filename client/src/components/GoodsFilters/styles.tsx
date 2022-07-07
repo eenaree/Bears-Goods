@@ -28,4 +28,9 @@ export const styles = {
     padding: '1.2rem 2rem',
     cursor: 'pointer',
   }),
+  priceSortingZone: css({
+    margin: '10px 0',
+    display: 'flex',
+    justifyContent: 'right',
+  }),
 };

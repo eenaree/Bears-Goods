@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BiError } from 'react-icons/bi';
 import { useSearchParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import GoodsCard from '@components/GoodsCard';
 import Categories from '@components/GoodsFilters/Categories';
+import PriceSorting from '@components/GoodsFilters/PriceSorting';
 import ProgressBar from '@components/ProgressBar';
 import useAxiosWithAbort from '@hooks/useAxiosWithAbort';
 import { GoodsCategory, GoodsData } from '@typings/db';
@@ -24,6 +26,18 @@ export default function Main(): React.ReactElement {
   const [searchParams] = useSearchParams();
   const category = (searchParams.get('category') as GoodsCategory) || '';
 
+  const [sortBy, setSortBy] = useState(
+    () => sessionStorage.getItem('sortBy') || ''
+  );
+
+  const onChangeSortBy = useCallback((value: string) => {
+    setSortBy(value);
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem('sortBy', sortBy);
+  }, [sortBy]);
+
   const { status, data, error } = useAxiosWithAbort<GoodsData[]>(
     goodsAPI.getGoodsList,
     category
@@ -34,6 +48,7 @@ export default function Main(): React.ReactElement {
       <ProgressBar isLoading={status === 'loading'} />
       <section>
         <Categories />
+        <PriceSorting sortBy={sortBy} onChangeSortBy={onChangeSortBy} />
       </section>
       {data && <GoodsCardList>{renderGoodsCardList(data)}</GoodsCardList>}
       {error && (
