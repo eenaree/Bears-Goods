@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import useDetectDropdown from '@hooks/useDetectDropdown';
 import { styles } from './styles';
 
 interface Props {
@@ -13,35 +13,7 @@ export default function Dropdown({
   selected,
   onChangeSelected,
 }: Props): React.ReactElement {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const toggleIsActive = () => {
-    setIsActive(prev => !prev);
-  };
-
-  const dropdownRef = useRef<HTMLButtonElement>();
-  const setDropdownRef = (element: HTMLButtonElement) => {
-    dropdownRef.current = element;
-  };
-
-  useEffect(() => {
-    const onClickOutside = (e: MouseEvent) => {
-      if (
-        e.target &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Element)
-      ) {
-        setIsActive(false);
-      }
-    };
-
-    if (isActive) {
-      window.addEventListener('click', onClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('click', onClickOutside);
-    };
-  }, [isActive]);
+  const [isActive, toggleIsActive, setDropdownRef] = useDetectDropdown();
 
   return (
     <div css={styles.dropdownZone}>
