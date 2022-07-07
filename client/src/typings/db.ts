@@ -7,6 +7,8 @@ export interface GoodsData {
   category: 'uniform' | 'clothing' | 'cap';
 }
 
+export type GoodsCategory = GoodsData['category'];
+
 export interface Option {
   id: number;
   name: string;

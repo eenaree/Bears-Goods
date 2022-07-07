@@ -3,9 +3,10 @@ import { BiError } from 'react-icons/bi';
 import { useSearchParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import GoodsCard from '@components/GoodsCard';
+import Categories from '@components/GoodsFilters/Categories';
 import ProgressBar from '@components/ProgressBar';
 import useAxiosWithAbort from '@hooks/useAxiosWithAbort';
-import { GoodsData } from '@typings/db';
+import { GoodsCategory, GoodsData } from '@typings/db';
 import { CreateError, GoodsCardList } from './styles';
 
 const renderGoodsCardList = (goodsList: GoodsData[]): React.ReactElement[] =>
@@ -21,7 +22,7 @@ const renderGoodsCardList = (goodsList: GoodsData[]): React.ReactElement[] =>
 
 export default function Main(): React.ReactElement {
   const [searchParams] = useSearchParams();
-  const category = searchParams.get('category') || '';
+  const category = (searchParams.get('category') as GoodsCategory) || '';
 
   const { status, data, error } = useAxiosWithAbort<GoodsData[]>(
     goodsAPI.getGoodsList,
@@ -29,8 +30,11 @@ export default function Main(): React.ReactElement {
   );
 
   return (
-    <>
+    <main>
       <ProgressBar isLoading={status === 'loading'} />
+      <section>
+        <Categories />
+      </section>
       {data && <GoodsCardList>{renderGoodsCardList(data)}</GoodsCardList>}
       {error && (
         <CreateError>
@@ -38,6 +42,6 @@ export default function Main(): React.ReactElement {
           <p>상품 정보를 가져오는데 실패했습니다.</p>
         </CreateError>
       )}
-    </>
+    </main>
   );
 }
