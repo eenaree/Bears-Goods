@@ -1,6 +1,7 @@
 import * as React from 'react';
-import GoodsCard from '@components/GoodsCard';
+import GoodsProvider from '@context/GoodsContext';
 import { GoodsData } from '@typings/db';
+import GoodsCard from './GoodsCard';
 import { styles } from './styles';
 
 interface Props {
@@ -27,13 +28,15 @@ export default function GoodsList({ data, sortBy }: Props): React.ReactElement {
   return (
     <section css={styles.goodsListZone}>
       {sortedGoodsData.map(data => (
-        <GoodsCard
+        <GoodsProvider
           key={data.id}
           id={data.id}
           img={data.img}
           name={data.name}
           price={data.price}
-        />
+        >
+          <GoodsCard />
+        </GoodsProvider>
       ))}
     </section>
   );
