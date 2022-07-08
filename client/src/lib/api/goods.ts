@@ -1,14 +1,15 @@
 import { AxiosRequestConfig } from 'axios';
-import { server } from '@api/default';
+import { goodsAPI } from '@api/default';
 import { GoodsData } from '@typings/db';
 
-const goodsAPI = {
-  getGoodsList: (config: AxiosRequestConfig, category?: string) =>
-    server.get<GoodsData[]>(
+export default {
+  getGoodsList: (config: AxiosRequestConfig, category?: string) => {
+    return goodsAPI.get<GoodsData[]>(
       `/goods?${category ? `category=${category}` : ''}`,
       config
-    ),
-  getGoods: (id: string) => server.get<GoodsData>(`/goods/${id}`),
+    );
+  },
+  getGoods: (id: string) => {
+    return goodsAPI.get<GoodsData>(`/goods/${id}`);
+  },
 };
-
-export default goodsAPI;
