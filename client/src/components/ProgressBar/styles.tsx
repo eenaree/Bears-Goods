@@ -10,30 +10,24 @@ const LeftAndRightMoving = keyframes({
 });
 
 export const styles = {
-  wrapper: (isLoading: boolean) => [
+  wrapper: (isLoading: boolean) =>
     css({
+      opacity: isLoading ? 1 : 0,
+      visibility: isLoading ? 'visible' : 'hidden',
+      transitionDelay: isLoading ? '0' : '0.5s',
       width: '100%',
       backgroundColor: '#f8f8f8',
       overflow: 'hidden',
       transition: 'opacity 1s, visibility 1s',
     }),
-    isLoading
-      ? css({ opacity: 1, visibility: 'visible' })
-      : css({ opacity: 0, visibility: 'hidden', transitionDelay: '0.5s' }),
-  ],
-  bar: (isLoading: boolean) => [
+  bar: (isLoading: boolean) =>
     css({
       position: 'relative',
+      width: isLoading ? '30%' : '100%',
       height: 3,
       backgroundColor: '#ff8080',
+      animation: isLoading
+        ? `${LeftAndRightMoving} 1s linear infinite alternate`
+        : undefined,
     }),
-    isLoading
-      ? css({
-          width: '30%',
-          animation: `${LeftAndRightMoving} 1s linear infinite alternate`,
-        })
-      : css({
-          width: '100%',
-        }),
-  ],
 };
