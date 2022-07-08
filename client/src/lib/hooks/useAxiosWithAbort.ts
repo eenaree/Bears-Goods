@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
-interface Async<T> {
+interface Payload<T> {
   status: 'idle' | 'loading' | 'resolved' | 'rejected';
   data: T | null;
   error: unknown | null;
 }
 
 const useAxiosWithAbort = <T>(
-  asyncFunction: (
-    config: AxiosRequestConfig,
+  axiosRequest: (
+    signal: AbortSignal,
     ...args: any[]
   ) => Promise<AxiosResponse<T, any>>,
   ...args: any[]
-): Async<T> => {
-  const [state, setState] = useState<Async<T>>({
+): Payload<T> => {
+  const [state, setState] = useState<Payload<T>>({
     status: 'idle',
     data: null,
     error: null,
@@ -23,8 +23,9 @@ const useAxiosWithAbort = <T>(
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+
     setState({ status: 'loading', data: null, error: null });
-    asyncFunction({ signal }, ...args)
+    axiosRequest(signal, ...args)
       .then(({ data }) => {
         setTimeout(() => {
           if (signal.aborted) return;
@@ -46,7 +47,7 @@ const useAxiosWithAbort = <T>(
     return () => {
       abortController.abort();
     };
-  }, [asyncFunction, ...args]);
+  }, [axiosRequest, ...args]);
 
   return state;
 };

@@ -1,13 +1,12 @@
-import { AxiosRequestConfig } from 'axios';
 import { goodsAPI } from '@api/default';
 import { GoodsData } from '@typings/db';
 
 export default {
-  getGoodsList: (config: AxiosRequestConfig, category?: string) => {
-    return goodsAPI.get<GoodsData[]>(
-      `/goods?${category ? `category=${category}` : ''}`,
-      config
-    );
+  getGoodsList: (signal: AbortSignal, category?: string) => {
+    return goodsAPI.request({
+      url: `/goods?${category ? `category=${category}` : ''}`,
+      signal,
+    });
   },
   getGoods: (id: string) => {
     return goodsAPI.get<GoodsData>(`/goods/${id}`);
