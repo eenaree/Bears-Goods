@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useCallback, useEffect, useState } from 'react';
 import { BiError } from 'react-icons/bi';
 import { useSearchParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
@@ -8,24 +7,14 @@ import PriceSorting from '@components/GoodsFilters/PriceSorting';
 import GoodsList from '@components/GoodsList';
 import ProgressBar from '@components/ProgressBar';
 import useAxiosWithAbort from '@hooks/useAxiosWithAbort';
+import useSortBy from '@hooks/useSortBy';
 import { GoodsCategory, GoodsData } from '@typings/db';
 import { CreateError } from './styles';
 
 export default function Main(): React.ReactElement {
   const [searchParams] = useSearchParams();
   const category = (searchParams.get('category') as GoodsCategory) || '';
-
-  const [sortBy, setSortBy] = useState(
-    () => sessionStorage.getItem('sortBy') || ''
-  );
-
-  const onChangeSortBy = useCallback((value: string) => {
-    setSortBy(value);
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('sortBy', sortBy);
-  }, [sortBy]);
+  const [sortBy, onChangeSortBy] = useSortBy();
 
   const { status, data, error } = useAxiosWithAbort<GoodsData[]>(
     goodsAPI.getGoodsList,
