@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCartListCount } from '@context/CartContext';
-import { CartButton, CartItemCount, Container, Inner, Logo } from './styles';
+import { styles } from './styles';
 
 export default function Header(): React.ReactElement {
   const cartListCount = useCartListCount();
@@ -12,16 +12,18 @@ export default function Header(): React.ReactElement {
   };
 
   return (
-    <Container>
-      <Inner>
-        <Logo>
+    <header css={styles.headerZone}>
+      <div css={styles.headerInner}>
+        <h1 css={styles.headerLogo}>
           <Link to="/">Bears Goods</Link>
-        </Logo>
-        <CartButton onClick={handleCartCheck}>
+        </h1>
+        <button css={styles.cartButton} onClick={handleCartCheck}>
           <AiOutlineShoppingCart size="2.8rem" />
-          {cartListCount > 0 && <CartItemCount>{cartListCount}</CartItemCount>}
-        </CartButton>
-      </Inner>
-    </Container>
+          {cartListCount > 0 && (
+            <span css={styles.cartItemCount}>{cartListCount}</span>
+          )}
+        </button>
+      </div>
+    </header>
   );
 }
