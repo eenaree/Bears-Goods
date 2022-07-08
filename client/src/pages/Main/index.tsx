@@ -28,7 +28,9 @@ export default function Main(): React.ReactElement {
         <PriceSorting sortBy={sortBy} onChangeSortBy={onChangeSortBy} />
       </section>
       {data && <GoodsList data={data} sortBy={sortBy} />}
-      {error && <ErrorMessage />}
+      {error && (
+        <ErrorMessage>상품 정보를 가져오는데 실패했습니다.</ErrorMessage>
+      )}
     </main>
   );
 }
