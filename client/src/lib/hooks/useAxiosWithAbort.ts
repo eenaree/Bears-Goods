@@ -27,21 +27,17 @@ const useAxiosWithAbort = <T>(
     setState({ status: 'loading', data: null, error: null });
     axiosRequest(signal, ...args)
       .then(({ data }) => {
-        setTimeout(() => {
-          if (signal.aborted) return;
-          setState({ status: 'resolved', data, error: null });
-        }, 500);
+        if (signal.aborted) return;
+        setState({ status: 'resolved', data, error: null });
       })
       .catch((error: unknown) => {
         if (axios.isAxiosError(error)) {
-          setTimeout(() => {
-            if (signal.aborted) return;
-            setState({
-              status: 'rejected',
-              data: null,
-              error: error.response,
-            });
-          }, 500);
+          if (signal.aborted) return;
+          setState({
+            status: 'rejected',
+            data: null,
+            error: error.response,
+          });
         }
       });
     return () => {
