@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { BiError } from 'react-icons/bi';
 
 interface Props {
-  children: React.ReactNode;
+  error: string;
 }
 
 const styles = {
@@ -17,11 +17,11 @@ const styles = {
   }),
 };
 
-export default function ErrorMessage({ children }: Props): React.ReactElement {
+export default function ErrorMessage({ error }: Props): React.ReactElement {
   return (
     <section css={styles.errorZone}>
       <BiError size="5rem" color="#ff0000" />
-      <p css={styles.errorText}>{children}</p>
+      <p css={styles.errorText}>{error}</p>
     </section>
   );
 }
