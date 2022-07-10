@@ -1,32 +1,22 @@
 import * as React from 'react';
 import { createContext, useContext } from 'react';
-
-interface GoodsContext {
-  id: number;
-  name: string;
-  price: number;
-  img: string;
-}
+import { GoodsData } from '@typings/db';
 
 interface Props {
   children: React.ReactElement | React.ReactElement[];
+  goods: GoodsData;
 }
 
-const GoodsContext = createContext<GoodsContext | undefined>(undefined);
+const GoodsContext = createContext<Omit<GoodsData, 'category'> | undefined>(
+  undefined
+);
 
 export default function GoodsProvider({
   children,
-  ...props
-}: Props & GoodsContext): React.ReactElement {
-  const value = {
-    id: props.id,
-    name: props.name,
-    price: props.price,
-    img: props.img,
-  };
-
+  goods,
+}: Props): React.ReactElement {
   return (
-    <GoodsContext.Provider value={value}>{children}</GoodsContext.Provider>
+    <GoodsContext.Provider value={goods}>{children}</GoodsContext.Provider>
   );
 }
 

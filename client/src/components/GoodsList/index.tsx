@@ -28,13 +28,7 @@ export default function GoodsList({ data, sortBy }: Props): React.ReactElement {
   return (
     <section css={styles.goodsListZone}>
       {sortedGoodsData.map(data => (
-        <GoodsProvider
-          key={data.id}
-          id={data.id}
-          img={data.img}
-          name={data.name}
-          price={data.price}
-        >
+        <GoodsProvider key={data.id} goods={data}>
           <GoodsCard />
         </GoodsProvider>
       ))}
