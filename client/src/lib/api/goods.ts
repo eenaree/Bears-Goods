@@ -3,7 +3,7 @@ import { GoodsData } from '@typings/db';
 
 export default {
   getGoodsList: (signal: AbortSignal, category: string) => {
-    return goodsAPI.request({
+    return goodsAPI.request<GoodsData[]>({
       url: `/goods`,
       params: {
         category: category || null,
