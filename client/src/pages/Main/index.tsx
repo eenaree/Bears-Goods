@@ -22,7 +22,7 @@ export default function Main(): React.ReactElement {
 
   return (
     <main>
-      <ProgressBar isLoading={status === 'loading'} />
+      <ProgressBar />
       <section>
         <Categories />
         <PriceSorting sortBy={sortBy} onChangeSortBy={onChangeSortBy} />

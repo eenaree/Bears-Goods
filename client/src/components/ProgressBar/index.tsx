@@ -1,11 +1,9 @@
 import * as React from 'react';
+import { useLoader } from '@context/LoaderContext';
 import { styles } from './styles';
 
-interface Props {
-  isLoading: boolean;
-}
-
-export default function ProgressBar({ isLoading }: Props): React.ReactElement {
+export default function ProgressBar(): React.ReactElement {
+  const isLoading = useLoader();
   return (
     <div css={styles.wrapper(isLoading)}>
       <div css={styles.bar(isLoading)} />
