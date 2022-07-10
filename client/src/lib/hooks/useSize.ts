@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { OptionAction } from '@reducers/option';
-import { GoodsData, Option } from '@typings/db';
+import { GoodsData, GoodsOption } from '@typings/db';
 
 const useSize = (
   goods: GoodsData | null,
-  options: Option[],
+  options: GoodsOption[],
   dispatch: React.Dispatch<OptionAction>
 ) => {
   const [size, setSize] = useState<string | number>('');

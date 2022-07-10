@@ -1,12 +1,12 @@
-import { Option } from '@typings/db';
+import { GoodsOption } from '@typings/db';
 
 interface OptionState {
-  options: Option[];
+  options: GoodsOption[];
 }
 
 export type OptionAction =
-  | { type: 'ADD_OPTION'; option: Option }
-  | { type: 'REMOVE_OPTION'; option: Option }
+  | { type: 'ADD_OPTION'; option: GoodsOption }
+  | { type: 'REMOVE_OPTION'; option: GoodsOption }
   | { type: 'INCREMENT_OPTION_QUANTITY'; size: string | number; price: number }
   | { type: 'DECREMENT_OPTION_QUANTITY'; size: string | number; price: number }
   | { type: 'RESET_OPTIONS' }

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useCartDispatch, useCartState } from '@context/CartContext';
-import { CartItemOption, Option } from '@typings/db';
+import { CartItemOption, GoodsOption } from '@typings/db';
 import { Button } from './styles';
 
 interface Props {
-  options: Option[];
+  options: GoodsOption[];
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

@@ -8,11 +8,11 @@ import {
 import useDelayUnmount from '@hooks/useDelayUnmount';
 import { addThousandSeperatorToNumber } from '@lib/utils';
 import { OptionAction } from '@reducers/option';
-import { Option } from '@typings/db';
+import { GoodsOption } from '@typings/db';
 import { Price, Wrapper } from './styles';
 
 interface Prop {
-  option: Option;
+  option: GoodsOption;
   dispatch: React.Dispatch<OptionAction>;
 }
 

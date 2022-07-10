@@ -1,23 +1,22 @@
-export interface GoodsData {
+export interface CommonGoods {
   id: number;
   name: string;
   price: number;
-  size: Array<string> | Array<number>;
   img: string;
+}
+
+export interface GoodsData extends CommonGoods {
+  size: Array<string> | Array<number>;
   category: 'uniform' | 'clothing' | 'cap';
 }
 
 export type GoodsCategory = GoodsData['category'];
 
-export interface Option {
-  id: number;
-  name: string;
-  img: string;
-  size: string | number;
-  price: number;
+export interface GoodsOption extends CommonGoods {
+  size: GoodsData['size'][number];
   quantity: number;
 }
 
-export interface CartItemOption extends Option {
+export interface CartItemOption extends GoodsOption {
   selected: boolean;
 }
