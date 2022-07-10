@@ -1,21 +1,16 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosPromise } from 'axios';
 
 interface Payload<T> {
-  status: 'idle' | 'loading' | 'resolved' | 'rejected';
   data: T | null;
-  error: unknown | null;
+  error: string | null;
 }
 
 const useAxiosWithAbort = <T>(
-  axiosRequest: (
-    signal: AbortSignal,
-    ...args: any[]
-  ) => Promise<AxiosResponse<T, any>>,
+  axiosRequest: (signal: AbortSignal, ...args: any[]) => AxiosPromise<T>,
   ...args: any[]
-): Payload<T> => {
-  const [state, setState] = useState<Payload<T>>({
-    status: 'idle',
+) => {
+  const [payload, setPayload] = useState<Payload<T>>({
     data: null,
     error: null,
   });
@@ -24,19 +19,18 @@ const useAxiosWithAbort = <T>(
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    setState({ status: 'loading', data: null, error: null });
+    setPayload({ data: null, error: null });
     axiosRequest(signal, ...args)
       .then(({ data }) => {
         if (signal.aborted) return;
-        setState({ status: 'resolved', data, error: null });
+        setPayload({ data, error: null });
       })
-      .catch((error: unknown) => {
-        if (axios.isAxiosError(error)) {
-          if (signal.aborted) return;
-          setState({
-            status: 'rejected',
+      .catch(error => {
+        if (signal.aborted) return;
+        if (error instanceof Error) {
+          setPayload({
             data: null,
-            error: error.response,
+            error: error.message,
           });
         }
       });
@@ -45,7 +39,7 @@ const useAxiosWithAbort = <T>(
     };
   }, [axiosRequest, ...args]);
 
-  return state;
+  return [payload.data, payload.error] as const;
 };
 
 export default useAxiosWithAbort;

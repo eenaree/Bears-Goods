@@ -15,7 +15,7 @@ export default function Main(): React.ReactElement {
   const category = (searchParams.get('category') as GoodsCategory) || '';
   const [sortBy, onChangeSortBy] = useSortBy();
 
-  const { status, data, error } = useAxiosWithAbort<GoodsData[]>(
+  const [data, error] = useAxiosWithAbort<GoodsData[]>(
     goodsAPI.getGoodsList,
     category
   );
