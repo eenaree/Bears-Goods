@@ -6,49 +6,58 @@ export const styles = {
     display: 'flex',
     flexWrap: 'wrap',
   }),
-  goodsCardZone: css({
+  blind: css({
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    margin: '-1px',
+    padding: 0,
+    border: 0,
+    overflow: 'hidden',
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    whiteSpace: 'nowrap',
+  }),
+  goodsCardLink: css({
+    display: 'block',
     position: 'relative',
-    flex: '0 1 calc(50% - 2rem)',
     maxWidth: 'calc(50% - 2rem)',
     margin: '1rem',
     boxSizing: 'border-box',
     border: '1px solid #eee',
     borderRadius: 5,
     boxShadow: '0 2px 2px rgba(0,0,0,0.2)',
+    color: 'inherit',
     transition: 'transform 0.5s',
     '&:hover': {
       transform: 'translate(0, -5px)',
       boxShadow: '10px 10px 10px rgba(255,255,255,0.4)',
     },
     [mq('sm')]: {
-      flex: '0 1 calc(33.3% - 2rem)',
-      maxWidth: 'calc(33% - 2rem)',
+      maxWidth: 'calc(33.3% - 2rem)',
     },
     [mq('md')]: {
-      flex: '0 1 calc(25% - 2rem)',
       maxWidth: 'calc(25% - 2rem)',
     },
   }),
   cardImageArea: css({
+    display: 'block',
     textAlign: 'center',
-    a: {
-      color: 'inherit',
-    },
     img: {
       width: '100%',
     },
   }),
   cardLabelArea: css({
-    padding: '0 10px',
-    fontSize: '1.2rem',
-    fontWeight: 700,
-    backgroundColor: '#f8f8f8',
-    textAlign: 'center',
-    p: {
+    em: {
+      display: 'block',
+      padding: '5px 10px',
+      fontSize: '1.2rem',
+      fontWeight: 700,
+      backgroundColor: '#f8f8f8',
+      textAlign: 'center',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      padding: '6px 0',
     },
     strong: {
       color: '#ff0000',

@@ -5,6 +5,18 @@ export const styles = {
     display: 'inline-block',
     width: '100%',
   }),
+  blind: css({
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    margin: '-1px',
+    padding: 0,
+    border: 0,
+    overflow: 'hidden',
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    whiteSpace: 'nowrap',
+  }),
   category: css({
     float: 'left',
     width: '25%',
@@ -25,12 +37,13 @@ export const styles = {
   }),
   categoryLabel: css({
     display: 'block',
-    padding: '1.2rem 2rem',
+    padding: '1rem 0',
+    textAlign: 'center',
     cursor: 'pointer',
   }),
   priceSortingZone: css({
     margin: '10px 0',
     display: 'flex',
-    justifyContent: 'right',
+    justifyContent: 'flex-end',
   }),
 };

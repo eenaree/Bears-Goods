@@ -23,22 +23,25 @@ export default function Categories(): React.ReactElement {
 
   return (
     <article css={styles.categoryZone}>
-      {categoryOptions.map(option => (
-        <span key={option.label} css={styles.category}>
-          <input
-            type="radio"
-            name="category"
-            id={option.label}
-            value={option.value}
-            checked={category === option.value}
-            onChange={onChangeCategory}
-            css={styles.categoryInput}
-          />
-          <label htmlFor={option.label} css={styles.categoryLabel}>
-            {option.label}
-          </label>
-        </span>
-      ))}
+      <h2 css={styles.blind}>카테고리</h2>
+      <div>
+        {categoryOptions.map(option => (
+          <span key={option.label} css={styles.category}>
+            <input
+              type="radio"
+              name="category"
+              id={option.label}
+              value={option.value}
+              checked={category === option.value}
+              onChange={onChangeCategory}
+              css={styles.categoryInput}
+            />
+            <label htmlFor={option.label} css={styles.categoryLabel}>
+              {option.label}
+            </label>
+          </span>
+        ))}
+      </div>
     </article>
   );
 }

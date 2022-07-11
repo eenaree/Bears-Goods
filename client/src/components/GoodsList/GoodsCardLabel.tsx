@@ -6,11 +6,11 @@ import { styles } from './styles';
 export default function GoodsCardLabel(): React.ReactElement {
   const { name, price } = useGoodsValue();
   return (
-    <div css={styles.cardLabelArea}>
-      <p>{name}</p>
-      <p>
+    <span css={styles.cardLabelArea}>
+      <em>{name}</em>
+      <em>
         <strong>{addThousandSeperatorToNumber(price)}</strong> 원
-      </p>
-    </div>
+      </em>
+    </span>
   );
 }
