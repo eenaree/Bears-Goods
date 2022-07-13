@@ -50,4 +50,18 @@ export const styles = {
       fontSize: '2.4rem',
     },
   }),
+  totalPriceArea: css({
+    padding: '10px 0',
+    textAlign: 'right',
+    color: '#666',
+  }),
+  totalPrice: css({
+    marginLeft: 10,
+    fontSize: '2rem',
+    strong: {
+      fontSize: '3rem',
+      fontWeight: 700,
+      color: '#ff0000',
+    },
+  }),
 };
