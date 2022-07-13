@@ -20,6 +20,25 @@ export default function Main(): React.ReactElement {
     category
   );
 
+  const sortByPricing = () => {
+    const copiedData = data && data.slice();
+    if (copiedData) {
+      if (sortBy === 'asc') {
+        copiedData.sort((a, b) => a.price - b.price);
+        return copiedData;
+      }
+      if (sortBy === 'desc') {
+        copiedData.sort((a, b) => b.price - a.price);
+        return copiedData;
+      }
+      return copiedData;
+    }
+
+    return null;
+  };
+
+  const sortedData = sortByPricing();
+
   return (
     <main>
       <ProgressBar />
@@ -27,7 +46,7 @@ export default function Main(): React.ReactElement {
         <Categories />
         <PriceSorting sortBy={sortBy} onChangeSortBy={onChangeSortBy} />
       </section>
-      {data && <GoodsList data={data} sortBy={sortBy} />}
+      {sortedData && <GoodsList goods={sortedData} />}
       {error && <ErrorMessage error={error} />}
     </main>
   );

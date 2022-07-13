@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { useGoodsValue } from '@context/GoodsContext';
 import { addThousandSeperatorToNumber } from '@lib/utils';
+import { GoodsData } from '@typings/db';
 import { styles } from './styles';
 
-export default function GoodsCardLabel(): React.ReactElement {
-  const { name, price } = useGoodsValue();
+interface Props {
+  name: GoodsData['name'];
+  price: GoodsData['price'];
+}
+
+export default function GoodsLabel({ name, price }: Props): React.ReactElement {
   return (
-    <span css={styles.cardLabelArea}>
+    <span css={styles.goodsLabel}>
       <em>{name}</em>
       <em>
         <strong>{addThousandSeperatorToNumber(price)}</strong> 원

@@ -1,38 +1,24 @@
 import * as React from 'react';
-import GoodsProvider from '@context/GoodsContext';
+import { Link } from 'react-router-dom';
 import { GoodsData } from '@typings/db';
-import GoodsCard from './GoodsCard';
+import GoodsImage from './GoodsImage';
+import GoodsLabel from './GoodsLabel';
 import { styles } from './styles';
 
 interface Props {
-  data: GoodsData[];
-  sortBy: string;
+  goods: GoodsData[];
 }
 
-export default function GoodsList({ data, sortBy }: Props): React.ReactElement {
-  const copiedData = data.slice();
-  const sortByPricing = (): GoodsData[] => {
-    if (sortBy === 'asc') {
-      copiedData.sort((a, b) => a.price - b.price);
-      return copiedData;
-    }
-    if (sortBy === 'desc') {
-      copiedData.sort((a, b) => b.price - a.price);
-      return copiedData;
-    }
-    return copiedData;
-  };
-
-  const sortedGoodsData = sortByPricing();
-
+export default function GoodsList({ goods }: Props): React.ReactElement {
   return (
     <section>
       <h2 css={styles.blind}>상품리스트</h2>
       <div css={styles.goodsListZone}>
-        {sortedGoodsData.map(data => (
-          <GoodsProvider key={data.id} goods={data}>
-            <GoodsCard />
-          </GoodsProvider>
+        {goods.map(goods => (
+          <Link key={goods.id} to={`/goods/${goods.id}`} css={styles.goodsLink}>
+            <GoodsImage img={goods.img} alt={goods.name} />
+            <GoodsLabel name={goods.name} price={goods.price} />
+          </Link>
         ))}
       </div>
     </section>

@@ -18,7 +18,7 @@ export const styles = {
     clipPath: 'inset(50%)',
     whiteSpace: 'nowrap',
   }),
-  goodsCardLink: css({
+  goodsLink: css({
     display: 'block',
     position: 'relative',
     maxWidth: 'calc(50% - 2rem)',
@@ -40,14 +40,14 @@ export const styles = {
       maxWidth: 'calc(25% - 2rem)',
     },
   }),
-  cardImageArea: css({
+  goodsImage: css({
     display: 'block',
     textAlign: 'center',
     img: {
       width: '100%',
     },
   }),
-  cardLabelArea: css({
+  goodsLabel: css({
     em: {
       display: 'block',
       padding: '5px 10px',
