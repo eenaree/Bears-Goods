@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useSortBy = () => {
   const [sortBy, setSortBy] = useState(
     () => sessionStorage.getItem('sortBy') || ''
   );
-  const onChangeSortBy = useCallback((value: string) => {
+  const onChangeSortBy = (value: string) => {
     setSortBy(value);
-  }, []);
+  };
 
   useEffect(() => {
     sessionStorage.setItem('sortBy', sortBy);
