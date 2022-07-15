@@ -4,6 +4,7 @@ import { GoodsData } from '@typings/db';
 import GoodsImage from './GoodsImage';
 import GoodsInfo from './GoodsInfo';
 import GoodsLabel from './GoodsLabel';
+import GoodsOptionPicker from './GoodsOptionPicker';
 import { styles } from './styles';
 import TotalPrice from './TotalPrice';
 
@@ -19,6 +20,7 @@ export default function GoodsItem({ item }: Props): React.ReactElement {
         <GoodsLabel name={item.name} price={item.price} />
         <OptionProvider>
           <TotalPrice />
+          <GoodsOptionPicker item={item} />
         </OptionProvider>
       </GoodsInfo>
     </section>

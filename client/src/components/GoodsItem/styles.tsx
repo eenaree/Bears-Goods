@@ -64,4 +64,10 @@ export const styles = {
       color: '#ff0000',
     },
   }),
+  optionArea: css({
+    padding: '15px 0',
+    '> div': {
+      width: '100%',
+    },
+  }),
 };
