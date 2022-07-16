@@ -70,4 +70,56 @@ export const styles = {
       width: '100%',
     },
   }),
+  selectedOption: css({
+    fontSize: '1.3rem',
+    position: 'relative',
+    margin: '15px 0',
+    backgroundColor: '#f8f8f8',
+    border: '1px solid #eee',
+    padding: 20,
+    [mq('xs')]: {
+      fontSize: '1.4rem',
+    },
+  }),
+  selectedOptionSize: css({
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    strong: {
+      fontWeight: 700,
+    },
+  }),
+  selectedOptionQuantity: css({
+    paddingTop: 10,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    strong: {
+      fontWeight: 700,
+      fontSize: '1.6rem',
+    },
+  }),
+  closeButton: css({
+    position: 'absolute',
+    top: 15,
+    right: 15,
+    span: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: 14,
+      height: 2,
+      backgroundColor: '#333',
+      transform: 'rotate(45deg)',
+      '&:after': {
+        content: '""',
+        position: 'absolute',
+        top: '-6px',
+        left: 6,
+        width: 2,
+        height: 14,
+        backgroundColor: '#333',
+      },
+    },
+  }),
 };
