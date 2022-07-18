@@ -30,7 +30,7 @@ export default function DeleteConfirmModal({
   }
 
   return (
-    <ModalView isMounted={isMounted}>
+    <ModalView>
       <ModalBody>
         <p>선택한 상품을 삭제하시겠습니까?</p>
         <button onClick={handleDelayUnmount}>예</button>
