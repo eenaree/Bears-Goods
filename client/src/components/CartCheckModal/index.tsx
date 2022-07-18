@@ -26,7 +26,7 @@ export default function CartCheckModal({
   };
 
   return (
-    <ModalView isMounted={isMounted}>
+    <ModalView>
       <ModalBody>
         <p>장바구니에 상품을 담았습니다.</p>
         <div>

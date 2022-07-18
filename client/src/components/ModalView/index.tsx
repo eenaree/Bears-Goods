@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { ModalContainer } from './styles';
+import { styles } from './styles';
 
 interface Props {
-  children: React.ReactElement;
-  isMounted?: boolean;
+  children: React.ReactChild | React.ReactChild[];
 }
 
-export default function ModalView({
-  children,
-  isMounted,
-}: Props): React.ReactElement {
+export default function ModalView({ children }: Props): React.ReactElement {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -18,5 +14,9 @@ export default function ModalView({
     };
   }, []);
 
-  return <ModalContainer isMounted={isMounted}>{children}</ModalContainer>;
+  return (
+    <div css={styles.modalContainer}>
+      <div css={styles.modalView}>{children}</div>
+    </div>
+  );
 }
