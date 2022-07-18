@@ -30,6 +30,7 @@ export const styles = {
       position: 'absolute',
       top: 45,
       left: 0,
+      width: '100%',
       backgroundColor: '#fff',
       boxShadow: '0 1px 10px rgba(0,0,0,0.3)',
       borderRadius: 5,
