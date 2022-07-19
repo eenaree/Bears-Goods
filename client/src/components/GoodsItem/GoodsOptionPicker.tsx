@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useRef } from 'react';
+import AlertModal from '@components/AlertModal';
+import ModalProvider from '@context/ModalContext';
 import { useOption } from '@context/OptionContext';
 import { GoodsData } from '@typings/db';
 import GoodsOptionDropdown from './GoodsOptionDropdown';
@@ -11,13 +14,21 @@ interface Props {
 
 export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
   const option = useOption();
+  const selectedRef = useRef(new Set(option.map(option => option.size)));
 
   return (
     <div css={styles.optionArea}>
-      <GoodsOptionDropdown item={item} />
+      <ModalProvider>
+        <GoodsOptionDropdown item={item} selectedRef={selectedRef} />
+        <AlertModal>이미 선택한 옵션입니다.</AlertModal>
+      </ModalProvider>
       <div>
         {option.map(option => (
-          <SelectedOption key={option.size} {...option} />
+          <SelectedOption
+            key={option.size}
+            selectedRef={selectedRef}
+            {...option}
+          />
         ))}
       </div>
     </div>
