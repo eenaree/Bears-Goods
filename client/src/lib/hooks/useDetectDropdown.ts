@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import useDetectElementOutside from './useDetectElementOutside';
 
 const useDetectDropdown = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -6,30 +7,10 @@ const useDetectDropdown = () => {
     setIsActive(prev => !prev);
   };
 
-  const dropdownRef = useRef<HTMLButtonElement>();
-  const setDropdownRef = (element: HTMLButtonElement) => {
-    dropdownRef.current = element;
-  };
-
-  useEffect(() => {
-    const onClickOutside = (e: MouseEvent) => {
-      if (
-        e.target &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Element)
-      ) {
-        setIsActive(false);
-      }
-    };
-
-    if (isActive) {
-      window.addEventListener('click', onClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('click', onClickOutside);
-    };
-  }, [isActive]);
+  const setDropdownRef = useDetectElementOutside<HTMLButtonElement>(
+    isActive,
+    () => setIsActive(false)
+  );
 
   return [isActive, toggleIsActive, setDropdownRef] as const;
 };
