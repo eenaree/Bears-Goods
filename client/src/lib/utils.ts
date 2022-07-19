@@ -12,8 +12,7 @@ type CheckValueFn<T> = (value: any) => value is T;
 
 export const getLocalStorage = <T>(
   key: string,
-  checkValue: CheckValueFn<T>,
-  defaultValue: T
+  checkValue: CheckValueFn<T>
 ) => {
   const value = localStorage.getItem(key);
   if (value) {
@@ -22,11 +21,6 @@ export const getLocalStorage = <T>(
       return parsedValue;
     } else {
       localStorage.removeItem(key);
-      localStorage.setItem(key, JSON.stringify(defaultValue));
-      return defaultValue;
     }
-  } else {
-    localStorage.setItem(key, JSON.stringify(defaultValue));
-    return defaultValue;
   }
 };
