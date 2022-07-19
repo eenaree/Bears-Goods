@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 export default function useDetectElementOutside<T extends HTMLElement>(
-  isActive: boolean,
-  disableFunction: () => void
+  active: boolean,
+  inactiveFunction: () => void
 ) {
   const elementRef = useRef<T>();
   const setElementRef = (element: T) => {
@@ -16,18 +16,18 @@ export default function useDetectElementOutside<T extends HTMLElement>(
         elementRef.current &&
         !elementRef.current.contains(e.target as Element)
       ) {
-        disableFunction();
+        inactiveFunction();
       }
     };
 
-    if (isActive) {
+    if (active) {
       window.addEventListener('click', onClickOutside);
     }
 
     return () => {
       window.removeEventListener('click', onClickOutside);
     };
-  }, [isActive, disableFunction]);
+  }, [active, inactiveFunction]);
 
   return setElementRef;
 }
