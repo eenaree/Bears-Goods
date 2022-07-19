@@ -11,7 +11,7 @@ const cartItemFadeOut = keyframes({
   },
 });
 
-export const Wrapper = styled.div<{ isMounted: boolean }>(
+export const Wrapper = styled.div(
   {
     display: 'flex',
     position: 'relative',
@@ -29,7 +29,7 @@ export const Wrapper = styled.div<{ isMounted: boolean }>(
     },
   },
   props => ({
-    animation: !props.isMounted ? `${cartItemFadeOut} 0.5s` : undefined,
+    // animation: !props.isMounted ? `${cartItemFadeOut} 0.5s` : undefined,
   })
 );
 

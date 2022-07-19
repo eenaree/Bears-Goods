@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CartQuantityInput from '@components/CartQuantityInput';
 import CheckBox from '@components/CheckBox';
 import { useCartDispatch } from '@context/CartContext';
-import useDelayUnmount from '@hooks/useDelayUnmount';
+// import useDelayUnmount from '@hooks/useDelayUnmount';
 import { addThousandSeperatorToNumber } from '@lib/utils';
 import { CartItemOption } from '@typings/db';
 import {
@@ -24,10 +24,10 @@ interface Props {
 
 export default memo(function CartItem({ item }: Props): React.ReactElement {
   const dispatch = useCartDispatch();
-  const [isMounted, setIsMounted] = useDelayUnmount(handleItemRemove, 500);
-  function handleDelayUnmount() {
-    setIsMounted(false);
-  }
+  // const [isMounted, setIsMounted] = useDelayUnmount(handleItemRemove, 500);
+  // function handleDelayUnmount() {
+  //   setIsMounted(false);
+  // }
   function handleItemRemove() {
     dispatch({ type: 'REMOVE_CART_ITEM', item });
   }
@@ -37,7 +37,7 @@ export default memo(function CartItem({ item }: Props): React.ReactElement {
   };
 
   return (
-    <Wrapper isMounted={isMounted}>
+    <Wrapper>
       <CheckBox
         id="check"
         checked={item.selected}
@@ -62,7 +62,7 @@ export default memo(function CartItem({ item }: Props): React.ReactElement {
           <span> 원</span>
         </Price>
       </ItemInfo>
-      <DeleteButton onClick={handleDelayUnmount}>
+      <DeleteButton>
         <CgTrash size="2rem" />
       </DeleteButton>
     </Wrapper>
