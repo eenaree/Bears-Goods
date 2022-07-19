@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react';
 
-const useDelayUnmount = (delayFn: () => void, delayTime: number) => {
-  const [isMounted, setIsMounted] = useState<boolean>(true);
+export default function useDelayUnmount(trigger: boolean, delay: number) {
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    let animationTimeoutId: number;
-    if (!isMounted) {
-      animationTimeoutId = window.setTimeout(delayFn, delayTime);
+    let timeoutId: number;
+
+    if (trigger && !isMounted) {
+      setIsMounted(true);
     }
+
+    if (!trigger && isMounted) {
+      timeoutId = window.setTimeout(() => {
+        setIsMounted(false);
+      }, delay);
+    }
+
     return () => {
-      clearTimeout(animationTimeoutId);
+      clearTimeout(timeoutId);
     };
-  }, [isMounted, delayFn, delayTime]);
+  }, [trigger, isMounted, delay]);
 
-  return [isMounted, setIsMounted] as const;
-};
-
-export default useDelayUnmount;
+  return isMounted;
+}
