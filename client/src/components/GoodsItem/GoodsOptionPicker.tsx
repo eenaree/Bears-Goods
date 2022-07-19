@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useRef } from 'react';
+import AlertModal from '@components/AlertModal';
+import ModalProvider from '@context/ModalContext';
 import { useOption } from '@context/OptionContext';
 import { GoodsData } from '@typings/db';
 import GoodsOptionDropdown from './GoodsOptionDropdown';
@@ -16,7 +18,10 @@ export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
 
   return (
     <div css={styles.optionArea}>
-      <GoodsOptionDropdown item={item} selectedRef={selectedRef} />
+      <ModalProvider>
+        <GoodsOptionDropdown item={item} selectedRef={selectedRef} />
+        <AlertModal>이미 선택한 옵션입니다.</AlertModal>
+      </ModalProvider>
       <div>
         {option.map(option => (
           <SelectedOption

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Dropdown from '@components/Dropdown';
+import { useModalDispatch } from '@context/ModalContext';
 import { useOptionDispatch } from '@context/OptionContext';
 import { GoodsData, GoodsOption } from '@typings/db';
 
@@ -12,6 +13,7 @@ export default function GoodsOptionDropdown({
   item,
   selectedRef,
 }: Props): React.ReactElement {
+  const modalDispatch = useModalDispatch();
   const optionDispatch = useOptionDispatch();
   const sizes = item.size.map(size => ({
     label: `${size}`,
@@ -24,7 +26,7 @@ export default function GoodsOptionDropdown({
       : Number(size);
 
     if (selectedRef.current.has(parsedSize)) {
-      alert('이미 선택한 옵션입니다.');
+      modalDispatch({ type: 'OPEN_MODAL' });
       return;
     }
 
