@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import goodsAPI from '@api/goods';
 import GoodsItem from '@components/GoodsItem';
+import LoadingSpinner from '@components/LoadingSpinner';
 import { GoodsData } from '@typings/db';
 
 export default function Detail(): React.ReactElement {
@@ -20,5 +21,10 @@ export default function Detail(): React.ReactElement {
     }
   }, [params.id]);
 
-  return <main>{goods && <GoodsItem item={goods} />}</main>;
+  return (
+    <>
+      <LoadingSpinner />
+      <main>{goods && <GoodsItem item={goods} />}</main>
+    </>
+  );
 }
