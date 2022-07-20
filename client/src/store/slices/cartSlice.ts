@@ -4,7 +4,7 @@ import { GoodsOption } from '@typings/db';
 
 const checkCart = (value: any): value is GoodsOption[] => {
   if (Array.isArray(value)) {
-    value.forEach(value => {
+    const isCart = value.every(value => {
       if (
         typeof value === 'object' &&
         'id' in value &&
@@ -12,11 +12,16 @@ const checkCart = (value: any): value is GoodsOption[] => {
         'price' in value &&
         'img' in value &&
         'size' in value &&
-        'category' in value
+        'quantity' in value
       ) {
         return true;
       }
+      return false;
     });
+
+    if (isCart) return true;
+
+    return false;
   }
 
   return false;
