@@ -21,11 +21,13 @@ export default function ModalView({
   );
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (isMounted) {
+      document.body.style.overflow = 'hidden';
+    }
     return () => {
-      document.body.style.overflow = 'visible';
+      document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [isMounted]);
 
   if (!isMounted) return null;
 
