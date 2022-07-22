@@ -4,6 +4,7 @@ import AlertModal from '@components/AlertModal';
 import ModalProvider from '@context/ModalContext';
 import { useOption } from '@context/OptionContext';
 import { GoodsData } from '@typings/db';
+import AddToCart from './AddToCart';
 import GoodsOptionDropdown from './GoodsOptionDropdown';
 import SelectedOption from './SelectedOption';
 import { styles } from './styles';
@@ -31,6 +32,7 @@ export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
           />
         ))}
       </div>
+      <AddToCart />
     </div>
   );
 }
