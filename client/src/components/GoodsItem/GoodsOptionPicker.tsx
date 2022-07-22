@@ -35,7 +35,7 @@ export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
       </div>
       <ModalProvider>
         <AddToCart />
-        <CheckCartModal />
+        <CheckCartModal selectedRef={selectedRef} />
       </ModalProvider>
     </div>
   );
