@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { getLocalStorage } from '@lib/utils';
+import { RootState } from '@store/store';
 import { GoodsOption } from '@typings/db';
 
 const checkCart = (value: any): value is GoodsOption[] => {
@@ -32,7 +34,31 @@ const initialState = getLocalStorage('cart', checkCart) || [];
 const cartSlice = createSlice({
   name: 'cartSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    addCartItem: (state, action: PayloadAction<GoodsOption[]>) => {
+      return state
+        .concat(action.payload)
+        .reduce<GoodsOption[]>((prev, curr) => {
+          const duplicateIndex = prev.findIndex(
+            prev => prev.name === curr.name && prev.size === curr.size
+          );
+
+          if (duplicateIndex !== -1) {
+            prev[duplicateIndex] = {
+              ...prev[duplicateIndex],
+              quantity: prev[duplicateIndex].quantity + curr.quantity,
+            };
+            return prev;
+          }
+
+          return prev.concat(curr);
+        }, []);
+    },
+  },
 });
 
 export default cartSlice.reducer;
+
+export const { addCartItem } = cartSlice.actions;
+
+export const selectCart = (state: RootState) => state.cart;
