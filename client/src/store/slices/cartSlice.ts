@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { getLocalStorage } from '@lib/utils';
 import { RootState } from '@store/store';
@@ -62,3 +62,8 @@ export default cartSlice.reducer;
 export const { addCartItem } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;
+
+export const selectCartItemCount = createSelector(
+  selectCart,
+  cart => cart.length
+);
