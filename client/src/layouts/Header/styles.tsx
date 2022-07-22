@@ -30,6 +30,7 @@ export const styles = {
     position: 'absolute',
     top: 15,
     right: 15,
+    color: 'inherit',
     [mq('md')]: {
       top: 25,
       right: 25,

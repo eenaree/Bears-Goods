@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import AlertModal from '@components/AlertModal';
+import CheckCartModal from '@components/CheckCartModal';
 import ModalProvider from '@context/ModalContext';
 import { useOption } from '@context/OptionContext';
 import { GoodsData } from '@typings/db';
+import AddToCart from './AddToCart';
 import GoodsOptionDropdown from './GoodsOptionDropdown';
 import SelectedOption from './SelectedOption';
 import { styles } from './styles';
@@ -31,6 +33,10 @@ export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
           />
         ))}
       </div>
+      <ModalProvider>
+        <AddToCart />
+        <CheckCartModal selectedRef={selectedRef} />
+      </ModalProvider>
     </div>
   );
 }

@@ -122,4 +122,17 @@ export const styles = {
       },
     },
   }),
+  cartButton: css({
+    width: '100%',
+    padding: 10,
+    margin: '10px 0',
+    backgroundColor: '#333',
+    color: '#fff',
+    fontSize: '1.6rem',
+    fontWeight: 700,
+    '&:disabled': {
+      cursor: 'auto',
+      backgroundColor: '#ddd',
+    },
+  }),
 };

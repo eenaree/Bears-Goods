@@ -18,7 +18,8 @@ type OptionActions =
       type: 'CHANGE_OPTION_QUANTITY';
       size: GoodsOption['size'];
       quantity: GoodsOption['quantity'];
-    };
+    }
+  | { type: 'RESET_OPTION' };
 
 const optionReducer = (
   state: GoodsOption[],
@@ -47,6 +48,8 @@ const optionReducer = (
           ? { ...option, quantity: action.quantity }
           : option
       );
+    case 'RESET_OPTION':
+      return [];
   }
 };
 
