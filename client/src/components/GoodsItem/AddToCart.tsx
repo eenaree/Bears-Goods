@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
+import { useModalDispatch } from '@context/ModalContext';
 import { useOption } from '@context/OptionContext';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { addCartItem, selectCart } from '@store/slices/cartSlice';
@@ -10,9 +11,11 @@ export default function AddToCart(): React.ReactElement {
   const cart = useAppSelector(selectCart);
 
   const appDispatch = useAppDispatch();
+  const modalDispatch = useModalDispatch();
 
   const onClick = () => {
     appDispatch(addCartItem(option));
+    modalDispatch({ type: 'OPEN_MODAL' });
   };
 
   useEffect(() => {
