@@ -63,6 +63,12 @@ export const { addCartItem } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;
 
+export const selectCartItem = (
+  state: RootState,
+  id: GoodsOption['id'],
+  size: GoodsOption['size']
+) => state.cart.find(cartItem => cartItem.id === id && cartItem.size === size);
+
 export const selectCartItemCount = createSelector(
   selectCart,
   cart => cart.length
