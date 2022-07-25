@@ -66,12 +66,64 @@ const cartSlice = createSlice({
           !(item.id === action.payload.id && item.size === action.payload.size)
       );
     },
+    incrementItemQuantity: (
+      state,
+      action: PayloadAction<{
+        id: GoodsOption['id'];
+        size: GoodsOption['size'];
+      }>
+    ) => {
+      const item = state.find(
+        item =>
+          item.id === action.payload.id && item.size === action.payload.size
+      );
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    decrementItemQuantity: (
+      state,
+      action: PayloadAction<{
+        id: GoodsOption['id'];
+        size: GoodsOption['size'];
+      }>
+    ) => {
+      const item = state.find(
+        item =>
+          item.id === action.payload.id && item.size === action.payload.size
+      );
+      if (item) {
+        item.quantity -= 1;
+      }
+    },
+    changeItemQuantity: (
+      state,
+      action: PayloadAction<{
+        id: GoodsOption['id'];
+        size: GoodsOption['size'];
+        quantity: GoodsOption['quantity'];
+      }>
+    ) => {
+      const item = state.find(
+        item =>
+          item.id === action.payload.id && item.size === action.payload.size
+      );
+      if (item) {
+        item.quantity = action.payload.quantity;
+      }
+    },
   },
 });
 
 export default cartSlice.reducer;
 
-export const { addCartItem, removeCartItem } = cartSlice.actions;
+export const {
+  addCartItem,
+  removeCartItem,
+  incrementItemQuantity,
+  decrementItemQuantity,
+  changeItemQuantity,
+} = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;
 

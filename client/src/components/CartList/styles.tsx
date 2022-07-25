@@ -32,6 +32,7 @@ export const styles = {
     justifyContent: 'space-evenly',
     overflow: 'hidden',
     '> *': {
+      padding: '4px 0',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
