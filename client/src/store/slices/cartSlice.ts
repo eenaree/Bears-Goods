@@ -29,14 +29,22 @@ const checkCart = (value: any): value is GoodsOption[] => {
   return false;
 };
 
-const initialState = getLocalStorage('cart', checkCart) || [];
+interface CartState {
+  items: GoodsOption[];
+  checked: string[];
+}
+
+const initialState: CartState = {
+  items: getLocalStorage('cart', checkCart) || [],
+  checked: [],
+};
 
 const cartSlice = createSlice({
   name: 'cartSlice',
   initialState,
   reducers: {
     addCartItem: (state, action: PayloadAction<GoodsOption[]>) => {
-      return state
+      state.items = state.items
         .concat(action.payload)
         .reduce<GoodsOption[]>((prev, curr) => {
           const duplicateIndex = prev.findIndex(
@@ -61,7 +69,7 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      return state.filter(
+      state.items = state.items.filter(
         item =>
           !(item.id === action.payload.id && item.size === action.payload.size)
       );
@@ -73,7 +81,7 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
@@ -88,7 +96,7 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
@@ -104,7 +112,7 @@ const cartSlice = createSlice({
         quantity: GoodsOption['quantity'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
@@ -125,13 +133,16 @@ export const {
   changeItemQuantity,
 } = cartSlice.actions;
 
-export const selectCart = (state: RootState) => state.cart;
+export const selectCart = (state: RootState) => state.cart.items;
 
 export const selectCartItem = (
   state: RootState,
   id: GoodsOption['id'],
   size: GoodsOption['size']
-) => state.cart.find(cartItem => cartItem.id === id && cartItem.size === size);
+) =>
+  state.cart.items.find(
+    cartItem => cartItem.id === id && cartItem.size === size
+  );
 
 export const selectCartItemCount = createSelector(
   selectCart,
