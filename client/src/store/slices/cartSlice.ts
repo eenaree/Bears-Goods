@@ -54,12 +54,24 @@ const cartSlice = createSlice({
           return prev.concat(curr);
         }, []);
     },
+    removeCartItem: (
+      state,
+      action: PayloadAction<{
+        id: GoodsOption['id'];
+        size: GoodsOption['size'];
+      }>
+    ) => {
+      return state.filter(
+        item =>
+          !(item.id === action.payload.id && item.size === action.payload.size)
+      );
+    },
   },
 });
 
 export default cartSlice.reducer;
 
-export const { addCartItem } = cartSlice.actions;
+export const { addCartItem, removeCartItem } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useAppSelector } from '@store/hooks';
-import { selectCartItem } from '@store/slices/cartSlice';
+import { CgTrash } from 'react-icons/cg';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { removeCartItem, selectCartItem } from '@store/slices/cartSlice';
 import { GoodsOption } from '@typings/db';
 import CartItemImage from './CartItemImage';
 import CartItemInfo from './CartItemInfo';
@@ -17,12 +18,20 @@ export default function CartItem({
 }: Props): React.ReactElement | null {
   const item = useAppSelector(state => selectCartItem(state, id, size));
 
+  const appDispatch = useAppDispatch();
+  const onClick = () => {
+    appDispatch(removeCartItem({ id, size }));
+  };
+
   if (!item) return null;
 
   return (
     <li css={styles.cartItemZone}>
       <CartItemImage img={item.img} alt={item.name} />
       <CartItemInfo item={item} />
+      <button onClick={onClick}>
+        <CgTrash size="2rem" />
+      </button>
     </li>
   );
 }
