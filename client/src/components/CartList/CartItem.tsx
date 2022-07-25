@@ -27,7 +27,7 @@ export default function CartItem({
 
   return (
     <li css={styles.cartItemZone}>
-      <CartItemImage img={item.img} alt={item.name} />
+      <CartItemImage id={item.id} img={item.img} alt={item.name} />
       <CartItemInfo item={item} />
       <button onClick={onClick}>
         <CgTrash size="2rem" />
