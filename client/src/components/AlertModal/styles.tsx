@@ -2,15 +2,22 @@ import { css } from '@emotion/react';
 import { mq } from '@styles/mediaQueries';
 
 export const styles = {
-  alertTitle: css({
+  modalBody: css({
+    width: 230,
+    [mq('xs')]: {
+      width: 300,
+    },
+  }),
+  modalTitle: css({
     paddingBottom: 15,
     borderBottom: '1px solid #ff0000',
     fontWeight: 700,
   }),
-  alertText: css({
+  modalMessage: css({
     padding: '40px 0',
     textAlign: 'center',
-    [mq('sm')]: {
+    lineHeight: '25px',
+    [mq('xs')]: {
       padding: '60px 0',
     },
   }),

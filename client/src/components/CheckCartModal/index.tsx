@@ -25,8 +25,8 @@ export default function CheckCartModal({
 
   return (
     <ModalView>
-      <div>
-        <p css={styles.message}>장바구니에 상품을 담았습니다.</p>
+      <div css={styles.modalBody}>
+        <p css={styles.modalMessage}>장바구니에 상품을 담았습니다.</p>
         <Link to="/goods_cart" css={styles.confirmButton}>
           장바구니 이동
         </Link>

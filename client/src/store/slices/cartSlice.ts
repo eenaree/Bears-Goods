@@ -29,14 +29,22 @@ const checkCart = (value: any): value is GoodsOption[] => {
   return false;
 };
 
-const initialState = getLocalStorage('cart', checkCart) || [];
+interface CartState {
+  items: GoodsOption[];
+  checked: string[];
+}
+
+const initialState: CartState = {
+  items: getLocalStorage('cart', checkCart) || [],
+  checked: [],
+};
 
 const cartSlice = createSlice({
   name: 'cartSlice',
   initialState,
   reducers: {
     addCartItem: (state, action: PayloadAction<GoodsOption[]>) => {
-      return state
+      state.items = state.items
         .concat(action.payload)
         .reduce<GoodsOption[]>((prev, curr) => {
           const duplicateIndex = prev.findIndex(
@@ -61,10 +69,19 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      return state.filter(
+      state.items = state.items.filter(
         item =>
           !(item.id === action.payload.id && item.size === action.payload.size)
       );
+      state.checked = state.checked.filter(
+        checked => checked !== `${action.payload.id}-${action.payload.size}`
+      );
+    },
+    removeSelectedCartItem: state => {
+      state.items = state.items.filter(
+        item => !state.checked.includes(`${item.id}-${item.size}`)
+      );
+      state.checked = [];
     },
     incrementItemQuantity: (
       state,
@@ -73,7 +90,7 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
@@ -88,7 +105,7 @@ const cartSlice = createSlice({
         size: GoodsOption['size'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
@@ -104,12 +121,28 @@ const cartSlice = createSlice({
         quantity: GoodsOption['quantity'];
       }>
     ) => {
-      const item = state.find(
+      const item = state.items.find(
         item =>
           item.id === action.payload.id && item.size === action.payload.size
       );
       if (item) {
         item.quantity = action.payload.quantity;
+      }
+    },
+    toggleItemChecked: (state, action: PayloadAction<string>) => {
+      const itemIndex = state.checked.indexOf(action.payload);
+      if (itemIndex !== -1) {
+        state.checked.splice(itemIndex, 1);
+      } else {
+        state.checked.push(action.payload);
+      }
+    },
+    toggleAllChecked: state => {
+      const isAllChecked = state.items.length === state.checked.length;
+      if (isAllChecked) {
+        state.checked = [];
+      } else {
+        state.checked = state.items.map(item => `${item.id}-${item.size}`);
       }
     },
   },
@@ -120,18 +153,33 @@ export default cartSlice.reducer;
 export const {
   addCartItem,
   removeCartItem,
+  removeSelectedCartItem,
   incrementItemQuantity,
   decrementItemQuantity,
   changeItemQuantity,
+  toggleItemChecked,
+  toggleAllChecked,
 } = cartSlice.actions;
 
-export const selectCart = (state: RootState) => state.cart;
+export const selectCart = (state: RootState) => state.cart.items;
 
 export const selectCartItem = (
   state: RootState,
   id: GoodsOption['id'],
   size: GoodsOption['size']
-) => state.cart.find(cartItem => cartItem.id === id && cartItem.size === size);
+) =>
+  state.cart.items.find(
+    cartItem => cartItem.id === id && cartItem.size === size
+  );
+
+export const selectCartItemChecked = (state: RootState, itemIndex: string) =>
+  state.cart.checked.includes(itemIndex);
+
+export const selectCartAllChecked = (state: RootState) =>
+  state.cart.items.length === state.cart.checked.length;
+
+export const selectCartItemCheckedCount = (state: RootState) =>
+  state.cart.checked.length;
 
 export const selectCartItemCount = createSelector(
   selectCart,
