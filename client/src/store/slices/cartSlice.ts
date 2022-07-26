@@ -128,6 +128,14 @@ const cartSlice = createSlice({
         state.checked.push(action.payload);
       }
     },
+    toggleAllChecked: state => {
+      const isAllChecked = state.items.length === state.checked.length;
+      if (isAllChecked) {
+        state.checked = [];
+      } else {
+        state.checked = state.items.map(item => `${item.id}-${item.size}`);
+      }
+    },
   },
 });
 
@@ -140,6 +148,7 @@ export const {
   decrementItemQuantity,
   changeItemQuantity,
   toggleItemChecked,
+  toggleAllChecked,
 } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart.items;
@@ -155,6 +164,9 @@ export const selectCartItem = (
 
 export const selectCartItemChecked = (state: RootState, itemIndex: string) =>
   state.cart.checked.includes(itemIndex);
+
+export const selectCartAllChecked = (state: RootState) =>
+  state.cart.items.length === state.cart.checked.length;
 
 export const selectCartItemCount = createSelector(
   selectCart,
