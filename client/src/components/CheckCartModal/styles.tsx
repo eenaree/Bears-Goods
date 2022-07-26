@@ -2,7 +2,13 @@ import { css } from '@emotion/react';
 import { mq } from '@styles/mediaQueries';
 
 export const styles = {
-  message: css({
+  modalBody: css({
+    width: 230,
+    [mq('xs')]: {
+      width: 300,
+    },
+  }),
+  modalMessage: css({
     padding: '40px 0',
     textAlign: 'center',
     [mq('sm')]: {

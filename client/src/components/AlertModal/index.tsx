@@ -16,9 +16,9 @@ export default function AlertModal({ children }: Props): React.ReactElement {
 
   return (
     <ModalView>
-      <div>
-        <p css={styles.alertTitle}>알림메세지</p>
-        <p css={styles.alertText}>{children}</p>
+      <div css={styles.modalBody}>
+        <p css={styles.modalTitle}>알림메세지</p>
+        <div css={styles.modalMessage}>{children}</div>
         <button type="button" css={styles.confirmButton} onClick={onClick}>
           확인
         </button>

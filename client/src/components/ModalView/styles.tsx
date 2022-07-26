@@ -1,5 +1,4 @@
 import { css, keyframes } from '@emotion/react';
-import { mq } from '@styles/mediaQueries';
 
 const modalFadeIn = keyframes({
   from: { opacity: 0 },
@@ -39,7 +38,6 @@ export const styles = {
     }),
   modalView: (modal: boolean) =>
     css({
-      width: 200,
       padding: 20,
       backgroundColor: '#fff',
       borderRadius: 5,
@@ -47,8 +45,5 @@ export const styles = {
       fontSize: '1.4rem',
       animationName: modal ? modalViewSlideDown : modalViewSlideUp,
       animationDuration: '0.6s',
-      [mq('sm')]: {
-        width: 300,
-      },
     }),
 };
