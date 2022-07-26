@@ -28,6 +28,7 @@ export default function GoodsOptionQuantityInput({
       setValue(quantity);
       return;
     }
+    if (quantity === value) return;
     optionDispatch({ type: 'CHANGE_OPTION_QUANTITY', size, quantity: value });
   };
 
