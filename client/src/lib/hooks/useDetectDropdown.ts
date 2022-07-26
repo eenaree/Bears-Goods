@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import useDetectElementOutside from './useDetectElementOutside';
 
-const useDetectDropdown = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+export default function useDetectDropdown() {
+  const [isActive, setIsActive] = useState(false);
   const toggleIsActive = () => {
     setIsActive(prev => !prev);
   };
@@ -13,6 +13,4 @@ const useDetectDropdown = () => {
   );
 
   return [isActive, toggleIsActive, setDropdownRef] as const;
-};
-
-export default useDetectDropdown;
+}

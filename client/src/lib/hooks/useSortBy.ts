@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useSortBy = () => {
+export default function useSortBy() {
   const [sortBy, setSortBy] = useState(
     () => sessionStorage.getItem('sortBy') || ''
   );
@@ -13,6 +13,4 @@ const useSortBy = () => {
   }, [sortBy]);
 
   return [sortBy, onChangeSortBy] as const;
-};
-
-export default useSortBy;
+}

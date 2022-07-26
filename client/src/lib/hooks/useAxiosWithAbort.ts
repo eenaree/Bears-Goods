@@ -6,10 +6,10 @@ interface Payload<T> {
   error: string | null;
 }
 
-const useAxiosWithAbort = <T>(
+export default function useAxiosWithAbort<T>(
   axiosRequest: (signal: AbortSignal, ...args: any[]) => AxiosPromise<T>,
   ...args: any[]
-) => {
+) {
   const [payload, setPayload] = useState<Payload<T>>({
     data: null,
     error: null,
@@ -40,6 +40,4 @@ const useAxiosWithAbort = <T>(
   }, [axiosRequest, ...args]);
 
   return [payload.data, payload.error] as const;
-};
-
-export default useAxiosWithAbort;
+}
