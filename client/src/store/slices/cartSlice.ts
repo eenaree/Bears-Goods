@@ -77,6 +77,12 @@ const cartSlice = createSlice({
         checked => checked !== `${action.payload.id}-${action.payload.size}`
       );
     },
+    removeSelectedCartItem: state => {
+      state.items = state.items.filter(
+        item => !state.checked.includes(`${item.id}-${item.size}`)
+      );
+      state.checked = [];
+    },
     incrementItemQuantity: (
       state,
       action: PayloadAction<{
@@ -147,6 +153,7 @@ export default cartSlice.reducer;
 export const {
   addCartItem,
   removeCartItem,
+  removeSelectedCartItem,
   incrementItemQuantity,
   decrementItemQuantity,
   changeItemQuantity,
@@ -170,6 +177,9 @@ export const selectCartItemChecked = (state: RootState, itemIndex: string) =>
 
 export const selectCartAllChecked = (state: RootState) =>
   state.cart.items.length === state.cart.checked.length;
+
+export const selectCartItemCheckedCount = (state: RootState) =>
+  state.cart.checked.length;
 
 export const selectCartItemCount = createSelector(
   selectCart,
