@@ -3,10 +3,11 @@ import AlertModal from '@components/AlertModal';
 import ModalProvider from '@context/ModalContext';
 import CartAllCheckbox from './CartAllCheckbox';
 import DeleteAction from './DeleteAction';
+import { styles } from './styles';
 
 export default function CartTool(): React.ReactElement {
   return (
-    <div>
+    <div css={styles.cartToolZone}>
       <CartAllCheckbox />
       <ModalProvider>
         <DeleteAction />

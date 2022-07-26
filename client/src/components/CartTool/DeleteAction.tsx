@@ -5,6 +5,7 @@ import {
   removeSelectedCartItem,
   selectCartItemCheckedCount,
 } from '@store/slices/cartSlice';
+import { styles } from './styles';
 
 export default function DeleteAction(): React.ReactElement {
   const cartItemCheckedCount = useAppSelector(selectCartItemCheckedCount);
@@ -20,5 +21,9 @@ export default function DeleteAction(): React.ReactElement {
     appDispatch(removeSelectedCartItem());
   };
 
-  return <button onClick={onClick}>선택 삭제</button>;
+  return (
+    <button onClick={onClick} css={styles.cartActionButton}>
+      선택 삭제
+    </button>
+  );
 }

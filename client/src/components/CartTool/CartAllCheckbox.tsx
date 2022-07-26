@@ -4,6 +4,7 @@ import {
   selectCartAllChecked,
   toggleAllChecked,
 } from '@store/slices/cartSlice';
+import { styles } from './styles';
 
 export default function CartAllCheckbox(): React.ReactElement {
   const checked = useAppSelector(selectCartAllChecked);
@@ -16,7 +17,7 @@ export default function CartAllCheckbox(): React.ReactElement {
   return (
     <label>
       <input type="checkbox" checked={checked} onChange={onChange} />
-      <span>전체 선택</span>
+      <span css={styles.cartAllCheckboxText}>전체 선택</span>
     </label>
   );
 }
