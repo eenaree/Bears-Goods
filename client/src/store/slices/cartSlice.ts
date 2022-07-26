@@ -73,6 +73,9 @@ const cartSlice = createSlice({
         item =>
           !(item.id === action.payload.id && item.size === action.payload.size)
       );
+      state.checked = state.checked.filter(
+        checked => checked !== `${action.payload.id}-${action.payload.size}`
+      );
     },
     incrementItemQuantity: (
       state,
