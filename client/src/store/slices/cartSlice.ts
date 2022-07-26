@@ -120,6 +120,14 @@ const cartSlice = createSlice({
         item.quantity = action.payload.quantity;
       }
     },
+    toggleItemChecked: (state, action: PayloadAction<string>) => {
+      const itemIndex = state.checked.indexOf(action.payload);
+      if (itemIndex !== -1) {
+        state.checked.splice(itemIndex, 1);
+      } else {
+        state.checked.push(action.payload);
+      }
+    },
   },
 });
 
@@ -131,6 +139,7 @@ export const {
   incrementItemQuantity,
   decrementItemQuantity,
   changeItemQuantity,
+  toggleItemChecked,
 } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart.items;
@@ -143,6 +152,9 @@ export const selectCartItem = (
   state.cart.items.find(
     cartItem => cartItem.id === id && cartItem.size === size
   );
+
+export const selectCartItemChecked = (state: RootState, itemIndex: string) =>
+  state.cart.checked.includes(itemIndex);
 
 export const selectCartItemCount = createSelector(
   selectCart,

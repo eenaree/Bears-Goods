@@ -3,6 +3,7 @@ import { CgTrash } from 'react-icons/cg';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { removeCartItem, selectCartItem } from '@store/slices/cartSlice';
 import { GoodsOption } from '@typings/db';
+import CartItemCheckbox from './CartItemCheckbox';
 import CartItemImage from './CartItemImage';
 import CartItemInfo from './CartItemInfo';
 import { styles } from './styles';
@@ -27,6 +28,7 @@ export default function CartItem({
 
   return (
     <li css={styles.cartItemZone}>
+      <CartItemCheckbox itemIndex={`${item.id}-${item.size}`} />
       <CartItemImage id={item.id} img={item.img} alt={item.name} />
       <CartItemInfo item={item} />
       <button onClick={onClick}>

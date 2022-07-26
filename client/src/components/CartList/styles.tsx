@@ -8,6 +8,7 @@ export const styles = {
   }),
   cartItemZone: css({
     display: 'flex',
+    alignItems: 'center',
     borderBottom: '1px solid #eee',
     padding: '10px 0',
     fontSize: '1.3rem',
@@ -22,11 +23,12 @@ export const styles = {
     [mq('xs')]: {
       width: 100,
       height: 100,
+      padding: '0 10px',
     },
   }),
   cartItemInfo: css({
     flex: '1 1 auto',
-    marginLeft: 15,
+    marginLeft: 10,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
