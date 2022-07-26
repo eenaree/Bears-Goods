@@ -16,7 +16,3 @@ export interface GoodsOption extends CommonGoods {
   size: GoodsData['size'][number];
   quantity: number;
 }
-
-export interface CartItemOption extends GoodsOption {
-  selected: boolean;
-}
