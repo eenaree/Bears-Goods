@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useModalDispatch } from '@context/ModalContext';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   removeSelectedCartItem,
@@ -9,10 +10,11 @@ export default function DeleteAction(): React.ReactElement {
   const cartItemCheckedCount = useAppSelector(selectCartItemCheckedCount);
 
   const appDispatch = useAppDispatch();
+  const modalDispatch = useModalDispatch();
 
   const onClick = () => {
     if (cartItemCheckedCount === 0) {
-      alert('선택한 상품이 없습니다. 삭제할 상품을 선택하세요.');
+      modalDispatch({ type: 'OPEN_MODAL' });
       return;
     }
     appDispatch(removeSelectedCartItem());
