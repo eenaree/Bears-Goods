@@ -5,7 +5,7 @@ import { useAppSelector } from '@store/hooks';
 import { selectCartItemCount } from '@store/slices/cartSlice';
 import { styles } from './styles';
 
-export default function Header(): React.ReactElement {
+export default function Header() {
   const cartItemCount = useAppSelector(selectCartItemCount);
 
   return (

@@ -6,7 +6,7 @@ import GoodsItem from '@components/GoodsItem';
 import LoadingSpinner from '@components/LoadingSpinner';
 import { GoodsData } from '@typings/db';
 
-export default function Detail(): React.ReactElement {
+export default function Detail() {
   const params = useParams<'id'>();
   const [goods, setGoods] = useState<GoodsData | null>(null);
 

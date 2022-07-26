@@ -14,7 +14,7 @@ interface Props {
   item: GoodsData;
 }
 
-export default function GoodsOptionPicker({ item }: Props): React.ReactElement {
+export default function GoodsOptionPicker({ item }: Props) {
   const option = useOption();
   const selectedRef = useRef(new Set(option.map(option => option.size)));
 

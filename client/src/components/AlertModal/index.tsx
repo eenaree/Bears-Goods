@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactChild | React.ReactChild[];
 }
 
-export default function AlertModal({ children }: Props): React.ReactElement {
+export default function AlertModal({ children }: Props) {
   const modalDispatch = useModalDispatch();
 
   const onClick = () => {

@@ -12,7 +12,7 @@ interface Props {
   item: GoodsData;
 }
 
-export default function GoodsItem({ item }: Props): React.ReactElement {
+export default function GoodsItem({ item }: Props) {
   return (
     <section css={styles.goodsItemZone}>
       <GoodsImage img={item.img} alt={item.name} />

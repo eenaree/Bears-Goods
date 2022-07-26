@@ -6,7 +6,7 @@ import {
 } from '@store/slices/cartSlice';
 import { styles } from './styles';
 
-export default function CartAllCheckbox(): React.ReactElement {
+export default function CartAllCheckbox() {
   const checked = useAppSelector(selectCartAllChecked);
 
   const appDispatch = useAppDispatch();

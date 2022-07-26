@@ -3,7 +3,7 @@ import { useOption } from '@context/OptionContext';
 import { addThousandSeperatorToNumber } from '@lib/utils';
 import { styles } from './styles';
 
-export default function TotalPrice(): React.ReactElement {
+export default function TotalPrice() {
   const option = useOption();
   const totalPrice = option.reduce(
     (prev, curr) => prev + curr.price * curr.quantity,

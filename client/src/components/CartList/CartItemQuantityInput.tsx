@@ -15,11 +15,7 @@ interface Props {
   quantity: GoodsOption['quantity'];
 }
 
-export default function CartItemQuantityInput({
-  id,
-  size,
-  quantity,
-}: Props): React.ReactElement {
+export default function CartItemQuantityInput({ id, size, quantity }: Props) {
   const [value, setValue] = useState(quantity);
   const appDispatch = useAppDispatch();
 

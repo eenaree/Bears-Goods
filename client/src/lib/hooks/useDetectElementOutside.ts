@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { RefCallback, useEffect, useRef } from 'react';
 
 export default function useDetectElementOutside<T extends HTMLElement>(
   active: boolean,
   inactiveFunction: () => void
 ) {
   const elementRef = useRef<T>();
-  const setElementRef = (element: T) => {
+  const setElementRef: RefCallback<T> = (element: T) => {
     elementRef.current = element;
   };
 

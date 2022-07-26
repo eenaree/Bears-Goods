@@ -9,10 +9,7 @@ interface Props {
   selectedRef: React.MutableRefObject<Set<string | number>>;
 }
 
-export default function GoodsOptionDropdown({
-  item,
-  selectedRef,
-}: Props): React.ReactElement {
+export default function GoodsOptionDropdown({ item, selectedRef }: Props) {
   const modalDispatch = useModalDispatch();
   const optionDispatch = useOptionDispatch();
   const sizes = item.size.map(size => ({

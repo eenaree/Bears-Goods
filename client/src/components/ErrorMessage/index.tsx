@@ -17,7 +17,7 @@ const styles = {
   }),
 };
 
-export default function ErrorMessage({ error }: Props): React.ReactElement {
+export default function ErrorMessage({ error }: Props) {
   return (
     <section css={styles.errorZone}>
       <BiError size="5rem" color="#ff0000" />

@@ -18,7 +18,7 @@ const styles = {
   }),
 };
 
-export default function AppLayout(): React.ReactElement {
+export default function AppLayout() {
   const cart = useAppSelector(selectCart);
 
   useEffect(() => {

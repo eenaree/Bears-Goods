@@ -5,7 +5,7 @@ import Detail from '@pages/Detail';
 import Main from '@pages/Main';
 import AppLayout from './AppLayout';
 
-export default function App(): React.ReactElement {
+export default function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>

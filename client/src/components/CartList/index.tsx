@@ -4,7 +4,7 @@ import { selectCart } from '@store/slices/cartSlice';
 import CartItem from './CartItem';
 import { styles } from './styles';
 
-export default function CartList(): React.ReactElement {
+export default function CartList() {
   const cart = useAppSelector(selectCart);
 
   return (

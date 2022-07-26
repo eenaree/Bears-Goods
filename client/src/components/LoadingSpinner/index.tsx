@@ -29,7 +29,7 @@ const styles = {
     }),
 };
 
-export default function LoadingSpinner(): React.ReactElement {
+export default function LoadingSpinner() {
   const isLoading = useLoader();
   return <div css={styles.spinner(isLoading)} />;
 }

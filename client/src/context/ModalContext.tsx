@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, Reducer, useContext, useReducer } from 'react';
 
 interface Props {
   children: React.ReactElement | React.ReactElement[];
@@ -7,7 +7,7 @@ interface Props {
 
 type ModalActions = { type: 'OPEN_MODAL' } | { type: 'CLOSE_MODAL' };
 
-const modalReducer = (state: boolean, action: ModalActions): boolean => {
+const modalReducer: Reducer<boolean, ModalActions> = (state, action) => {
   switch (action.type) {
     case 'OPEN_MODAL':
       return true;
@@ -22,7 +22,7 @@ const ModalDispatchContext = createContext<
   React.Dispatch<ModalActions> | undefined
 >(undefined);
 
-export default function ModalProvider({ children }: Props): React.ReactElement {
+export default function ModalProvider({ children }: Props) {
   const [modal, dispatch] = useReducer(modalReducer, false);
 
   return (

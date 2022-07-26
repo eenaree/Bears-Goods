@@ -12,7 +12,7 @@ export default function Dropdown({
   options,
   selected,
   onChangeSelected,
-}: Props): React.ReactElement {
+}: Props) {
   const [isActive, toggleIsActive, setDropdownRef] = useDetectDropdown();
 
   return (

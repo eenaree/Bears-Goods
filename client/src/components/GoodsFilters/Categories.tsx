@@ -10,7 +10,7 @@ const categoryOptions = [
   { label: '모자', value: 'cap' },
 ] as const;
 
-export default function Categories(): React.ReactElement {
+export default function Categories() {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = (searchParams.get('category') as GoodsCategory) || '';
   const onChangeCategory = (e: React.ChangeEvent<HTMLInputElement>) => {

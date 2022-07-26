@@ -13,10 +13,7 @@ const priceOptions = [
   { label: '기본순', value: '' },
 ];
 
-export default function PriceSorting({
-  sortBy,
-  onChangeSortBy,
-}: Props): React.ReactElement {
+export default function PriceSorting({ sortBy, onChangeSortBy }: Props) {
   const selected =
     priceOptions.find(option => option.value === sortBy)?.label || '기본순';
 

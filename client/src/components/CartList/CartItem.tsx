@@ -13,10 +13,7 @@ interface Props {
   size: GoodsOption['size'];
 }
 
-export default function CartItem({
-  id,
-  size,
-}: Props): React.ReactElement | null {
+export default function CartItem({ id, size }: Props) {
   const item = useAppSelector(state => selectCartItem(state, id, size));
 
   const appDispatch = useAppDispatch();

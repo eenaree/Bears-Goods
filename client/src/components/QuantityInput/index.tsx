@@ -12,7 +12,7 @@ export default function QuantityInput({
   onIncrement,
   onDecrement,
   ...props
-}: Props & React.ComponentPropsWithoutRef<'input'>): React.ReactElement {
+}: Props & React.ComponentPropsWithoutRef<'input'>) {
   return (
     <div>
       <button type="button" css={styles.buttonCommon} onClick={onDecrement}>

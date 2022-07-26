@@ -6,7 +6,7 @@ import { useAppSelector } from '@store/hooks';
 import { selectCart } from '@store/slices/cartSlice';
 import { styles } from './styles';
 
-export default function Cart(): React.ReactElement {
+export default function Cart() {
   const cart = useAppSelector(selectCart);
 
   return (

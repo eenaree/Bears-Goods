@@ -9,7 +9,7 @@ interface Props {
   goods: GoodsData[];
 }
 
-export default function GoodsList({ goods }: Props): React.ReactElement {
+export default function GoodsList({ goods }: Props) {
   return (
     <section>
       <h2 css={styles.blind}>상품리스트</h2>

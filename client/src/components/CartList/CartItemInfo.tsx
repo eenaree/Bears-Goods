@@ -8,7 +8,7 @@ interface Props {
   item: GoodsOption;
 }
 
-export default function CartItemInfo({ item }: Props): React.ReactElement {
+export default function CartItemInfo({ item }: Props) {
   return (
     <span css={styles.cartItemInfo}>
       <strong>{item.name}</strong>

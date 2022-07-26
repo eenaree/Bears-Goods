@@ -10,9 +10,7 @@ interface Props {
   selectedRef: React.MutableRefObject<Set<string | number>>;
 }
 
-export default function CheckCartModal({
-  selectedRef,
-}: Props): React.ReactElement {
+export default function CheckCartModal({ selectedRef }: Props) {
   const modal = useModal();
   const optionDispatch = useOptionDispatch();
 

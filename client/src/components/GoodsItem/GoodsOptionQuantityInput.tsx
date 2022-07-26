@@ -9,12 +9,9 @@ interface Props {
   quantity: GoodsOption['quantity'];
 }
 
-export default function GoodsOptionQuantityInput({
-  size,
-  quantity,
-}: Props): React.ReactElement {
+export default function GoodsOptionQuantityInput({ size, quantity }: Props) {
   const optionDispatch = useOptionDispatch();
-  const [value, setValue] = useState<number>(quantity);
+  const [value, setValue] = useState(quantity);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);

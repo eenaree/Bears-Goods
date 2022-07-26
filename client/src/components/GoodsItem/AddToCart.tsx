@@ -5,7 +5,7 @@ import { useAppDispatch } from '@store/hooks';
 import { addCartItem } from '@store/slices/cartSlice';
 import { styles } from './styles';
 
-export default function AddToCart(): React.ReactElement {
+export default function AddToCart() {
   const option = useOption();
 
   const appDispatch = useAppDispatch();

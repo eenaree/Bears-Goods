@@ -9,10 +9,8 @@ interface Props {
 
 const LoaderContext = createContext<boolean | undefined>(undefined);
 
-export default function LoaderProvider({
-  children,
-}: Props): React.ReactElement {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export default function LoaderProvider({ children }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
 
   const requestInterceptor = goodsAPI.interceptors.request.use(
     config => {

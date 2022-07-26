@@ -10,7 +10,7 @@ import useAxiosWithAbort from '@hooks/useAxiosWithAbort';
 import useSortBy from '@hooks/useSortBy';
 import { GoodsCategory, GoodsData } from '@typings/db';
 
-export default function Main(): React.ReactElement {
+export default function Main() {
   const [searchParams] = useSearchParams();
   const category = (searchParams.get('category') as GoodsCategory) || '';
   const [sortBy, onChangeSortBy] = useSortBy();

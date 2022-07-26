@@ -7,7 +7,7 @@ interface Props {
   alt: GoodsData['name'];
 }
 
-export default function GoodsImage({ img, alt }: Props): React.ReactElement {
+export default function GoodsImage({ img, alt }: Props) {
   return (
     <span css={styles.goodsImage}>
       <img src={img} alt={alt} />

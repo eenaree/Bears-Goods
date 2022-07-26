@@ -8,7 +8,7 @@ interface Props {
   price: GoodsData['price'];
 }
 
-export default function GoodsLabel({ name, price }: Props): React.ReactElement {
+export default function GoodsLabel({ name, price }: Props) {
   return (
     <span css={styles.goodsLabel}>
       <em>{name}</em>

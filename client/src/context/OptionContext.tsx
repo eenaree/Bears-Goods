@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, Reducer, useContext, useReducer } from 'react';
 import { GoodsOption } from '@typings/db';
 
 interface Props {
@@ -21,10 +21,10 @@ type OptionActions =
     }
   | { type: 'RESET_OPTION' };
 
-const optionReducer = (
-  state: GoodsOption[],
-  action: OptionActions
-): GoodsOption[] => {
+const optionReducer: Reducer<GoodsOption[], OptionActions> = (
+  state,
+  action
+) => {
   switch (action.type) {
     case 'ADD_OPTION':
       return state.concat(action.option);
@@ -59,9 +59,7 @@ const OptionDispatchContext = createContext<
   React.Dispatch<OptionActions> | undefined
 >(undefined);
 
-export default function OptionProvider({
-  children,
-}: Props): React.ReactElement {
+export default function OptionProvider({ children }: Props) {
   const [option, dispatch] = useReducer(optionReducer, []);
 
   return (

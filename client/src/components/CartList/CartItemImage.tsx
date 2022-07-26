@@ -9,11 +9,7 @@ interface Props {
   alt: GoodsOption['name'];
 }
 
-export default function CartItemImage({
-  id,
-  img,
-  alt,
-}: Props): React.ReactElement {
+export default function CartItemImage({ id, img, alt }: Props) {
   return (
     <Link to={`/goods/${id}`} css={styles.cartItemImage}>
       <img src={img} alt={alt} />

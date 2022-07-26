@@ -9,9 +9,7 @@ interface Props {
   children: React.ReactChild | React.ReactChild[];
 }
 
-export default function ModalView({
-  children,
-}: Props): React.ReactElement | null {
+export default function ModalView({ children }: Props) {
   const modal = useModal();
   const isMounted = useDelayUnmount(modal, 500);
 

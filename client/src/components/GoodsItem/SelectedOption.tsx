@@ -14,7 +14,7 @@ export default function SelectedOption({
   price,
   quantity,
   selectedRef,
-}: GoodsOption & Props): React.ReactElement {
+}: GoodsOption & Props) {
   const optionDispatch = useOptionDispatch();
   const onClick = () => {
     selectedRef.current.delete(size);

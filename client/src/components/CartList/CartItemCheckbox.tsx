@@ -9,9 +9,7 @@ interface Props {
   itemIndex: string;
 }
 
-export default function CartItemCheckbox({
-  itemIndex,
-}: Props): React.ReactElement {
+export default function CartItemCheckbox({ itemIndex }: Props) {
   const checked = useAppSelector(state =>
     selectCartItemChecked(state, itemIndex)
   );
