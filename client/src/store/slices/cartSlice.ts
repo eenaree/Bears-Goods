@@ -181,7 +181,5 @@ export const selectCartAllChecked = (state: RootState) =>
 export const selectCartItemCheckedCount = (state: RootState) =>
   state.cart.checked.length;
 
-export const selectCartItemCount = createSelector(
-  selectCart,
-  cart => cart.length
-);
+export const selectCartItemCount = (state: RootState) =>
+  state.cart.items.length;
