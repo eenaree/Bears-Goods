@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import CartList from '@components/CartList';
+import CartPrice from '@components/CartPrice';
 import CartTool from '@components/CartTool';
 import { useAppSelector } from '@store/hooks';
 import { selectCart } from '@store/slices/cartSlice';
@@ -16,6 +17,7 @@ export default function Cart() {
         <>
           <CartTool />
           <CartList />
+          <CartPrice />
         </>
       ) : (
         <div css={styles.noneCart}>
