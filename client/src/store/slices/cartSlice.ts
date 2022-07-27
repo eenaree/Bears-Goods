@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { getLocalStorage } from '@lib/utils';
 import { RootState } from '@store/store';
@@ -183,3 +183,8 @@ export const selectCartItemCheckedCount = (state: RootState) =>
 
 export const selectCartItemCount = (state: RootState) =>
   state.cart.items.length;
+
+export const selectCheckedItemTotalPrice = (state: RootState) =>
+  state.cart.items
+    .filter(item => state.cart.checked.includes(`${item.id}-${item.size}`))
+    .reduce((prev, curr) => prev + curr.price * curr.quantity, 0);
