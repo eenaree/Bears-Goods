@@ -20,18 +20,26 @@ export default function Detail() {
   });
 
   useEffect(() => {
+    let shouldSetState = true;
+
     if (params.id) {
       goodsAPI
         .getGoods(params.id)
         .then(({ data }) => {
+          if (!shouldSetState) return;
           setPayload({ goods: data, error: null });
         })
         .catch((error: unknown) => {
+          if (!shouldSetState) return;
           if (error instanceof Error) {
             setPayload({ goods: null, error: error.message });
           }
         });
     }
+
+    return () => {
+      shouldSetState = false;
+    };
   }, [params.id]);
 
   return (
