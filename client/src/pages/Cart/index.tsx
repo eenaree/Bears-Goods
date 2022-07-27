@@ -14,11 +14,13 @@ export default function Cart() {
     <main css={styles.cartZone}>
       <h2 css={styles.cartTitle}>장바구니</h2>
       {cart.length > 0 ? (
-        <>
-          <CartTool />
-          <CartList />
+        <section css={styles.cartContents}>
+          <div css={styles.cartListWrapper}>
+            <CartTool />
+            <CartList />
+          </div>
           <CartPrice />
-        </>
+        </section>
       ) : (
         <div css={styles.noneCart}>
           <p>장바구니에 담긴 상품이 없습니다.</p>

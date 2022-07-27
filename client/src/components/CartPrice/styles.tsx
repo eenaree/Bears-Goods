@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
+import { mq } from '@styles/mediaQueries';
 
 export const styles = {
+  cartPriceWrapper: css({
+    [mq('md')]: {
+      flexBasis: '30%',
+    },
+  }),
   cartPriceZone: css({
     padding: 20,
     borderRadius: 5,

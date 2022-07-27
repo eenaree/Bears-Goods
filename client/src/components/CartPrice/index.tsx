@@ -14,7 +14,7 @@ export default function CartPrice() {
     cartItemCheckedCount && checkedItemTotalPrice < 30000 ? 3000 : 0;
 
   return (
-    <section>
+    <section css={styles.cartPriceWrapper}>
       <div css={styles.cartPriceZone}>
         <PriceArea title="선택 상품 금액" price={checkedItemTotalPrice} />
         <PriceArea title="배송비" price={deliveryFee} />

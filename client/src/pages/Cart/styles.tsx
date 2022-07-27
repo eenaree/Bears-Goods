@@ -31,4 +31,17 @@ export const styles = {
       color: 'inherit',
     },
   }),
+  cartContents: css({
+    [mq('md')]: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      padding: '10px 0 20px',
+    },
+  }),
+  cartListWrapper: css({
+    [mq('md')]: {
+      flexBasis: '60%',
+    },
+  }),
 };
