@@ -52,10 +52,7 @@ const cartSlice = createSlice({
           );
 
           if (duplicateIndex !== -1) {
-            prev[duplicateIndex] = {
-              ...prev[duplicateIndex],
-              quantity: prev[duplicateIndex].quantity + curr.quantity,
-            };
+            prev[duplicateIndex].quantity += curr.quantity;
             return prev;
           }
 
