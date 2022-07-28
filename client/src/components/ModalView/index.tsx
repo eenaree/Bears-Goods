@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useModal, useModalDispatch } from '@context/ModalContext';
 import useDelayUnmount from '@hooks/useDelayUnmount';
 import useDetectElementOutside from '@hooks/useDetectElementOutside';
@@ -12,6 +12,9 @@ interface Props {
 export default function ModalView({ children }: Props) {
   const modal = useModal();
   const isMounted = useDelayUnmount(modal, 500);
+  const scrollBarWidthRef = useRef(
+    window.innerWidth - document.body.clientWidth
+  );
 
   const modalDispatch = useModalDispatch();
   const setModalRef = useDetectElementOutside<HTMLDivElement>(modal, () =>
@@ -21,9 +24,11 @@ export default function ModalView({ children }: Props) {
   useEffect(() => {
     if (isMounted) {
       document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollBarWidthRef.current}px`;
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '0px';
     };
   }, [isMounted]);
 
