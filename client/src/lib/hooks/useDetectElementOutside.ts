@@ -1,13 +1,11 @@
-import { RefCallback, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import useElement from './useElement';
 
-export default function useDetectElementOutside<T extends HTMLElement>(
+export default function useDetectElementOutside(
   active: boolean,
   inactiveFunction: () => void
 ) {
-  const elementRef = useRef<T>();
-  const setElementRef: RefCallback<T> = (element: T) => {
-    elementRef.current = element;
-  };
+  const [elementRef, setElementRef] = useElement();
 
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
@@ -27,7 +25,7 @@ export default function useDetectElementOutside<T extends HTMLElement>(
     return () => {
       window.removeEventListener('click', onClickOutside);
     };
-  }, [active, inactiveFunction]);
+  }, [active, inactiveFunction, elementRef]);
 
   return setElementRef;
 }

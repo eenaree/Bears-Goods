@@ -17,7 +17,7 @@ export default function ModalView({ children }: Props) {
   );
 
   const modalDispatch = useModalDispatch();
-  const setModalRef = useDetectElementOutside<HTMLDivElement>(modal, () =>
+  const setModalRef = useDetectElementOutside(modal, () =>
     modalDispatch({ type: 'CLOSE_MODAL' })
   );
 

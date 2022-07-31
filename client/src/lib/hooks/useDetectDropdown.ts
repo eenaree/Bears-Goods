@@ -7,9 +7,8 @@ export default function useDetectDropdown() {
     setIsActive(prev => !prev);
   };
 
-  const setDropdownRef = useDetectElementOutside<HTMLButtonElement>(
-    isActive,
-    () => setIsActive(false)
+  const setDropdownRef = useDetectElementOutside(isActive, () =>
+    setIsActive(false)
   );
 
   return [isActive, toggleIsActive, setDropdownRef] as const;
