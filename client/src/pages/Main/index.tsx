@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import goodsAPI from '@api/goods';
+import { getGoodsList } from '@api/goods';
 import ErrorMessage from '@components/ErrorMessage';
 import Categories from '@components/GoodsFilters/Categories';
 import PriceSorting from '@components/GoodsFilters/PriceSorting';
@@ -15,10 +15,7 @@ export default function Main() {
   const category = (searchParams.get('category') as GoodsCategory) || '';
   const [sortBy, onChangeSortBy] = useSortBy();
 
-  const [data, error] = useAxiosWithAbort<GoodsData[]>(
-    goodsAPI.getGoodsList,
-    category
-  );
+  const [data, error] = useAxiosWithAbort<GoodsData[]>(getGoodsList, category);
 
   const sortByPricing = () => {
     const copiedData = data && data.slice();

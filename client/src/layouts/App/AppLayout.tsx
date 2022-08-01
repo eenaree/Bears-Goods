@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
 import { Outlet } from 'react-router-dom';
-import LoaderProvider from '@context/LoaderContext';
+import { LoaderProvider } from '@context/LoaderContext';
 import Header from '@layouts/Header';
 import { useAppSelector } from '@store/hooks';
 import { selectCart } from '@store/slices/cartSlice';

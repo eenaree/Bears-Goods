@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ModalProvider from '@context/ModalContext';
+import { ModalProvider } from '@context/ModalContext';
 import CartAllCheckbox from './CartAllCheckbox';
 import DeleteAction from './DeleteAction';
 import RenderModalDialog from './RenderModalDialog';

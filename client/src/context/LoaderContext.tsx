@@ -5,9 +5,7 @@ import { goodsAPI } from '@api/default';
 
 const LoaderContext = createContext<boolean | undefined>(undefined);
 
-export default function LoaderProvider({
-  children,
-}: React.PropsWithChildren<unknown>) {
+export function LoaderProvider({ children }: React.PropsWithChildren<unknown>) {
   const [isLoading, setIsLoading] = useState(false);
 
   const requestInterceptor = goodsAPI.interceptors.request.use(
@@ -70,10 +68,10 @@ export default function LoaderProvider({
   );
 }
 
-export const useLoader = () => {
+export function useLoader() {
   const state = useContext(LoaderContext);
   if (state === undefined) {
     throw new Error('LoaderContextProvider can not found');
   }
   return state;
-};
+}

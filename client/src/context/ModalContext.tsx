@@ -18,9 +18,7 @@ const ModalDispatchContext = createContext<
   React.Dispatch<ModalActions> | undefined
 >(undefined);
 
-export default function ModalProvider({
-  children,
-}: React.PropsWithChildren<unknown>) {
+export function ModalProvider({ children }: React.PropsWithChildren<unknown>) {
   const [modal, dispatch] = useReducer(modalReducer, false);
 
   return (
@@ -30,18 +28,18 @@ export default function ModalProvider({
   );
 }
 
-export const useModal = () => {
+export function useModal() {
   const state = useContext(ModalContext);
   if (state === undefined) {
     throw new Error('ModalContextProvider can not found');
   }
   return state;
-};
+}
 
-export const useModalDispatch = () => {
+export function useModalDispatch() {
   const dispatch = useContext(ModalDispatchContext);
   if (dispatch === undefined) {
     throw new Error('ModalDispatchContextProvider can not found');
   }
   return dispatch;
-};
+}

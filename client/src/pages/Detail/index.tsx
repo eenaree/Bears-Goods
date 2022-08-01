@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import goodsAPI from '@api/goods';
+import { getGoods } from '@api/goods';
 import ErrorMessage from '@components/ErrorMessage';
 import GoodsItem from '@components/GoodsItem';
 import LoadingSpinner from '@components/LoadingSpinner';
@@ -23,8 +23,7 @@ export default function Detail() {
     let shouldSetState = true;
 
     if (params.id) {
-      goodsAPI
-        .getGoods(params.id)
+      getGoods(params.id)
         .then(({ data }) => {
           if (!shouldSetState) return;
           setPayload({ goods: data, error: null });

@@ -55,9 +55,7 @@ const OptionDispatchContext = createContext<
   React.Dispatch<OptionActions> | undefined
 >(undefined);
 
-export default function OptionProvider({
-  children,
-}: React.PropsWithChildren<unknown>) {
+export function OptionProvider({ children }: React.PropsWithChildren<unknown>) {
   const [option, dispatch] = useReducer(optionReducer, []);
 
   return (
@@ -67,18 +65,18 @@ export default function OptionProvider({
   );
 }
 
-export const useOption = () => {
+export function useOption() {
   const state = useContext(OptionContext);
   if (state === undefined) {
     throw new Error('OptionContextProvider can not found');
   }
   return state;
-};
+}
 
-export const useOptionDispatch = () => {
+export function useOptionDispatch() {
   const dispatch = useContext(OptionDispatchContext);
   if (dispatch === undefined) {
     throw new Error('OptionDispatchContextProvider can not found');
   }
   return dispatch;
-};
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import OptionProvider from '@context/OptionContext';
+import { OptionProvider } from '@context/OptionContext';
 import { GoodsData } from '@typings/db';
 import GoodsImage from './GoodsImage';
 import GoodsInfo from './GoodsInfo';

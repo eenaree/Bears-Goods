@@ -22,7 +22,7 @@ const styles = {
       border: '5px solid #eee',
       borderTopColor: '#666',
       borderRadius: '50%',
-      animationName: `${infiniteLotation}`,
+      animationName: infiniteLotation,
       animationDuration: '1s',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'linear',
