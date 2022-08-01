@@ -5,11 +5,9 @@ import useDelayUnmount from '@hooks/useDelayUnmount';
 import useDetectElementOutside from '@hooks/useDetectElementOutside';
 import { styles } from './styles';
 
-interface Props {
-  children: React.ReactChild | React.ReactChild[];
-}
-
-export default function ModalView({ children }: Props) {
+export default function ModalView({
+  children,
+}: React.PropsWithChildren<unknown>) {
   const modal = useModal();
   const isMounted = useDelayUnmount(modal, 500);
   const scrollBarWidthRef = useRef(

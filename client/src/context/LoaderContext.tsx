@@ -3,13 +3,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { goodsAPI } from '@api/default';
 
-interface Props {
-  children: React.ReactElement | React.ReactElement[];
-}
-
 const LoaderContext = createContext<boolean | undefined>(undefined);
 
-export default function LoaderProvider({ children }: Props) {
+export default function LoaderProvider({
+  children,
+}: React.PropsWithChildren<unknown>) {
   const [isLoading, setIsLoading] = useState(false);
 
   const requestInterceptor = goodsAPI.interceptors.request.use(

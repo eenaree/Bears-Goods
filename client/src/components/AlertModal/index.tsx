@@ -3,11 +3,9 @@ import ModalView from '@components/ModalView';
 import { useModalDispatch } from '@context/ModalContext';
 import { styles } from './styles';
 
-interface Props {
-  children: React.ReactChild | React.ReactChild[];
-}
-
-export default function AlertModal({ children }: Props) {
+export default function AlertModal({
+  children,
+}: React.PropsWithChildren<unknown>) {
   const modalDispatch = useModalDispatch();
 
   const onClick = () => {

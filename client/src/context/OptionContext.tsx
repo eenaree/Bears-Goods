@@ -2,10 +2,6 @@ import * as React from 'react';
 import { createContext, Reducer, useContext, useReducer } from 'react';
 import { GoodsOption } from '@typings/db';
 
-interface Props {
-  children: React.ReactElement | React.ReactElement[];
-}
-
 type OptionActions =
   | { type: 'ADD_OPTION'; option: GoodsOption }
   | {
@@ -59,7 +55,9 @@ const OptionDispatchContext = createContext<
   React.Dispatch<OptionActions> | undefined
 >(undefined);
 
-export default function OptionProvider({ children }: Props) {
+export default function OptionProvider({
+  children,
+}: React.PropsWithChildren<unknown>) {
   const [option, dispatch] = useReducer(optionReducer, []);
 
   return (

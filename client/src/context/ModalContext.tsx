@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { createContext, Reducer, useContext, useReducer } from 'react';
 
-interface Props {
-  children: React.ReactElement | React.ReactElement[];
-}
-
 type ModalActions = { type: 'OPEN_MODAL' } | { type: 'CLOSE_MODAL' };
 
 const modalReducer: Reducer<boolean, ModalActions> = (state, action) => {
@@ -22,7 +18,9 @@ const ModalDispatchContext = createContext<
   React.Dispatch<ModalActions> | undefined
 >(undefined);
 
-export default function ModalProvider({ children }: Props) {
+export default function ModalProvider({
+  children,
+}: React.PropsWithChildren<unknown>) {
   const [modal, dispatch] = useReducer(modalReducer, false);
 
   return (
