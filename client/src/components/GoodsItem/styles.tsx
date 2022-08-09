@@ -10,6 +10,7 @@ export const styles = {
     },
   }),
   goodsImageArea: css({
+    position: 'relative',
     padding: 20,
     boxSizing: 'border-box',
     textAlign: 'center',
@@ -18,7 +19,9 @@ export const styles = {
       border: '1px solid #eee',
     },
     [mq('sm')]: {
-      flexBasis: '50%',
+      flexBasis: '46%',
+      margin: '2%',
+      padding: 0,
     },
   }),
   goodsInfoArea: css({
