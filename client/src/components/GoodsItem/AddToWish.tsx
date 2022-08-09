@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RiHeartAddLine } from 'react-icons/ri';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   addWishItem,
@@ -26,7 +27,8 @@ export default function AddToWish({ item }: Props) {
 
   return (
     <button onClick={onClick} css={styles.wishButton}>
-      찜하기
+      <span>찜하기</span>
+      <RiHeartAddLine size="2rem" color={isWishItem ? '#ff0000' : 'inherit'} />
     </button>
   );
 }

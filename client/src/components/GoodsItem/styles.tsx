@@ -148,8 +148,15 @@ export const styles = {
     border: '1px solid #ddd',
     fontSize: '1.6rem',
     transition: '0.5s',
+    span: {
+      verticalAlign: 'top',
+      marginRight: 10,
+    },
     '&:hover': {
       borderColor: '#333',
+      '& :not(span)': {
+        color: '#ff0000',
+      },
     },
   }),
 };
