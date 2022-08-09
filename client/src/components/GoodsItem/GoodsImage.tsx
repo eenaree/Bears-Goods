@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import ZoomScanner from '@components/ZoomScanner';
+import ZoomView from '@components/ZoomView';
 import useClientRect from '@hooks/useClientRect';
 import { GoodsData } from '@typings/db';
 import { styles } from './styles';
@@ -18,6 +19,7 @@ interface Position {
 export default function GoodsImage({ img, alt }: Props) {
   const [imageRectRef, setImageRectRef] = useClientRect();
   const [scannerPosition, setScannerPosition] = useState<Position | null>();
+  const [viewPosition, setViewPosition] = useState<Position | null>();
 
   const onMouseMove = (e: React.MouseEvent) => {
     if (document.documentElement.clientWidth >= 768 && imageRectRef.current) {
@@ -61,31 +63,50 @@ export default function GoodsImage({ img, alt }: Props) {
       }
 
       setScannerPosition(scannerPosition);
+      setViewPosition({
+        left: scannerPosition.left * -2,
+        top: scannerPosition.top * -2,
+      });
     }
   };
 
   const onMouseLeave = () => {
     if (document.documentElement.clientWidth >= 768 && imageRectRef.current) {
       setScannerPosition(null);
+      setViewPosition(null);
     }
   };
 
   return (
-    <div
-      css={styles.goodsImageArea}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-    >
-      <img src={img} alt={alt} ref={setImageRectRef} />
-      {imageRectRef.current && scannerPosition && (
-        <ZoomScanner
-          position={scannerPosition}
+    <>
+      <div
+        css={styles.goodsImageArea}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+      >
+        <img src={img} alt={alt} ref={setImageRectRef} />
+        {imageRectRef.current && scannerPosition && (
+          <ZoomScanner
+            position={scannerPosition}
+            elementOffset={{
+              width: imageRectRef.current.width * 0.5,
+              height: imageRectRef.current.height * 0.5,
+            }}
+          />
+        )}
+      </div>
+      {imageRectRef.current && viewPosition && (
+        <ZoomView
+          img={img}
+          position={viewPosition}
           elementOffset={{
-            width: imageRectRef.current.width * 0.5,
-            height: imageRectRef.current.height * 0.5,
+            left: imageRectRef.current.x + imageRectRef.current.width + 20,
+            top: imageRectRef.current.y,
+            width: imageRectRef.current.width,
+            height: imageRectRef.current.height,
           }}
         />
       )}
-    </div>
+    </>
   );
 }
