@@ -125,8 +125,11 @@ export const styles = {
       },
     },
   }),
+  actionButtonWrapper: css({
+    display: 'flex',
+  }),
   cartButton: css({
-    width: '100%',
+    width: '50%',
     padding: 10,
     margin: '10px 0',
     backgroundColor: '#333',
@@ -136,6 +139,24 @@ export const styles = {
     '&:disabled': {
       cursor: 'auto',
       backgroundColor: '#ddd',
+    },
+  }),
+  wishButton: css({
+    width: '50%',
+    padding: 10,
+    margin: '10px 0',
+    border: '1px solid #ddd',
+    fontSize: '1.6rem',
+    transition: '0.5s',
+    span: {
+      verticalAlign: 'top',
+      marginRight: 10,
+    },
+    '&:hover': {
+      borderColor: '#333',
+      '& :not(span)': {
+        color: '#ff0000',
+      },
     },
   }),
 };

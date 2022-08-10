@@ -6,6 +6,7 @@ import { LoaderProvider } from '@context/LoaderContext';
 import Header from '@layouts/Header';
 import { useAppSelector } from '@store/hooks';
 import { selectCart } from '@store/slices/cartSlice';
+import { selectWishItems } from '@store/slices/wishSlice';
 import { mq } from '@styles/mediaQueries';
 
 const styles = {
@@ -20,10 +21,12 @@ const styles = {
 
 export default function AppLayout() {
   const cart = useAppSelector(selectCart);
+  const wishItems = useAppSelector(selectWishItems);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem('wishlist', JSON.stringify(wishItems));
+  }, [cart, wishItems]);
 
   return (
     <>
