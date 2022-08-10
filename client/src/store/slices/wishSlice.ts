@@ -33,9 +33,13 @@ const checkWishList = (value: any): value is GoodsData[] => {
   return false;
 };
 
+const wishStorage = getLocalStorage('wishlist', checkWishList);
+
+const wishStorageId = wishStorage?.map(item => item.id);
+
 const initialState: WishState = {
-  items: getLocalStorage('wishlist', checkWishList) || [],
-  wishId: [],
+  items: wishStorage || [],
+  wishId: wishStorageId || [],
 };
 
 const wishSlice = createSlice({
@@ -66,3 +70,5 @@ export const { addWishItem, removeWishItem } = wishSlice.actions;
 
 export const selectIsWishItem = (state: RootState, id: number) =>
   state.wish.wishId.includes(id);
+
+export const selectWishItems = (state: RootState) => state.wish.items;
