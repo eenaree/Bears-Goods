@@ -29,9 +29,9 @@ export default function GoodsImage({ img, alt }: Props) {
       const scannerOffsetWidth = imageRectRef.current.width * 0.5 + 2;
       const scannerOffsetHeight = imageRectRef.current.height * 0.5 + 2;
       const scannerPosLeft =
-        e.pageX - imageRectRef.current.x - scannerOffsetWidth / 2;
+        e.clientX - imageRectRef.current.x - scannerOffsetWidth / 2;
       const scannerPosTop =
-        e.pageY - imageRectRef.current.y - scannerOffsetHeight / 2;
+        e.clientY - imageRectRef.current.y - scannerOffsetHeight / 2;
 
       const allowedPosLeft =
         scannerPosLeft >= 0 &&
