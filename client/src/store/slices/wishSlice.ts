@@ -72,3 +72,6 @@ export const selectIsWishItem = (state: RootState, id: number) =>
   state.wish.wishId.includes(id);
 
 export const selectWishItems = (state: RootState) => state.wish.items;
+
+export const selectWishItem = (state: RootState, id: number) =>
+  state.wish.items.find(item => item.id === id);
