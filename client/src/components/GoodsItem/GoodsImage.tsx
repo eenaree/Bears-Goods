@@ -28,22 +28,22 @@ export default function GoodsImage({ img, alt }: Props) {
       // +2 = tracker border-width 1px
       const scannerOffsetWidth = imageRectRef.current.width * 0.5 + 2;
       const scannerOffsetHeight = imageRectRef.current.height * 0.5 + 2;
-      const trackerPosLeft =
-        e.pageX - imageRectRef.current.x - scannerOffsetWidth / 2;
-      const trackerPosTop =
-        e.pageY - imageRectRef.current.y - scannerOffsetHeight / 2;
+      const scannerPosLeft =
+        e.clientX - imageRectRef.current.x - scannerOffsetWidth / 2;
+      const scannerPosTop =
+        e.clientY - imageRectRef.current.y - scannerOffsetHeight / 2;
 
       const allowedPosLeft =
-        trackerPosLeft >= 0 &&
-        trackerPosLeft <= imageRectRef.current.width - scannerOffsetWidth;
+        scannerPosLeft >= 0 &&
+        scannerPosLeft <= imageRectRef.current.width - scannerOffsetWidth;
       const allowedPosTop =
-        trackerPosTop >= 0 &&
-        trackerPosTop <= imageRectRef.current.height - scannerOffsetHeight;
+        scannerPosTop >= 0 &&
+        scannerPosTop <= imageRectRef.current.height - scannerOffsetHeight;
 
       if (allowedPosLeft) {
-        scannerPosition.left = trackerPosLeft;
+        scannerPosition.left = scannerPosLeft;
       } else {
-        if (trackerPosLeft < 0) {
+        if (scannerPosLeft < 0) {
           scannerPosition.left = 0;
         } else {
           scannerPosition.left =
@@ -52,9 +52,9 @@ export default function GoodsImage({ img, alt }: Props) {
       }
 
       if (allowedPosTop) {
-        scannerPosition.top = trackerPosTop;
+        scannerPosition.top = scannerPosTop;
       } else {
-        if (trackerPosTop < 0) {
+        if (scannerPosTop < 0) {
           scannerPosition.top = 0;
         } else {
           scannerPosition.top =
