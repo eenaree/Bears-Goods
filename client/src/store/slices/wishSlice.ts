@@ -75,3 +75,20 @@ export const selectWishItems = (state: RootState) => state.wish.items;
 
 export const selectWishItem = (state: RootState, id: number) =>
   state.wish.items.find(item => item.id === id);
+
+export const selectWishItemCount = (state: RootState) =>
+  state.wish.items.length;
+
+export const selectWishFilterList = (state: RootState) =>
+  state.wish.items.reduce<[Filter, number][]>((prev, curr) => {
+    for (const filter of prev) {
+      if (filter[0] === curr.category) {
+        filter[1]++;
+        return prev;
+      }
+    }
+
+    prev.push([curr.category, 1]);
+    return prev;
+  }, []);
+
