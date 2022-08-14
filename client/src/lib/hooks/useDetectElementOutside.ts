@@ -9,12 +9,10 @@ export default function useDetectElementOutside(
 
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
-      if (
-        e.target &&
-        elementRef.current &&
-        !elementRef.current.contains(e.target as Element)
-      ) {
-        inactiveFunction();
+      if (e.target instanceof Element) {
+        if (elementRef.current && !elementRef.current.contains(e.target)) {
+          inactiveFunction();
+        }
       }
     };
 
