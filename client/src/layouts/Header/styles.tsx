@@ -26,20 +26,25 @@ export const styles = {
       fontSize: '2.8rem',
     },
   }),
-  cartButton: css({
-    position: 'absolute',
-    top: 15,
-    right: 15,
-    color: 'inherit',
-    [mq('md')]: {
-      top: 25,
-      right: 25,
+  headerTop: css({
+    borderBottom: '1px solid #eee',
+  }),
+  headerTopButtons: css({
+    display: 'flex',
+    justifyContent: 'flex-end',
+    li: {
+      margin: '5px 10px',
+    },
+    a: {
+      position: 'relative',
+      fontSize: '2.5rem',
+      color: 'inherit',
     },
   }),
   cartItemCount: css({
     position: 'absolute',
-    top: '-5px',
-    right: '-5px',
+    top: '-2px',
+    right: '-6px',
     display: 'block',
     minWidth: 15,
     height: 15,
