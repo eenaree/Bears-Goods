@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv';
 import { createEmotionPlugin } from 'emotion-ts-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import * as webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -19,7 +18,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const commonConfig: webpack.Configuration = {
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, 'tsconfig.json'),
@@ -52,13 +51,6 @@ const commonConfig: webpack.Configuration = {
             }),
           },
         },
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
       },
       {
         test: /\.(jpe?g|gif|png|svg|ico)?$/i,
@@ -118,9 +110,6 @@ const productionConfig: webpack.Configuration = {
   plugins: [
     new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
   ],
   output: {
     path: path.join(__dirname, 'build'),
