@@ -1,6 +1,5 @@
 import * as path from 'path';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as dotenv from 'dotenv';
 import { createEmotionPlugin } from 'emotion-ts-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -17,7 +16,6 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const commonConfig: webpack.Configuration = {
   resolve: {
-    modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     plugins: [
       new TsconfigPathsPlugin({
@@ -56,7 +54,7 @@ const commonConfig: webpack.Configuration = {
         test: /\.(jpe?g|gif|png|svg|ico)?$/i,
         type: 'asset',
         generator: {
-          filename: 'images/[name].[ext]?[hash]',
+          filename: 'images/[hash][ext][query]',
         },
       },
       {
@@ -72,7 +70,6 @@ const commonConfig: webpack.Configuration = {
     new ForkTsCheckerWebpackPlugin({ async: false }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      minify: !isDevelopment,
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
@@ -90,38 +87,29 @@ const developmentConfig: webpack.Configuration = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
-    publicPath: '/',
   },
   devServer: {
     hot: true,
     port: 3000,
-    static: {
-      directory: path.join(__dirname, 'public'),
-      publicPath: '/public',
-    },
     historyApiFallback: true,
-    compress: true,
   },
 };
 
 const productionConfig: webpack.Configuration = {
   mode: 'production',
   devtool: 'hidden-source-map',
-  plugins: [
-    new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new BundleAnalyzerPlugin({ analyzerMode: 'static' })],
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].[chunkhash].js',
+    clean: true,
   },
 };
 
-const config = (): webpack.Configuration => {
+export function config() {
   if (isDevelopment) {
     return merge(commonConfig, developmentConfig);
+  } else {
+    return merge(commonConfig, productionConfig);
   }
-  return merge(commonConfig, productionConfig);
-};
-
-export default config;
+}

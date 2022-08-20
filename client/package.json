@@ -28,7 +28,6 @@
     "@types/webpack-bundle-analyzer": "^4.4.1",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
-    "clean-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.1",
     "emotion-ts-plugin": "^2.0.1",
     "eslint": "^8.15.0",
