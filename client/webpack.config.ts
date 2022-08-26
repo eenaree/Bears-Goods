@@ -106,7 +106,7 @@ const productionConfig: webpack.Configuration = {
   },
 };
 
-export function config() {
+export default function config() {
   if (isDevelopment) {
     return merge(commonConfig, developmentConfig);
   } else {
